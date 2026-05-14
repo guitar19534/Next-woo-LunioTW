@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ShoppingCart, Plus, Minus, Loader2 } from "lucide-react";
 
-import type { Product, ProductVariation } from "@/lib/woocommerce.d";
+import type { Product, ProductVariation } from "@/types/woocommerce";
 import { isProductInStock } from "@/lib/woocommerce";
 import { useCart } from "@/components/shop/cart-provider";
 import { Button } from "@/components/ui/button";
@@ -44,17 +44,8 @@ export function AddToCartButton({
     setIsAdding(true);
 
     try {
-      await addItem({
-        productId: product.id,
-        variationId: variation?.id,
-        quantity,
-        name: product.name + (variation ? ` - ${variation.attributes.map((a) => a.option).join(", ")}` : ""),
-        price: variation?.price || product.price,
-        image: (variation?.image || product.images[0])?.src,
-        attributes: variation?.attributes,
-      });
-
-      // Reset quantity after adding
+      // Pass variation ID if available — WooCommerce Store API resolves parent automatically
+      await addItem(variation?.id ?? product.id, quantity);
       setQuantity(1);
     } finally {
       setIsAdding(false);

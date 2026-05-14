@@ -1,5 +1,6 @@
 {
   "permissions": {
+    "defaultMode": "bypassPermissions",
     "allow": [
       "Bash(find:*)",
       "Bash(cat:*)",
@@ -14,7 +15,24 @@
       "Bash(WORDPRESS_URL=\"\" WORDPRESS_HOSTNAME=\"\" pnpm build:*)",
       "Bash(pnpm tsc:*)",
       "Bash(gh run list:*)",
-      "WebFetch(domain:station.railway.com)"
+      "WebFetch(domain:station.railway.com)",
+      "WebFetch(domain:lunio.com.tw)",
+      "Bash(curl -s \"https://lunio.com.tw/wp-json/wc/v3/products/categories?consumer_key=ck_a1b2edd12c2a20270317ec62b7ec9deb368ebcf1&consumer_secret=cs_c984a21b168f6cd4abb4c8de3a3af8cf09546e51&per_page=50&hide_empty=true\")",
+      "Bash(python3 -c \":*)",
+      "Bash(curl -s \"https://lunio.com.tw/wp-json/wc/v3/products?consumer_key=ck_a1b2edd12c2a20270317ec62b7ec9deb368ebcf1&consumer_secret=cs_c984a21b168f6cd4abb4c8de3a3af8cf09546e51&per_page=20&status=publish\")",
+      "Bash(npm run:*)",
+      "Bash(curl -s \"https://lunio.com.tw/wp-json/wc/v3/products?consumer_key=ck_a1b2edd12c2a20270317ec62b7ec9deb368ebcf1&consumer_secret=cs_c984a21b168f6cd4abb4c8de3a3af8cf09546e51&per_page=6&category=484&status=publish&orderby=popularity\")",
+      "Bash(curl -s \"https://lunio.com.tw/wp-json/wc/v3/products?consumer_key=ck_a1b2edd12c2a20270317ec62b7ec9deb368ebcf1&consumer_secret=cs_c984a21b168f6cd4abb4c8de3a3af8cf09546e51&per_page=8&category=964&status=publish&orderby=popularity\")",
+      "Bash(curl -s \"https://lunio.com.tw/wp-json/wc/v3/products?consumer_key=ck_a1b2edd12c2a20270317ec62b7ec9deb368ebcf1&consumer_secret=cs_c984a21b168f6cd4abb4c8de3a3af8cf09546e51&per_page=6&category=513&status=publish&orderby=popularity\")",
+      "Bash(grep -v \"^$\")",
+      "Bash(npx tsc:*)",
+      "Bash(npx next:*)",
+      "Bash(node_modules/.bin/next lint:*)",
+      "Bash(node_modules/.bin/eslint components/layout/nav.tsx components/nav/desktop-menu.tsx components/nav/mobile-nav.tsx components/nav/nav-scroll-effect.tsx --max-warnings 0 2>&1)",
+      "Bash(ls:*)",
+      "Bash(ESLINT_USE_FLAT_CONFIG=false node_modules/.bin/eslint components/layout/nav.tsx components/nav/desktop-menu.tsx components/nav/mobile-nav.tsx components/nav/nav-scroll-effect.tsx 2>&1)",
+      "Bash(npm install:*)",
+      "Bash(node -e \"require\\(''''framer-motion''''\\)\")"
     ],
     "deny": [],
     "ask": []

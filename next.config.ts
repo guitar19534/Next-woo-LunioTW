@@ -14,19 +14,51 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "placehold.co",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "img.youtube.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
   async redirects() {
-    if (!wordpressUrl) {
-      return [];
-    }
-    return [
+    const rules = [
+      // WooCommerce order-received → our success page
       {
+        source: "/checkout/order-received/:orderId",
+        destination: "/checkout/success?order=:orderId",
+        permanent: false,
+      },
+      // WordPress My Account → our custom account dashboard
+      {
+        source: "/my-account",
+        destination: "/account",
+        permanent: false,
+      },
+      {
+        source: "/my-account/:path*",
+        destination: "/account",
+        permanent: false,
+      },
+      // /posts/* → /blog/*
+      { source: "/posts", destination: "/blog", permanent: true },
+      { source: "/posts/:path*", destination: "/blog/:path*", permanent: true },
+    ];
+    if (wordpressUrl) {
+      rules.push({
         source: "/admin",
         destination: `${wordpressUrl}/wp-admin`,
         permanent: true,
-      },
-    ];
+      });
+    }
+    return rules;
   },
 };
 
