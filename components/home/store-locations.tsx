@@ -110,7 +110,7 @@ export function StoreLocations() {
 
         {/* CTA */}
         <div className="text-center">
-          <Link href="/pages/contact" className="btn-lunio inline-flex">
+          <Link href="/storefront" className="btn-lunio inline-flex">
             立即預約試躺
           </Link>
         </div>

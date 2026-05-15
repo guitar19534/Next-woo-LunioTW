@@ -194,7 +194,7 @@ export function MobileNav({ dark = false }: { dark?: boolean }) {
           style={{ borderColor: "#eaeaea" }}
         >
           <MobileLink
-            href="/pages/contact"
+            href="/storefront"
             onOpenChange={setOpen}
             className="flex items-center justify-center w-full py-3 rounded-[30px] text-[13.5px] font-medium tracking-[1px] transition-colors"
             style={{

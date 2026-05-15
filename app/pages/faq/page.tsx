@@ -4,7 +4,7 @@ import { FaqClient } from "@/components/faq/FaqClient";
 export const metadata: Metadata = {
   title: "常見問題｜Lunio Taiwan",
   description: "Lunio 床墊與枕頭常見問題解答，包含產品須知、退換貨說明、運送說明、付款說明等。",
-  alternates: { canonical: "/pages/faq" },
+  alternates: { canonical: "/faq" },
 };
 
 const BLUE = "#17569E";

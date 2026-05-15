@@ -187,7 +187,17 @@ function DropdownPanel({
   const defaultCard = FEATURED[dropKey];
   const [card, setCard] = React.useState<ProductCard>(defaultCard);
   const [visible, setVisible] = React.useState(true);
+  const [offsetX, setOffsetX] = React.useState(0);
+  const panelRef = React.useRef<HTMLDivElement>(null);
   const fadeTimer = React.useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  React.useLayoutEffect(() => {
+    if (!panelRef.current) return;
+    const rect = panelRef.current.getBoundingClientRect();
+    const overflow = rect.right - window.innerWidth + 16;
+    const next = overflow > 0 ? -overflow : 0;
+    setOffsetX((prev) => (prev === next ? prev : next));
+  }, []);
 
   React.useEffect(() => {
     setCard(defaultCard);
@@ -212,6 +222,7 @@ function DropdownPanel({
 
   return (
     <div
+      ref={panelRef}
       role="menu"
       className="absolute top-full left-0 z-50 bg-white"
       style={{
@@ -221,6 +232,7 @@ function DropdownPanel({
         boxShadow: "0 16px 48px rgba(0,0,0,0.12)",
         animation: "dropdown-in 0.16s ease-out",
         letterSpacing: "1px",
+        transform: offsetX ? `translateX(${offsetX}px)` : undefined,
       }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}

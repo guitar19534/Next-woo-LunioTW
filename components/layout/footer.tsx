@@ -159,7 +159,7 @@ export function Footer() {
               <span style={{ opacity: 0.3 }}>·</span>
               <Link href="/blog"          className="ft-link">分辨乳膠</Link>
               <Link href="/faq"           className="ft-link">產品購物須知</Link>
-              <Link href="/pages/privacy" className="ft-link">隱私政策</Link>
+              <Link href="/faq" className="ft-link">隱私政策</Link>
             </div>
           </div>
 

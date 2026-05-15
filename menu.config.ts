@@ -34,10 +34,9 @@ export const aboutMenu = {
   labelEn: "About",
   href: "/pages/about",
   items: [
-    { label: "品牌故事", href: "/pages/about" },
-    { label: "門市資訊", href: "/storefront" },
-    { label: "體驗分享", href: "/blog?category=experiences" },
-    { label: "好眠知識", href: "/blog" },
+    { label: "產品購物須知", href: "/faq" },
+    { label: "品牌故事",     href: "/our-story" },
+    { label: "媒體專訪",     href: "/press" },
   ],
 } as const;
 

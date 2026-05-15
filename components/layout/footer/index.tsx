@@ -148,11 +148,11 @@ export function Footer() {
           <div className="flex items-center gap-4">
             <ThemeToggle />
             <div className="flex items-center gap-3" style={{ fontSize: "12px", color: "#64748b" }}>
-              <Link href="/pages/returns" className="hover:text-white transition-colors">
+              <Link href="/faq" className="hover:text-white transition-colors">
                 產品購物須知
               </Link>
               <span aria-hidden>·</span>
-              <Link href="/pages/privacy" className="hover:text-white transition-colors">
+              <Link href="/faq" className="hover:text-white transition-colors">
                 隱私政策
               </Link>
             </div>

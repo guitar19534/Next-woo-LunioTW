@@ -432,7 +432,7 @@ export default function CheckoutPage() {
 
         <p className="mb-5" style={{ fontSize: 13.5, color: "#6b7280" }}>
           如果任何問題，您可參考更多{" "}
-          <Link href="/pages/faq" className="hover:underline" style={{ color: BLUE }}>產品及購物須知</Link>。
+          <Link href="/faq" className="hover:underline" style={{ color: BLUE }}>產品及購物須知</Link>。
         </p>
 
         {/* Login Banner */}

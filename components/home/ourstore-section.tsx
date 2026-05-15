@@ -65,7 +65,7 @@ export function OurstoreSection() {
         </div>
 
         <Link
-          href="/pages/contact"
+          href="/storefront"
           className="inline-block px-10 py-4 rounded-full font-bold text-white"
           style={{ backgroundColor: "#17569E", fontSize: "16px", fontFamily: "'Chiron Goround TC', sans-serif", letterSpacing: "0.1em" }}
         >

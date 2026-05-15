@@ -209,7 +209,7 @@ export function MobileNav({ dark = false }: { dark?: boolean }) {
               <MapPin size={14} style={{ color: BLUE }} />
               <span style={{ fontSize: 12.5, color: "#374151" }}>全台實體門市</span>
             </div>
-            <Link href="/pages/contact" onClick={close}
+            <Link href="/storefront" onClick={close}
               style={{ fontSize: 12, color: BLUE, fontWeight: 600 }}>
               查看位置 →
             </Link>
@@ -221,7 +221,7 @@ export function MobileNav({ dark = false }: { dark?: boolean }) {
         <div className="px-4 pb-6 pt-3 flex-shrink-0 space-y-2.5"
           style={{ borderTop: "1px solid #f0f0f0" }}>
           <Link
-            href="/pages/contact"
+            href="/storefront"
             onClick={close}
             className="flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl font-semibold text-white transition-opacity hover:opacity-90"
             style={{ backgroundColor: NAVY, fontSize: 14 }}

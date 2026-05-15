@@ -163,7 +163,7 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         {[
           { label: "繼續購物", desc: "探索 Lunio 全系列商品", href: "/shop", color: BLUE },
-          { label: "聯絡客服", desc: "有任何問題歡迎聯繫我們", href: "/pages/contact", color: "#16a34a" },
+          { label: "聯絡客服", desc: "有任何問題歡迎聯繫我們", href: "/storefront", color: "#16a34a" },
         ].map(({ label, desc, href, color }) => (
           <Link
             key={href}

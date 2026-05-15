@@ -63,7 +63,7 @@ export function NoozPreFooter({ productName, productHref = "#" }: Props) {
               <p className="mb-1" style={{ fontSize: 14.5, color: "#555", lineHeight: 1.8 }}>花個10分鐘，讓我們更認識彼此</p>
               <p className="mb-6" style={{ fontSize: 14.5, color: "#555", lineHeight: 1.8 }}>激盪出不一樣火花</p>
               <Link
-                href="/pages/contact"
+                href="/storefront"
                 className="inline-flex items-center justify-center px-7 py-2.5 rounded-full text-white font-semibold transition-opacity hover:opacity-85"
                 style={{ backgroundColor: BLUE, fontSize: 14 }}
               >

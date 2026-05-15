@@ -204,7 +204,7 @@ export function BrandStory() {
 
           {/* CTA */}
           <Link
-            href="/pages/about"
+            href="/our-story"
             className="btn-outline inline-flex items-center gap-2"
           >
             了解品牌故事

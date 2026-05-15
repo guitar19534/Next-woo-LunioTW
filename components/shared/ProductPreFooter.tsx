@@ -63,7 +63,7 @@ export function ProductPreFooter({
           {/* Button */}
           <div className="absolute bottom-10 left-1/2 -translate-x-1/2">
             <Link
-              href="/pages/contact"
+              href="/storefront"
               className="inline-block px-8 py-3 rounded-full font-medium text-white whitespace-nowrap"
               style={{ backgroundColor: "#17569E", fontSize: "15px" }}
             >

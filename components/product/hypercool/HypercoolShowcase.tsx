@@ -198,7 +198,7 @@ function HypercoolIntro() {
                 </svg>
               </Link>
               <Link
-                href="/pages/about"
+                href="/our-story"
                 className="btn-outline inline-flex items-center gap-2"
               >
                 了解更多
