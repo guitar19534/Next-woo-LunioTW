@@ -325,7 +325,7 @@ export default function CartPage() {
   return (
     <div
       className="min-h-screen py-8 md:py-12 lg:py-16 pb-28 md:pb-12 lg:pb-16"
-      style={{ backgroundColor: "#fafafa", fontFamily: FONT }}
+      style={{ backgroundColor: "#fafafa", fontFamily: FONT, letterSpacing: "0.05em" }}
     >
       <div className="max-w-[1200px] w-[94%] md:w-[92%] mx-auto">
 

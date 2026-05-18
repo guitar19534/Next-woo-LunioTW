@@ -178,26 +178,17 @@ function ProductLink({
 
 // ── Dropdown panel ─────────────────────────────────────────────────────────────
 function DropdownPanel({
-  dropKey, category, extraColumns, onClose, onMouseEnter, onMouseLeave,
+  dropKey, category, extraColumns, leftOffset, onClose, onMouseEnter, onMouseLeave,
 }: {
   dropKey: DropdownKey; category: CategoryDef;
   extraColumns?: readonly ExtraCol[];
+  leftOffset: number;
   onClose: () => void; onMouseEnter: () => void; onMouseLeave: () => void;
 }) {
   const defaultCard = FEATURED[dropKey];
   const [card, setCard] = React.useState<ProductCard>(defaultCard);
   const [visible, setVisible] = React.useState(true);
-  const [offsetX, setOffsetX] = React.useState(0);
-  const panelRef = React.useRef<HTMLDivElement>(null);
   const fadeTimer = React.useRef<ReturnType<typeof setTimeout>>(undefined);
-
-  React.useLayoutEffect(() => {
-    if (!panelRef.current) return;
-    const rect = panelRef.current.getBoundingClientRect();
-    const overflow = rect.right - window.innerWidth + 16;
-    const next = overflow > 0 ? -overflow : 0;
-    setOffsetX((prev) => (prev === next ? prev : next));
-  }, []);
 
   React.useEffect(() => {
     setCard(defaultCard);
@@ -222,7 +213,6 @@ function DropdownPanel({
 
   return (
     <div
-      ref={panelRef}
       role="menu"
       className="absolute top-full left-0 z-50 bg-white"
       style={{
@@ -232,7 +222,7 @@ function DropdownPanel({
         boxShadow: "0 16px 48px rgba(0,0,0,0.12)",
         animation: "dropdown-in 0.16s ease-out",
         letterSpacing: "1px",
-        transform: offsetX ? `translateX(${offsetX}px)` : undefined,
+        transform: leftOffset ? `translateX(${leftOffset}px)` : undefined,
       }}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
@@ -362,8 +352,8 @@ const STORE_CARDS = [
 ];
 
 function StoreDropdownPanel({
-  onClose, onMouseEnter, onMouseLeave,
-}: { onClose: () => void; onMouseEnter: () => void; onMouseLeave: () => void }) {
+  leftOffset, onClose, onMouseEnter, onMouseLeave,
+}: { leftOffset: number; onClose: () => void; onMouseEnter: () => void; onMouseLeave: () => void }) {
   return (
     <div
       role="menu"
@@ -373,6 +363,7 @@ function StoreDropdownPanel({
         borderRadius: "0 0 16px 16px",
         borderTop: "2.5px solid #3c7ae4",
         boxShadow: "0 16px 48px rgba(0,0,0,0.12)",
+        transform: leftOffset ? `translateX(${leftOffset}px)` : undefined,
         animation: "dropdown-in 0.16s ease-out",
         letterSpacing: "1px",
       }}
@@ -474,10 +465,30 @@ export function DesktopMenu({ dark = false }: { dark?: boolean }) {
   const pathname = usePathname();
   const [open, setOpen] = React.useState<DropdownKey | null>(null);
   const [openSimple, setOpenSimple] = React.useState<SimpleDropdownKey | null>(null);
+  const [leftOffsets, setLeftOffsets] = React.useState<Partial<Record<DropdownKey, number>>>({});
+  const [simpleOffset, setSimpleOffset] = React.useState(0);
   const closeTimer = React.useRef<ReturnType<typeof setTimeout>>(undefined);
 
-  const openMenu = (key: DropdownKey) => { clearTimeout(closeTimer.current); setOpen(key); setOpenSimple(null); };
-  const openSimpleMenu = (key: SimpleDropdownKey) => { clearTimeout(closeTimer.current); setOpenSimple(key); setOpen(null); };
+  function openMenu(key: DropdownKey, li: HTMLLIElement) {
+    clearTimeout(closeTimer.current);
+    // Calculate how much to shift left to prevent viewport overflow
+    const extraLen = EXTRA_COLUMNS[key]?.length ?? 0;
+    const dropW = 720 + extraLen * 170;
+    const rect = li.getBoundingClientRect();
+    const overflow = rect.left + dropW - window.innerWidth + 16;
+    setLeftOffsets((prev) => ({ ...prev, [key]: overflow > 0 ? -overflow : 0 }));
+    setOpen(key);
+    setOpenSimple(null);
+  }
+  function openSimpleMenu(key: SimpleDropdownKey, li: HTMLLIElement) {
+    clearTimeout(closeTimer.current);
+    const w = key === "門市試躺" ? 760 : 200;
+    const rect = li.getBoundingClientRect();
+    const overflow = rect.left + w - window.innerWidth + 16;
+    setSimpleOffset(overflow > 0 ? -overflow : 0);
+    setOpenSimple(key);
+    setOpen(null);
+  }
   const scheduleClose = () => { closeTimer.current = setTimeout(() => { setOpen(null); setOpenSimple(null); }, 150); };
   const cancelClose = () => clearTimeout(closeTimer.current);
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
@@ -504,7 +515,10 @@ export function DesktopMenu({ dark = false }: { dark?: boolean }) {
             const isOpen = open === label;
             const active = isActive(cat.href) || isOpen;
             return (
-              <li key={label} className="relative" onMouseEnter={() => openMenu(label)} onMouseLeave={scheduleClose}>
+              <li key={label} className="relative"
+                onMouseEnter={(e) => openMenu(label, e.currentTarget)}
+                onMouseLeave={scheduleClose}
+              >
                 <button
                   type="button"
                   className={navLinkClass(active, dark)}
@@ -521,6 +535,7 @@ export function DesktopMenu({ dark = false }: { dark?: boolean }) {
                     dropKey={label}
                     category={cat}
                     extraColumns={EXTRA_COLUMNS[label]}
+                    leftOffset={leftOffsets[label] ?? 0}
                     onClose={() => setOpen(null)}
                     onMouseEnter={cancelClose}
                     onMouseLeave={scheduleClose}
@@ -535,13 +550,14 @@ export function DesktopMenu({ dark = false }: { dark?: boolean }) {
             const isOpen = openSimple === "門市試躺";
             const active = isActive(storeMenu.href) || isOpen;
             return (
-              <li className="relative" onMouseEnter={() => openSimpleMenu("門市試躺")} onMouseLeave={scheduleClose}>
+              <li className="relative" onMouseEnter={(e) => openSimpleMenu("門市試躺", e.currentTarget)} onMouseLeave={scheduleClose}>
                 <button type="button" className={navLinkClass(active, dark)} aria-expanded={isOpen} aria-haspopup="true">
                   門市試躺
                   <ChevronDown size={13} className={cn("opacity-50 transition-transform duration-200", isOpen && "rotate-180")} />
                 </button>
                 {isOpen && (
                   <StoreDropdownPanel
+                    leftOffset={simpleOffset}
                     onClose={() => setOpenSimple(null)}
                     onMouseEnter={cancelClose}
                     onMouseLeave={scheduleClose}
@@ -556,7 +572,7 @@ export function DesktopMenu({ dark = false }: { dark?: boolean }) {
             const isOpen = openSimple === "關於Lunio";
             const active = isActive(aboutMenu.href) || isOpen;
             return (
-              <li className="relative" onMouseEnter={() => openSimpleMenu("關於Lunio")} onMouseLeave={scheduleClose}>
+              <li className="relative" onMouseEnter={(e) => openSimpleMenu("關於Lunio", e.currentTarget)} onMouseLeave={scheduleClose}>
                 <button type="button" className={navLinkClass(active, dark)} aria-expanded={isOpen} aria-haspopup="true">
                   關於Lunio
                   <ChevronDown size={13} className={cn("opacity-50 transition-transform duration-200", isOpen && "rotate-180")} />

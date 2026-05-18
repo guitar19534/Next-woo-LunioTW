@@ -1,10 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
-
 import type { Product } from "@/lib/woocommerce.d";
-import { cn } from "@/lib/utils";
-import { formatPrice, calculateDiscountPercentage, isProductInStock } from "@/lib/woocommerce";
-import { Badge } from "@/components/ui/badge";
+import { isProductInStock } from "@/lib/woocommerce";
+
+const BLUE   = "#3c7ae4";
+const NAVY   = "#17284b";
+const ORANGE = "#f5892a";
+
+function ntd(price: string): string {
+  const n = parseFloat(price);
+  if (!n) return "";
+  return `NT$${n.toLocaleString("zh-TW")}`;
+}
+
+function discount(regular: string, sale: string): number {
+  const r = parseFloat(regular);
+  const s = parseFloat(sale);
+  if (!r || !s || s >= r) return 0;
+  return Math.round((1 - s / r) * 100);
+}
 
 interface ProductCardProps {
   product: Product;
@@ -12,86 +26,114 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, priority = false }: ProductCardProps) {
-  const inStock = isProductInStock(product);
-  const discountPercentage = product.on_sale
-    ? calculateDiscountPercentage(product.regular_price, product.sale_price)
-    : 0;
-
-  const primaryImage = product.images[0];
+  const inStock   = isProductInStock(product);
+  const onSale    = product.on_sale;
+  const pct       = onSale ? discount(product.regular_price, product.sale_price) : 0;
+  const img       = product.images[0];
+  const href      = `/product/${product.slug}`;
 
   return (
     <Link
-      href={`/shop/${product.slug}`}
-      className={cn(
-        "group flex flex-col border rounded-lg overflow-hidden bg-accent/30",
-        "hover:bg-accent/75 transition-all"
-      )}
+      href={href}
+      className="lunio-product-card"
     >
-      <div className="relative aspect-square overflow-hidden bg-muted">
-        {primaryImage?.src ? (
+      {/* Image */}
+      <div className="lpc-img" style={{ position: "relative", width: "100%", paddingBottom: "72%", overflow: "hidden", background: "#f6f9ff" }}>
+        {img?.src ? (
           <Image
-            src={primaryImage.src}
-            alt={primaryImage.alt || product.name}
+            src={img.src}
+            alt={img.alt || product.name}
             fill
-            className="object-cover transition-transform group-hover:scale-105"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             priority={priority}
+            className="object-cover object-center"
+            sizes="(max-width:640px) 100vw,(max-width:1024px) 50vw,25vw"
+            style={{ transition: "transform .4s ease" }}
           />
         ) : (
-          <div className="flex items-center justify-center w-full h-full text-muted-foreground">
-            No image
+          <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#ccc", fontSize: 14 }}>
+            暫無圖片
           </div>
         )}
 
         {/* Badges */}
-        <div className="absolute top-2 left-2 flex flex-col gap-1">
-          {product.on_sale && discountPercentage > 0 && (
-            <Badge variant="destructive">-{discountPercentage}%</Badge>
+        <div style={{ position: "absolute", top: 12, left: 12, display: "flex", flexDirection: "column", gap: 6 }}>
+          {onSale && pct > 0 && (
+            <span style={{ background: ORANGE, color: "#fff", fontSize: 11, fontWeight: 700, padding: "3px 10px", borderRadius: 6 }}>
+              -{pct}%
+            </span>
           )}
-          {product.featured && <Badge variant="secondary">Featured</Badge>}
-          {!inStock && <Badge variant="outline">Out of Stock</Badge>}
+          {product.featured && (
+            <span style={{ background: BLUE, color: "#fff", fontSize: 11, fontWeight: 700, padding: "3px 10px", borderRadius: 6 }}>
+              精選
+            </span>
+          )}
+          {!inStock && (
+            <span style={{ background: "#999", color: "#fff", fontSize: 11, fontWeight: 700, padding: "3px 10px", borderRadius: 6 }}>
+              已售完
+            </span>
+          )}
         </div>
       </div>
 
-      <div className="flex flex-col gap-2 p-4">
+      {/* Content */}
+      <div style={{ padding: "16px 16px 0", flexGrow: 1, display: "flex", flexDirection: "column" }}>
         {/* Category */}
         {product.categories[0] && (
-          <span className="text-xs text-muted-foreground">
+          <p style={{ fontSize: 11, color: BLUE, fontWeight: 600, letterSpacing: "0.08em", marginBottom: 6, textTransform: "uppercase" }}>
             {product.categories[0].name}
-          </span>
+          </p>
         )}
 
         {/* Name */}
-        <h3 className="font-medium line-clamp-2 group-hover:underline decoration-muted-foreground underline-offset-4 decoration-dotted">
+        <h3 style={{ fontSize: "clamp(12px,0.95vw,13.5px)", fontWeight: 600, color: NAVY, lineHeight: 1.45, marginBottom: 10, flexGrow: 1 }}>
           {product.name}
         </h3>
 
         {/* Price */}
-        <div className="flex items-center gap-2 mt-auto">
-          {product.on_sale ? (
+        <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 4 }}>
+          {onSale ? (
             <>
-              <span className="font-semibold text-destructive">
-                {formatPrice(product.sale_price)}
+              <span style={{ fontSize: "clamp(14px,1.2vw,16px)", fontWeight: 800, color: BLUE }}>
+                {ntd(product.sale_price)}
               </span>
-              <span className="text-sm text-muted-foreground line-through">
-                {formatPrice(product.regular_price)}
+              <span style={{ fontSize: 12, color: "#bbb", textDecoration: "line-through" }}>
+                {ntd(product.regular_price)}
               </span>
             </>
           ) : (
-            <span className="font-semibold">
-              {product.price ? formatPrice(product.price) : "Price on request"}
+            <span style={{ fontSize: "clamp(14px,1.2vw,16px)", fontWeight: 700, color: NAVY }}>
+              {product.price ? ntd(product.price) : "詢問價格"}
             </span>
           )}
         </div>
 
         {/* Rating */}
         {product.rating_count > 0 && (
-          <div className="flex items-center gap-1 text-sm text-muted-foreground">
-            <span className="text-yellow-500">★</span>
+          <div style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 12, color: "#888", marginBottom: 4 }}>
+            <span style={{ color: "#f5a623" }}>★</span>
             <span>{product.average_rating}</span>
             <span>({product.rating_count})</span>
           </div>
         )}
+      </div>
+
+      {/* CTA */}
+      <div style={{ padding: "12px 16px 16px" }}>
+        <div style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "10px 0",
+          borderRadius: 30,
+          background: inStock ? BLUE : "#e5e7eb",
+          color: inStock ? "#fff" : "#999",
+          fontWeight: 600,
+          fontSize: 13,
+          letterSpacing: "0.06em",
+          transition: "background .2s",
+        }}>
+          {inStock ? "選購產品" : "補貨中"}
+        </div>
       </div>
     </Link>
   );
