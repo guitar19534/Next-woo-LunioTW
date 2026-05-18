@@ -19,13 +19,6 @@ const COLORS = [
 
 const SIZES = ["標準單人｜單人加大", "標準雙人｜雙人加大", "雙人特大"];
 
-/* ─── Gallery images ────────────────────────────────────────── */
-const GALLERY_IMAGES = [
-  "/snowweave-blanket/PC1.webp",
-  "/snowweave-blanket/PC2.webp",
-  "/snowweave-blanket/PC3.webp",
-  "/snowweave-blanket/Other-1.webp",
-];
 
 /* ─── Accordion ──────────────────────────────────────────────── */
 const ACCORDION_ITEMS = [
@@ -120,22 +113,25 @@ function Accordion() {
   );
 }
 
-function Gallery() {
+function Gallery({ images }: { images: string[] }) {
   const [activeIdx, setActiveIdx] = useState(0);
+  if (!images.length) return null;
   return (
     <div className="space-y-3">
       <div className="relative w-full overflow-hidden rounded-2xl bg-gray-50" style={{ aspectRatio: "3/2" }}>
-        <Image src={GALLERY_IMAGES[activeIdx]} alt="Lunio Snow Weave Blanket Cover" fill className="object-contain" sizes="(max-width:1024px) 100vw, 65vw" priority />
+        <Image src={images[activeIdx]} alt="Lunio Snow Weave Blanket Cover" fill className="object-contain" sizes="(max-width:1024px) 100vw, 65vw" priority />
       </div>
-      <div className="grid grid-cols-4 gap-2">
-        {GALLERY_IMAGES.map((src, i) => (
-          <button key={i} type="button" onClick={() => setActiveIdx(i)}
-            className="relative overflow-hidden rounded-xl aspect-square"
-            style={{ border: i === activeIdx ? `2px solid ${BLUE}` : "2px solid transparent", backgroundColor: "#f5f5f5" }}>
-            <Image src={src} alt={`preview ${i + 1}`} fill className="object-cover" sizes="15vw" />
-          </button>
-        ))}
-      </div>
+      {images.length > 1 && (
+        <div className="grid grid-cols-4 gap-2">
+          {images.map((src, i) => (
+            <button key={i} type="button" onClick={() => setActiveIdx(i)}
+              className="relative overflow-hidden rounded-xl aspect-square"
+              style={{ border: i === activeIdx ? `2px solid ${BLUE}` : "2px solid transparent", backgroundColor: "#f5f5f5" }}>
+              <Image src={src} alt={`preview ${i + 1}`} fill className="object-cover" sizes="15vw" />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -196,7 +192,7 @@ export function DuvetCoverHero({ product, variations }: Props) {
                 {Math.round((1 - Number(price) / Number(regularPrice)) * 100)}% Off
               </div>
             )}
-            <Gallery />
+            <Gallery images={product.images?.map((img) => img.src).filter(Boolean) ?? []} />
           </div>
 
           {/* Panel */}
