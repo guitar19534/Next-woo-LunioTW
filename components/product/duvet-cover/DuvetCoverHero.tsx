@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
-import Image from "next/image";
+import { useState, useCallback, useRef, useMemo } from "react";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import type { Product, ProductVariation } from "@/lib/woocommerce.d";
 import { useCart } from "@/components/shop";
 import { StickyCartBar } from "@/components/product/shared/StickyCartBar";
+import { ProductGalleryCustom } from "@/components/product/shared/ProductGalleryCustom";
 
 const BLUE = "#17569E";
 const NAVY = "#17284b";
@@ -19,7 +19,6 @@ const COLORS = [
 
 const SIZES = ["標準單人｜單人加大", "標準雙人｜雙人加大", "雙人特大"];
 
-
 /* ─── Accordion ──────────────────────────────────────────────── */
 const ACCORDION_ITEMS = [
   {
@@ -27,45 +26,24 @@ const ACCORDION_ITEMS = [
     content: (
       <div style={{ fontSize: 14, color: "#374151", lineHeight: 1.85 }}>
         <p className="font-bold mb-3" style={{ color: NAVY }}>輕柔守護，讓舊被瞬間升級</p>
-        <p className="mb-3" style={{ color: "#6b7280" }}>
-          接觸肌膚的第一層，天絲被套讓舊被瞬間變得柔軟奢華
-        </p>
-        <p className="mb-3" style={{ color: "#6b7280" }}>
-          100% 奧地利天絲萊賽爾纖維<br />
-          柔軟親膚，天然涼感，吸濕排汗，一夜清爽舒適
-        </p>
-        <p className="mb-3" style={{ color: "#6b7280" }}>
-          60支紗 x 300織，高規格厚度 115gsm<br />
-          手感細膩柔軟又耐用，清洗後依然順滑不易起毛球，機洗也方便
-        </p>
-        <p style={{ color: "#6b7280" }}>
-          素色簡約設計<br />
-          靜謐優雅，與床包完美搭配，悄悄提升臥室整體氛圍
-        </p>
+        <p className="mb-3" style={{ color: "#6b7280" }}>接觸肌膚的第一層，天絲被套讓舊被瞬間變得柔軟奢華</p>
+        <p className="mb-3" style={{ color: "#6b7280" }}>100% 奧地利天絲萊賽爾纖維<br />柔軟親膚，天然涼感，吸濕排汗，一夜清爽舒適</p>
+        <p className="mb-3" style={{ color: "#6b7280" }}>60支紗 x 300織，高規格厚度 115gsm<br />手感細膩柔軟又耐用，清洗後依然順滑不易起毛球，機洗也方便</p>
+        <p style={{ color: "#6b7280" }}>素色簡約設計<br />靜謐優雅，與床包完美搭配，悄悄提升臥室整體氛圍</p>
       </div>
     ),
   },
   {
     title: "尺寸和重量",
     content: (
-      <div style={{ fontSize: 14, color: "#374151" }}>
-        <div className="grid md:grid-cols-2 gap-6 items-start">
-          <ul className="space-y-3" style={{ paddingLeft: "1.2em", listStyleType: "disc", lineHeight: 1.85 }}>
-            <li><span className="font-medium" style={{ color: NAVY }}>標準單人｜單人加大：</span>152×212 cm</li>
-            <li><span className="font-medium" style={{ color: NAVY }}>標準雙人｜雙人加大：</span>182×212 cm</li>
-            <li><span className="font-medium" style={{ color: NAVY }}>雙人特大：</span>242×212 cm</li>
-          </ul>
-          <div className="relative w-full" style={{ aspectRatio: "4/3" }}>
-            <Image src="/snowweave-blanket/Snow-Weave.webp" alt="Lunio Snow Weave 包裝" fill className="object-contain" sizes="200px" />
-          </div>
-        </div>
-      </div>
+      <ul className="space-y-2" style={{ fontSize: 14, color: "#374151", paddingLeft: "1.2em", listStyleType: "disc", lineHeight: 1.85 }}>
+        <li><strong style={{ color: NAVY }}>標準單人｜單人加大：</strong>152×212 cm</li>
+        <li><strong style={{ color: NAVY }}>標準雙人｜雙人加大：</strong>182×212 cm</li>
+        <li><strong style={{ color: NAVY }}>雙人特大：</strong>242×212 cm</li>
+      </ul>
     ),
   },
-  {
-    title: "運送方式",
-    content: <p style={{ fontSize: 14, color: "#374151" }}>單買配件統一使用新竹物流出貨</p>,
-  },
+  { title: "運送方式", content: <p style={{ fontSize: 14, color: "#374151" }}>單買配件統一使用新竹物流出貨</p> },
   {
     title: "材質",
     content: (
@@ -113,29 +91,6 @@ function Accordion() {
   );
 }
 
-function Gallery({ images }: { images: string[] }) {
-  const [activeIdx, setActiveIdx] = useState(0);
-  if (!images.length) return null;
-  return (
-    <div className="space-y-3">
-      <div className="relative w-full overflow-hidden rounded-2xl bg-gray-50" style={{ aspectRatio: "3/2" }}>
-        <Image src={images[activeIdx]} alt="Lunio Snow Weave Blanket Cover" fill className="object-contain" sizes="(max-width:1024px) 100vw, 65vw" priority />
-      </div>
-      {images.length > 1 && (
-        <div className="grid grid-cols-4 gap-2">
-          {images.map((src, i) => (
-            <button key={i} type="button" onClick={() => setActiveIdx(i)}
-              className="relative overflow-hidden rounded-xl aspect-square"
-              style={{ border: i === activeIdx ? `2px solid ${BLUE}` : "2px solid transparent", backgroundColor: "#f5f5f5" }}>
-              <Image src={src} alt={`preview ${i + 1}`} fill className="object-cover" sizes="15vw" />
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
 interface Props { product: Product; variations: ProductVariation[]; }
 
 export function DuvetCoverHero({ product, variations }: Props) {
@@ -146,10 +101,26 @@ export function DuvetCoverHero({ product, variations }: Props) {
   const { addItem } = useCart();
   const ctaRef = useRef<HTMLButtonElement>(null);
 
-  const selectedVariation = variations.find((v) =>
-    v.attributes.some((a) => (a.name === "被套顏色" || a.name === "寢具顏色") && a.option === selectedColor) &&
-    v.attributes.some((a) => (a.name === "被套尺寸" || a.name === "床包尺寸") && a.option === selectedSize)
-  ) ?? null;
+  // Find selected variation
+  const selectedVariation = useMemo(() =>
+    variations.find((v) =>
+      v.attributes.some((a) => ["被套顏色", "寢具顏色", "pa_color"].includes(a.name) && a.option === selectedColor) &&
+      v.attributes.some((a) => ["被套尺寸", "床包尺寸", "pa_size"].includes(a.name) && a.option === selectedSize)
+    ) ?? null,
+    [variations, selectedColor, selectedSize]
+  );
+
+  // Gallery: variation image first, then product images
+  const galleryImages = useMemo(() => {
+    const varImg = selectedVariation?.image?.src
+      ? [{ id: 0, src: selectedVariation.image.src, alt: selectedColor, name: "" }]
+      : [];
+    const prodImgs = product.images ?? [];
+    // Deduplicate: remove product images that match variation image src
+    const varSrc = selectedVariation?.image?.src;
+    const filtered = varSrc ? prodImgs.filter((img) => img.src !== varSrc) : prodImgs;
+    return [...varImg, ...filtered];
+  }, [selectedVariation, product.images, selectedColor]);
 
   const price = selectedVariation?.price || product.price;
   const regularPrice = selectedVariation?.regular_price || product.regular_price;
@@ -164,13 +135,20 @@ export function DuvetCoverHero({ product, variations }: Props) {
 
   const formatPrice = (p: string) => p ? `NT$${Number(p).toLocaleString()}` : "";
 
+  const variationLabels: Record<string, string> = {};
+  variations.forEach((v) => {
+    const colorAttr = v.attributes.find((a) => ["被套顏色", "寢具顏色"].includes(a.name));
+    const sizeAttr  = v.attributes.find((a) => ["被套尺寸", "床包尺寸"].includes(a.name));
+    if (colorAttr && sizeAttr) variationLabels[`${colorAttr.option}|${sizeAttr.option}`] = sizeAttr.option;
+  });
+
   return (
     <section className="pt-12 pb-20 bg-white">
       <div className="max-w-[1400px] w-[85%] mx-auto">
 
         {/* Mobile header */}
         <div className="lg:hidden mb-4 space-y-2">
-          <nav className="flex items-center gap-1 text-sm" style={{ color: BLUE }}>
+          <nav className="flex items-center gap-1 text-xs" style={{ color: BLUE }}>
             <Link href="/" className="hover:underline">Lunio</Link>
             <span style={{ color: "#aaa" }}>›</span>
             <span style={{ color: "#aaa" }}>Lunio SnowWeave 智能天絲被套</span>
@@ -184,7 +162,7 @@ export function DuvetCoverHero({ product, variations }: Props) {
 
         <div className="grid lg:grid-cols-[65fr_35fr] gap-10 lg:gap-16 items-start">
 
-          {/* Gallery */}
+          {/* Gallery — WooCommerce product images */}
           <div className="lg:sticky lg:top-24 lg:self-start">
             {isOnSale && regularPrice && (
               <div className="inline-block mb-3 px-3 py-1 rounded-full text-white text-sm font-bold"
@@ -192,7 +170,7 @@ export function DuvetCoverHero({ product, variations }: Props) {
                 {Math.round((1 - Number(price) / Number(regularPrice)) * 100)}% Off
               </div>
             )}
-            <Gallery images={product.images?.map((img) => img.src).filter(Boolean) ?? []} />
+            <ProductGalleryCustom images={galleryImages} productName="Lunio Snow Weave Blanket Cover" />
           </div>
 
           {/* Panel */}
@@ -215,13 +193,9 @@ export function DuvetCoverHero({ product, variations }: Props) {
 
             {/* Price */}
             <div className="flex items-baseline gap-3">
-              <span className="font-bold" style={{ fontSize: 26, color: BLUE }}>
-                {formatPrice(price)}
-              </span>
+              <span className="font-bold" style={{ fontSize: 26, color: BLUE }}>{formatPrice(price)}</span>
               {isOnSale && regularPrice && (
-                <span className="line-through" style={{ fontSize: 16, color: "#9ca3af" }}>
-                  {formatPrice(regularPrice)}
-                </span>
+                <span className="line-through" style={{ fontSize: 16, color: "#9ca3af" }}>{formatPrice(regularPrice)}</span>
               )}
             </div>
 
@@ -230,37 +204,26 @@ export function DuvetCoverHero({ product, variations }: Props) {
               <p className="text-sm font-semibold mb-2" style={{ color: NAVY }}>顏色：{selectedColor}</p>
               <div className="flex gap-2">
                 {COLORS.map((c) => (
-                  <button key={c.key} type="button" onClick={() => setSelectedColor(c.key)}
-                    title={c.label}
+                  <button key={c.key} type="button" onClick={() => setSelectedColor(c.key)} title={c.label}
                     className="rounded-full transition-all"
-                    style={{
-                      width: 28, height: 28, backgroundColor: c.swatch,
-                      outline: selectedColor === c.key ? `2px solid ${BLUE}` : "2px solid transparent",
-                      outlineOffset: 2,
-                    }} />
+                    style={{ width: 28, height: 28, backgroundColor: c.swatch, outline: selectedColor === c.key ? `2px solid ${BLUE}` : "2px solid transparent", outlineOffset: 2 }} />
                 ))}
               </div>
             </div>
 
             {/* Size */}
-            <div>
-              <select value={selectedSize} onChange={(e) => setSelectedSize(e.target.value)}
-                className="w-full rounded-xl px-4 py-3 text-sm font-medium appearance-none"
-                style={{ border: "1.5px solid #e5eaf5", color: NAVY, backgroundColor: "#f8faff", cursor: "pointer" }}>
-                {SIZES.map((s) => <option key={s} value={s}>{s}</option>)}
-              </select>
-            </div>
+            <select value={selectedSize} onChange={(e) => setSelectedSize(e.target.value)}
+              className="w-full rounded-xl px-4 py-3 text-sm font-medium appearance-none"
+              style={{ border: "1.5px solid #e5eaf5", color: NAVY, backgroundColor: "#f8faff", cursor: "pointer" }}>
+              {SIZES.map((s) => <option key={s} value={s}>{s}</option>)}
+            </select>
 
             {/* Qty + CTA */}
             <div className="flex items-center gap-3">
               <div className="flex items-center rounded-xl overflow-hidden" style={{ border: "1.5px solid #e5eaf5" }}>
-                <button type="button" onClick={() => setQty(Math.max(1, qty - 1))}
-                  className="w-11 h-11 flex items-center justify-center text-lg font-bold hover:bg-gray-50 transition-colors"
-                  style={{ color: NAVY }}>−</button>
+                <button type="button" onClick={() => setQty(Math.max(1, qty - 1))} className="w-11 h-11 flex items-center justify-center text-lg font-bold hover:bg-gray-50" style={{ color: NAVY }}>−</button>
                 <span className="w-10 text-center font-semibold" style={{ fontSize: 15, color: NAVY }}>{qty}</span>
-                <button type="button" onClick={() => setQty(qty + 1)}
-                  className="w-11 h-11 flex items-center justify-center text-lg font-bold hover:bg-gray-50 transition-colors"
-                  style={{ color: NAVY }}>+</button>
+                <button type="button" onClick={() => setQty(qty + 1)} className="w-11 h-11 flex items-center justify-center text-lg font-bold hover:bg-gray-50" style={{ color: NAVY }}>+</button>
               </div>
               <button ref={ctaRef} type="button" onClick={handleAddToCart} disabled={adding}
                 className="flex-1 h-11 rounded-xl font-bold text-white transition-all"
@@ -270,7 +233,6 @@ export function DuvetCoverHero({ product, variations }: Props) {
             </div>
 
             <p style={{ fontSize: 12, color: "#9ca3af" }}>本島免運＋門市試躺＋專業服務</p>
-
             <Accordion />
           </div>
         </div>
@@ -286,7 +248,7 @@ export function DuvetCoverHero({ product, variations }: Props) {
         variations={variations}
         selectedVariation={selectedVariation}
         onVariationChange={() => {}}
-        variationLabels={{}}
+        variationLabels={variationLabels}
         onAddToCart={handleAddToCart}
         adding={adding}
       />
