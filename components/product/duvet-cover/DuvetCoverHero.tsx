@@ -112,15 +112,13 @@ export function DuvetCoverHero({ product, variations }: Props) {
 
   // Gallery: variation image first, then product images
   const galleryImages = useMemo(() => {
-    const varImg = selectedVariation?.image?.src
-      ? [{ id: 0, src: selectedVariation.image.src, alt: selectedColor, name: "" }]
-      : [];
-    const prodImgs = product.images ?? [];
-    // Deduplicate: remove product images that match variation image src
     const varSrc = selectedVariation?.image?.src;
-    const filtered = varSrc ? prodImgs.filter((img) => img.src !== varSrc) : prodImgs;
-    return [...varImg, ...filtered];
-  }, [selectedVariation, product.images, selectedColor]);
+    const prodImgs = product.images ?? [];
+    if (!varSrc) return prodImgs;
+    const varImg = selectedVariation!.image!;
+    const filtered = prodImgs.filter((img) => img.src !== varSrc);
+    return [varImg, ...filtered];
+  }, [selectedVariation, product.images]);
 
   const price = selectedVariation?.price || product.price;
   const regularPrice = selectedVariation?.regular_price || product.regular_price;
