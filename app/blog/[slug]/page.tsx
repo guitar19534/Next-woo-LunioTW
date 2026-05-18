@@ -126,8 +126,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <main style={{ fontFamily: "'MiSansTC','Noto Sans TC',sans-serif", backgroundColor: "#f8faff", minHeight: "100vh" }}>
-      <div className="max-w-[1200px] w-[90%] mx-auto py-10 md:py-14">
-        <div className="grid lg:grid-cols-[1fr_320px] gap-10">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-14">
+        <div className="grid lg:grid-cols-[1fr_320px] gap-8 lg:gap-10">
 
           {/* ── Article column ──────────────────────────────────── */}
           <article>
@@ -194,7 +194,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </article>
 
           {/* ── Sidebar ─────────────────────────────────────────── */}
-          <aside className="space-y-8">
+          <aside className="space-y-6 lg:space-y-8">
 
             {/* Ad banner */}
             <Link href="/product/lunio-latex-mattress" className="block rounded-2xl overflow-hidden group">
@@ -236,19 +236,31 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
       {/* Article content styles */}
       <style>{`
-        .blog-content h2 { font-size: clamp(18px, 2vw, 22px); font-weight: 700; color: ${BLUE}; margin: 2em 0 0.75em; }
-        .blog-content h3 { font-size: clamp(15px, 1.5vw, 18px); font-weight: 600; color: ${NAVY}; margin: 1.5em 0 0.5em; }
+        .blog-content { word-break: break-word; overflow-wrap: break-word; }
+        .blog-content h2 { font-size: clamp(17px, 2vw, 22px); font-weight: 700; color: ${BLUE}; margin: 2em 0 0.75em; line-height: 1.4; }
+        .blog-content h3 { font-size: clamp(15px, 1.5vw, 18px); font-weight: 600; color: ${NAVY}; margin: 1.5em 0 0.5em; line-height: 1.4; }
         .blog-content h4 { font-size: 15px; font-weight: 600; color: ${NAVY}; margin: 1.2em 0 0.4em; }
-        .blog-content p  { font-size: 15px; line-height: 1.9; color: #374151; margin-bottom: 1.2em; }
-        .blog-content a  { color: ${BLUE}; text-decoration: underline; }
-        .blog-content ul, .blog-content ol { padding-left: 1.5em; margin-bottom: 1.2em; }
-        .blog-content li { font-size: 15px; line-height: 1.85; color: #374151; margin-bottom: 0.3em; }
-        .blog-content img { border-radius: 12px; width: 100%; height: auto; margin: 1.5em 0; }
-        .blog-content table { width: 100%; border-collapse: collapse; margin: 1.5em 0; font-size: 14px; }
-        .blog-content th, .blog-content td { border: 1px solid #e5eaf5; padding: 10px 14px; text-align: left; }
+        .blog-content p  { font-size: clamp(14px, 1.1vw, 15px); line-height: 1.9; color: #374151; margin-bottom: 1.2em; }
+        .blog-content a  { color: ${BLUE}; text-decoration: underline; word-break: break-all; }
+        .blog-content ul, .blog-content ol { padding-left: 1.4em; margin-bottom: 1.2em; }
+        .blog-content li { font-size: clamp(14px, 1.1vw, 15px); line-height: 1.85; color: #374151; margin-bottom: 0.3em; }
+        .blog-content img { border-radius: 12px; width: 100%; height: auto; margin: 1.5em 0; display: block; }
+        .blog-content figure { margin: 1.5em 0; }
+        .blog-content figure img { margin: 0; }
+        .blog-content .wp-block-table, .blog-content table { width: 100%; margin: 1.5em 0; }
+        .blog-content .wp-block-table { overflow-x: auto; -webkit-overflow-scrolling: touch; display: block; }
+        .blog-content table { border-collapse: collapse; font-size: 14px; min-width: 400px; }
+        .blog-content th, .blog-content td { border: 1px solid #e5eaf5; padding: 8px 12px; text-align: left; }
         .blog-content th { background: #f0f4fb; font-weight: 600; color: ${NAVY}; }
         .blog-content blockquote { border-left: 3px solid ${BLUE}; background: #f0f4fb; padding: 12px 16px; margin: 1.5em 0; border-radius: 0 12px 12px 0; }
         .blog-content strong { color: ${NAVY}; font-weight: 700; }
+        .blog-content pre, .blog-content code { overflow-x: auto; max-width: 100%; white-space: pre-wrap; }
+        .blog-content iframe { max-width: 100%; }
+        @media (max-width: 640px) {
+          .blog-content h2 { font-size: 17px; margin: 1.5em 0 0.6em; }
+          .blog-content h3 { font-size: 15px; }
+          .blog-content p, .blog-content li { font-size: 14px; line-height: 1.85; }
+        }
       `}</style>
     </main>
   );

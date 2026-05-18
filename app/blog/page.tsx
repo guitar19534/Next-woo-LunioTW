@@ -169,7 +169,7 @@ export default async function BlogPage({
 
       {/* ── Hero header ─────────────────────────────────────────── */}
       <section className="py-14 md:py-20" style={{ backgroundColor: NAVY }}>
-        <div className="max-w-[1200px] w-[88%] mx-auto text-center">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 text-center">
           <p className="font-semibold mb-2 uppercase tracking-widest" style={{ fontSize: 12, color: "rgba(255,255,255,0.5)" }}>Lunio Blog</p>
           <h1 className="font-bold mb-4" style={{ fontSize: "clamp(32px, 5vw, 56px)", color: "#fff" }}>好眠知識</h1>
           <p className="mb-8" style={{ fontSize: "clamp(14px, 1.3vw, 17px)", color: "rgba(255,255,255,0.6)", maxWidth: 560, margin: "0 auto 2rem" }}>
@@ -184,7 +184,7 @@ export default async function BlogPage({
       {/* ── Category pills ──────────────────────────────────────── */}
       {categories.length > 0 && (
         <section className="py-5 bg-white" style={{ borderBottom: "1px solid #f0f4fb" }}>
-          <div className="max-w-[1200px] w-[88%] mx-auto">
+          <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
             <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide">
               <Link href="/blog"
                 className="flex-shrink-0 px-4 py-1.5 rounded-full text-sm font-medium transition-colors"
@@ -207,7 +207,7 @@ export default async function BlogPage({
         </section>
       )}
 
-      <div className="max-w-[1200px] w-[88%] mx-auto py-12 space-y-12">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-8 md:py-12 space-y-10 md:space-y-12">
 
         {/* Result count */}
         {search && (
