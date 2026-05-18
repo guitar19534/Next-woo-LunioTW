@@ -1,12 +1,44 @@
 "use client";
 
 import { useState, useCallback, useRef, useMemo } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import type { Product, ProductVariation } from "@/lib/woocommerce.d";
 import { useCart } from "@/components/shop";
 import { StickyCartBar } from "@/components/product/shared/StickyCartBar";
-import { ProductGalleryCustom } from "@/components/product/shared/ProductGalleryCustom";
+
+const BASE = "https://lunio.com.tw/wp-content/uploads/2025/09";
+
+const COLOR_IMAGES: Record<string, string[]> = {
+  "氣韻米": [
+    `${BASE}/Cream_Main_PC4.webp`,
+    `${BASE}/Artboard-1.webp`,
+    `${BASE}/Artboard-2.webp`,
+    `${BASE}/Artboard-3.webp`,
+    `${BASE}/Artboard-4.webp`,
+    `${BASE}/Artboard-5.webp`,
+    `${BASE}/Artboard-6.webp`,
+  ],
+  "量子藍": [
+    `${BASE}/Navy_Main_PC4.webp`,
+    `${BASE}/Artboard-1-1.webp`,
+    `${BASE}/Artboard-2-1.webp`,
+    `${BASE}/Artboard-3-1.webp`,
+    `${BASE}/Artboard-4-1.webp`,
+    `${BASE}/Artboard-5-1.webp`,
+    `${BASE}/Artboard-6-1.webp`,
+  ],
+  "鉑金灰": [
+    `${BASE}/Grey_Main_PC4.webp`,
+    `${BASE}/Artboard-1-2.webp`,
+    `${BASE}/Artboard-2-2.webp`,
+    `${BASE}/Artboard-3-2.webp`,
+    `${BASE}/Artboard-4-2.webp`,
+    `${BASE}/Artboard-5-2.webp`,
+    `${BASE}/Artboard-6-2.webp`,
+  ],
+};
 
 const BLUE = "#17569E";
 const NAVY = "#17284b";
@@ -73,6 +105,30 @@ const ACCORDION_ITEMS = [
   },
 ];
 
+function ColorGallery({ color }: { color: string }) {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const images = COLOR_IMAGES[color] ?? [];
+  if (!images.length) return null;
+  return (
+    <div className="space-y-3">
+      <div className="relative w-full overflow-hidden rounded-2xl bg-gray-50" style={{ aspectRatio: "3/2" }}>
+        <Image src={images[activeIdx]} alt={color} fill className="object-contain" sizes="(max-width:1024px) 100vw, 65vw" priority />
+      </div>
+      {images.length > 1 && (
+        <div className="grid grid-cols-4 gap-2">
+          {images.map((src, i) => (
+            <button key={i} type="button" onClick={() => setActiveIdx(i)}
+              className="relative overflow-hidden rounded-xl aspect-square"
+              style={{ border: i === activeIdx ? `2px solid ${BLUE}` : "2px solid transparent", backgroundColor: "#f5f5f5" }}>
+              <Image src={src} alt={`${color} ${i + 1}`} fill className="object-cover" sizes="15vw" />
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function Accordion() {
   const [open, setOpen] = useState<number | null>(0);
   return (
@@ -109,27 +165,6 @@ export function DuvetCoverHero({ product, variations }: Props) {
     ) ?? null,
     [variations, selectedColor, selectedSize]
   );
-
-  // Gallery: collect unique images from all variations + product images
-  const galleryImages = useMemo(() => {
-    // Unique variation images (all colors)
-    const varImgs = variations
-      .map((v) => v.image)
-      .filter((img): img is NonNullable<typeof img> => !!img?.src)
-      .filter((img, i, arr) => arr.findIndex((x) => x.src === img.src) === i);
-
-    // Selected variation image goes first
-    const selSrc = selectedVariation?.image?.src;
-    const ordered = selSrc
-      ? [varImgs.find((i) => i.src === selSrc)!, ...varImgs.filter((i) => i.src !== selSrc)]
-      : varImgs;
-
-    // Add product images not already included
-    const usedSrcs = new Set(ordered.map((i) => i.src));
-    const extra = (product.images ?? []).filter((i) => !usedSrcs.has(i.src));
-
-    return [...ordered, ...extra];
-  }, [variations, selectedVariation, product.images]);
 
   const price = selectedVariation?.price || product.price;
   const regularPrice = selectedVariation?.regular_price || product.regular_price;
@@ -171,7 +206,7 @@ export function DuvetCoverHero({ product, variations }: Props) {
 
         <div className="grid lg:grid-cols-[65fr_35fr] gap-10 lg:gap-16 items-start">
 
-          {/* Gallery — WooCommerce product images */}
+          {/* Gallery — color-aware, like bedsheet */}
           <div className="lg:sticky lg:top-24 lg:self-start">
             {isOnSale && regularPrice && (
               <div className="inline-block mb-3 px-3 py-1 rounded-full text-white text-sm font-bold"
@@ -179,7 +214,7 @@ export function DuvetCoverHero({ product, variations }: Props) {
                 {Math.round((1 - Number(price) / Number(regularPrice)) * 100)}% Off
               </div>
             )}
-            <ProductGalleryCustom images={galleryImages} productName="Lunio Snow Weave Blanket Cover" />
+            <ColorGallery color={selectedColor} />
           </div>
 
           {/* Panel */}
