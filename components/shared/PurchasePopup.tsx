@@ -62,93 +62,71 @@ export function PurchasePopup() {
     <>
       <style>{`
         @keyframes pp-in {
-          from { opacity: 0; transform: translateY(12px); }
+          from { opacity: 0; transform: translateY(16px); }
           to   { opacity: 1; transform: translateY(0); }
         }
       `}</style>
 
       <div
-        className="fixed bottom-6 left-5 z-50"
+        className="fixed bottom-6 right-5 z-50"
         style={{
-          width: 336,
-          borderRadius: 18,
-          background: "#fff",
-          boxShadow: "0 2px 4px rgba(0,0,0,0.04), 0 8px 24px rgba(23,40,75,0.10), 0 20px 48px rgba(23,40,75,0.06)",
-          border: "1px solid rgba(23,40,75,0.07)",
+          width: 340,
+          borderRadius: 20,
+          background: "#17284b",
+          boxShadow: "0 8px 32px rgba(0,0,0,0.28), 0 2px 8px rgba(0,0,0,0.18)",
           overflow: "hidden",
           animation: "pp-in 0.4s cubic-bezier(0.22,1,0.36,1) forwards",
           fontFamily: "'MiSansTC','Noto Sans TC',sans-serif",
           letterSpacing: "1px",
         }}
       >
-        {/* Thin top accent */}
-        <div style={{ height: 2, background: "linear-gradient(90deg, #17569E 0%, #4f93e0 100%)" }} />
+        <div style={{ padding: "16px 18px 16px 16px", display: "flex", alignItems: "center", gap: 14 }}>
 
-        <div style={{ padding: "16px 18px 14px" }}>
-          <div style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
-
-            {/* Image */}
-            <div style={{
-              width: 60, height: 60, borderRadius: 12, overflow: "hidden",
-              flexShrink: 0, backgroundColor: "#f5f7fb",
-              border: "1px solid #eef2fb",
-            }}>
-              <Image src={n.img} alt={n.product} width={60} height={60}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }} unoptimized />
-            </div>
-
-            {/* Text */}
-            <div style={{ flex: 1, minWidth: 0 }}>
-              {/* Badge */}
-              <span style={{
-                display: "inline-block",
-                fontSize: 10, fontWeight: 700,
-                color: "#16a34a",
-                letterSpacing: "0.06em",
-                marginBottom: 6,
-              }}>✓ 已購買</span>
-
-              {/* Product */}
-              <p style={{
-                fontSize: 13, fontWeight: 700, lineHeight: 1.45,
-                color: "#17284b", marginBottom: 4,
-                display: "-webkit-box",
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: "vertical" as const,
-                overflow: "hidden",
-              }}>{n.product}</p>
-
-              {/* Price */}
-              {n.price && (
-                <p style={{ fontSize: 13, fontWeight: 800, color: "#17569E", marginBottom: 5 }}>
-                  {n.price}
-                </p>
-              )}
-
-              {/* Meta */}
-              <p style={{ fontSize: 11, color: "#b0bac8", letterSpacing: "0.01em" }}>
-                {n.name}&ensp;·&ensp;{n.ago}
-              </p>
-            </div>
-
-            {/* Close */}
-            <button type="button" onClick={() => setDismissed(true)} aria-label="關閉"
-              style={{
-                flexShrink: 0, width: 22, height: 22,
-                borderRadius: "50%", border: "none", cursor: "pointer",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                backgroundColor: "#f3f5f9", marginTop: -2, padding: 0,
-              }}>
-              <X size={11} color="#9ca3af" />
-            </button>
+          {/* Image */}
+          <div style={{
+            width: 68, height: 68, borderRadius: 14, overflow: "hidden",
+            flexShrink: 0, backgroundColor: "#223660",
+          }}>
+            <Image src={n.img} alt={n.product} width={68} height={68}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }} unoptimized />
           </div>
+
+          {/* Text */}
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p style={{ fontSize: 13, color: "rgba(255,255,255,0.75)", marginBottom: 5, lineHeight: 1.4 }}>
+              {n.name} 已購買
+            </p>
+            <p style={{
+              fontSize: 14, fontWeight: 700, color: "#fff",
+              lineHeight: 1.45, marginBottom: 6,
+              display: "-webkit-box",
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: "vertical" as const,
+              overflow: "hidden",
+            }}>{n.product}</p>
+            <p style={{ fontSize: 12, color: "rgba(255,255,255,0.45)" }}>
+              {n.ago}
+            </p>
+          </div>
+
+          {/* Close */}
+          <button type="button" onClick={() => setDismissed(true)} aria-label="關閉"
+            style={{
+              flexShrink: 0, alignSelf: "flex-start",
+              width: 24, height: 24, borderRadius: "50%",
+              border: "none", cursor: "pointer", padding: 0,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              background: "rgba(255,255,255,0.12)",
+            }}>
+            <X size={12} color="rgba(255,255,255,0.7)" />
+          </button>
         </div>
 
         {/* Progress bar */}
-        <div style={{ height: 2, backgroundColor: "#f3f5f9" }}>
+        <div style={{ height: 2, backgroundColor: "rgba(255,255,255,0.08)" }}>
           <div style={{
             height: "100%", width: `${progress}%`,
-            background: "linear-gradient(90deg, #17569E, #4f93e0)",
+            background: "rgba(255,255,255,0.3)",
             transition: "width 0.08s linear",
           }} />
         </div>
