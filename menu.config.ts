@@ -6,9 +6,9 @@ export const mainMenu = {
   "枕頭": "/shop/category/pillow",
   "寢具配件": "/shop/category/bedding",
   "門市試躺": "/storefront",
-  "關於Lunio": "/pages/about",
   "領取優惠": "/shop/category/campaign10000",
-  "網紅體驗": "/influencers",
+  "關於Lunio": "/pages/about",
+  "體驗分享": "/influencers",
   "好眠知識": "/blog",
 } as const;
 
