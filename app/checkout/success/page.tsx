@@ -54,7 +54,7 @@ function OrderSummary({ order }: { order: Order }) {
                 {item.name}
               </p>
               {item.meta_data?.filter(m => m.key !== "_" && !m.key.startsWith("_")).map((m, i) => (
-                <p key={i} style={{ fontSize: 12, color: "#9ca3af" }}>{m.display_key}: {String(m.display_value ?? m.value)}</p>
+                <p key={i} style={{ fontSize: 12, color: "#9ca3af" }}>{m.key}: {String(m.value)}</p>
               ))}
               <p style={{ fontSize: 12, color: "#9ca3af" }}>× {item.quantity}</p>
             </div>
