@@ -18,12 +18,12 @@ const SLUG = "lunio-hypercool";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Lunio HyperCool 智能工學護頸枕｜Lunio Taiwan",
-  description: "HyperCool 智能工學護頸枕。4大專區精準支撐，適合全睡姿，HexaCool涼感布料，減少落枕翻身。",
+  title: { absolute: "Lunio HyperCool 智能工學護頸枕｜止鼾枕、側睡枕、蝴蝶枕 – Lunio乳膠床墊" },
+  description: "Lunio HyperCool 智能工學護頸枕。4大專區精準支撐，適合全睡姿，HexaCool涼感布料，減少落枕翻身。止鼾枕、側睡枕首選。",
   alternates: { canonical: "/product/lunio-hypercool" },
   openGraph: {
     title: "Lunio HyperCool 智能工學護頸枕",
-    description: "智慧專區支撐 × 適合全睡姿 × 減少落枕與翻身",
+    description: "止鼾枕、側睡枕、蝴蝶枕 × 4大專區精準支撐 × HexaCool涼感",
   },
 };
 

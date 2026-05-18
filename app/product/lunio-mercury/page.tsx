@@ -18,12 +18,12 @@ const SLUG = "lunio-mercury";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Lunio Mercury 石墨烯機能記憶枕｜Lunio Taiwan",
-  description: "Lunio Mercury 石墨烯機能記憶枕。三層設計自由調整高度，石墨烯導熱科技冬暖夏涼，冷凝凝膠持續涼感。",
+  title: { absolute: "Lunio Mercury 石墨烯機能記憶枕 – Lunio" },
+  description: "Lunio Mercury 石墨烯機能記憶枕。三層設計自由調整高度，石墨烯導熱科技冬暖夏涼，冷凝凝膠持續涼感。全台免費配送。",
   alternates: { canonical: "/product/lunio-mercury" },
   openGraph: {
     title: "Lunio Mercury 石墨烯機能記憶枕",
-    description: "石墨烯科技 × 三段高度任調 × 冷暖雙面任選",
+    description: "石墨烯導熱科技 × 三段高度調整 × 冷暖雙面",
   },
 };
 

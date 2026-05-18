@@ -16,12 +16,12 @@ const SLUG = "lunio-nebula";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Lunio Nebula 經典記憶枕｜Lunio Taiwan",
-  description: "Lunio Nebula 經典記憶枕。精細記憶棉蓬鬆有彈性，親膚枕套柔軟透氣，簡單就是經典。",
+  title: { absolute: "Lunio Nebula 經典記憶枕 – Lunio" },
+  description: "Lunio Nebula 經典記憶枕。精細記憶棉蓬鬆有彈性，親膚枕套柔軟透氣，簡單就是經典。全台免費配送。",
   alternates: { canonical: "/product/lunio-nebula" },
   openGraph: {
     title: "Lunio Nebula 經典記憶枕",
-    description: "精細記憶棉 × 柔軟不失支撐 × 簡單就是經典",
+    description: "精細記憶棉 × 柔軟透氣 × 簡單就是經典",
   },
 };
 

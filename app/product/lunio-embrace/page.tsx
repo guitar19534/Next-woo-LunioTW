@@ -18,12 +18,12 @@ const SLUG = "lunio-embrace";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Lunio Embrace 多功能擁抱枕｜Lunio Taiwan",
-  description: "Lunio Embrace 多功能擁抱枕。環腰溫暖擁抱，天鵝絨可拆洗枕套，碎記憶棉填充，追劇閱讀必備。",
+  title: { absolute: "Lunio Embrace 多功能擁抱枕｜沙發靠枕、床頭靠枕推薦 – Lunio乳膠床墊" },
+  description: "Lunio Embrace 多功能擁抱枕。環腰溫暖擁抱，天鵝絨可拆洗枕套，碎記憶棉填充，追劇閱讀、沙發靠枕必備。",
   alternates: { canonical: "/product/lunio-embrace" },
   openGraph: {
     title: "Lunio Embrace 多功能擁抱枕",
-    description: "環腰的溫暖擁抱 × 追劇必備神器",
+    description: "沙發靠枕、床頭靠枕推薦 × 環腰溫暖擁抱 × 天鵝絨可拆洗",
   },
 };
 

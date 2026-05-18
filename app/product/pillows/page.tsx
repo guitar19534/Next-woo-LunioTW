@@ -16,12 +16,12 @@ const SLUG = "pillows";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Lunio 天然乳膠枕｜Lunio Taiwan",
-  description: "Lunio 天然乳膠枕。泰國純天然乳膠，Q彈扎實支撐，天然防蟎抗菌，通風散熱，耐用壽命長。",
+  title: { absolute: "乳膠枕｜Q彈支撐，舒緩肩頸緊繃與酸痛 – Lunio" },
+  description: "Lunio 天然乳膠枕。泰國純天然乳膠，Q彈扎實支撐，舒緩肩頸緊繃與酸痛，天然防蟎抗菌，通風散熱，耐用壽命長。",
   alternates: { canonical: "/product/pillows" },
   openGraph: {
-    title: "Lunio 天然乳膠枕",
-    description: "Q彈扎實支撐 × 天然防蟎抗菌 × 通風不悶熱",
+    title: "乳膠枕｜Lunio",
+    description: "Q彈支撐 × 舒緩肩頸緊繃 × 天然防蟎抗菌",
   },
 };
 

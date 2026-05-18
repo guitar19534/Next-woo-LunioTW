@@ -17,12 +17,12 @@ const SLUG = "nooz-helix";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "NOOZ Helix 乳膠獨立筒床墊｜Lunio Taiwan",
-  description: "NOOZ Helix 乳膠獨立筒床墊。100 晚試睡保證，全台免費配送安裝。",
+  title: { absolute: "NOOZ Helix 乳膠獨立筒床墊★平價熱銷｜五星級飯店床墊般舒適" },
+  description: "NOOZ Helix 乳膠獨立筒床墊。平價熱銷首選，五星級飯店床墊般舒適，100% 天然乳膠 × 獨立筒彈簧。100 晚試睡保證，全台免費配送安裝。",
   alternates: { canonical: "/product/nooz-helix" },
   openGraph: {
     title: "NOOZ Helix 乳膠獨立筒床墊",
-    description: "NOOZ Helix 乳膠獨立筒 × 100 晚免費試睡保證",
+    description: "平價熱銷 × 五星級飯店舒適感 × 100晚試睡保證",
   },
 };
 

@@ -18,12 +18,12 @@ const SLUG = "nooz-butterfly";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Nooz Ergo Butterfly 蝶形記憶枕｜Lunio Taiwan",
-  description: "Nooz Ergo Butterfly 蝶形記憶枕。蝶形輪廓凹槽貼合，柔軟竹纖維枕套，適合入門工學枕。",
+  title: { absolute: "Nooz Ergo Butterfly 蝶形記憶枕｜平價側睡枕、止鼾枕 – Lunio乳膠床墊" },
+  description: "Nooz Ergo Butterfly 蝶形記憶枕。平價側睡枕、止鼾枕推薦，蝶形輪廓凹槽完美貼合肩頸，柔軟竹纖維枕套。",
   alternates: { canonical: "/product/nooz-butterfly" },
   openGraph: {
     title: "Nooz Ergo Butterfly 蝶形記憶枕",
-    description: "蝶形輪廓 × 凹槽貼合 × 柔軟竹纖維",
+    description: "平價側睡枕、止鼾枕 × 蝶形輪廓 × 竹纖維枕套",
   },
 };
 

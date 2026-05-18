@@ -18,12 +18,12 @@ const SLUG = "nooz-sunset";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "NOOZ Sunset Pro 乳膠床墊｜Lunio Taiwan",
-  description: "NOOZ Sunset Pro 乳膠床墊。100%天然乳膠 + 活性碳支撐層，專為喜歡硬床的你設計。全台免費配送安裝。",
+  title: { absolute: "NOOZ Sunset Pro乳膠活性碳床墊★平價床墊推薦｜扎實支撐首選" },
+  description: "NOOZ Sunset Pro 乳膠活性碳床墊。平價床墊推薦，100%天然乳膠 + 活性碳支撐層，扎實支撐，專為喜歡硬床的你設計。全台免費配送安裝。",
   alternates: { canonical: "/product/nooz-sunset" },
   openGraph: {
-    title: "NOOZ Sunset Pro 乳膠床墊",
-    description: "NOOZ Sunset Pro × 中等偏硬躺感 × 100晚免費試睡保證",
+    title: "NOOZ Sunset Pro乳膠活性碳床墊",
+    description: "平價床墊推薦 × 扎實支撐首選 × 100%天然乳膠",
   },
 };
 

@@ -18,12 +18,12 @@ const SLUG = "lunio-icefit";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Lunio IceFit Smart Curve 智能涼感護頸枕｜Lunio Taiwan",
-  description: "Lunio IceFit Smart Curve 智能涼感護頸枕。一觸即涼降溫1～3°C，凹型曲面完美貼合肩頸，三層枕芯雙面躺感。",
+  title: { absolute: "Lunio IceFit Smart Curve 智能涼感護頸枕 – Lunio乳膠床墊" },
+  description: "Lunio IceFit Smart Curve 智能涼感護頸枕。一觸即涼降溫1～3°C，凹型曲面完美貼合肩頸，三層枕芯雙面躺感。全台免費配送。",
   alternates: { canonical: "/product/lunio-icefit" },
   openGraph: {
     title: "Lunio IceFit Smart Curve 智能涼感護頸枕",
-    description: "一觸即涼 × 完美貼合頸部 × 雙面躺感",
+    description: "一觸即涼降溫 × 完美貼合肩頸 × 三層枕芯雙面躺感",
   },
 };
 

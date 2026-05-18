@@ -16,12 +16,12 @@ const SLUG = "nooz-moonlight";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "NOOZ Moonlight Plus 記憶床墊｜Lunio Taiwan",
-  description: "NOOZ Moonlight Plus 記憶床墊。冷凝記憶層瞬間散熱，整晚清爽好眠。全台免費配送安裝。",
+  title: { absolute: "NOOZ Moonlight Plus冷凝記憶床墊 ★平價床墊推薦 – Lunio" },
+  description: "NOOZ Moonlight Plus 冷凝記憶床墊。平價床墊推薦首選，冷凝記憶層瞬間散熱，整晚清爽好眠。100晚試睡保證，全台免費配送安裝。",
   alternates: { canonical: "/product/nooz-moonlight" },
   openGraph: {
-    title: "NOOZ Moonlight Plus 記憶床墊",
-    description: "NOOZ Moonlight Plus × 冷凝記憶 × 100晚免費試睡保證",
+    title: "NOOZ Moonlight Plus冷凝記憶床墊",
+    description: "平價床墊推薦 × 冷凝記憶散熱 × 100晚試睡保證",
   },
 };
 

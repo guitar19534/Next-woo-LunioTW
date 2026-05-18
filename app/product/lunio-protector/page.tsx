@@ -15,12 +15,12 @@ const SLUG = "lunio-protector";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Lunio Smartguard 智能防水保潔墊｜Lunio Taiwan",
+  title: { absolute: "Lunio Smartguard 智能防水保潔墊｜100％防水，柔軟又安靜 – Lunio" },
   description: "Lunio Smartguard 智能防水保潔墊。100% TENCEL 天絲親膚，TPU 超薄防水膜，360° 彈性包覆，安靜無聲，OEKO-TEX® 認證。",
   alternates: { canonical: "/product/lunio-protector" },
   openGraph: {
     title: "Lunio Smartguard 智能防水保潔墊",
-    description: "100%防水 × 親膚柔軟 × 靜音好眠，最舒服的天絲防水保潔墊",
+    description: "100%防水 × 柔軟安靜 × TENCEL天絲親膚",
   },
 };
 

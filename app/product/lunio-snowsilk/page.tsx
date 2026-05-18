@@ -15,12 +15,12 @@ const VIDEO_ID = "PLACEHOLDER_VIDEO_ID";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Lunio Snow Silk 智能涼被｜Lunio Taiwan",
-  description: "Lunio Snow Silk 智能涼被。雙面涼感布料 Qmax 0.31，觸感絲滑，OEKO-TEX® 認證，可機洗，四季適用。",
+  title: { absolute: "Lunio SnowSilk 智能涼被 – Lunio乳膠床墊" },
+  description: "Lunio SnowSilk 智能涼被。雙面涼感布料 Qmax 0.31，觸感絲滑，OEKO-TEX® 認證，可機洗，四季適用。全台免費配送。",
   alternates: { canonical: "/product/lunio-snowsilk" },
   openGraph: {
-    title: "Lunio Snow Silk 智能涼被",
-    description: "雙面涼感 × 絲滑柔軟 × 輕盈透氣",
+    title: "Lunio SnowSilk 智能涼被",
+    description: "雙面涼感 Qmax 0.31 × 絲滑柔軟 × OEKO-TEX® 認證",
   },
 };
 

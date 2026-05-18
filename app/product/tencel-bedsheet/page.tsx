@@ -14,12 +14,12 @@ const SLUG = "tencel-bedsheet";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Lunio Snow Weave 智能天絲床包組｜Lunio Taiwan",
-  description: "Lunio Snow Weave 智能天絲床包組。100% 奧地利天絲萊賽爾，60支紗×300織，115gsm，3色可選，360°彈力床包。",
+  title: { absolute: "Lunio Snow Weave 智能天絲床包組（床包+枕套） – 100%萊賽爾天絲，耐用耐洗" },
+  description: "Lunio Snow Weave 智能天絲床包組。100% 奧地利萊賽爾天絲，60支紗×300織，耐用耐洗，3色可選，360°彈力床包，全台免費配送。",
   alternates: { canonical: "/product/tencel-bedsheet" },
   openGraph: {
-    title: "Lunio Snow Weave 智能天絲床包組（床包+枕套）3色",
-    description: "親膚微涼 × 簡約優雅 × 臥室升級",
+    title: "Lunio Snow Weave 智能天絲床包組",
+    description: "100%萊賽爾天絲 × 耐用耐洗 × 60支紗300織",
   },
 };
 

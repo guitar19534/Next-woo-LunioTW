@@ -19,13 +19,13 @@ const SLUG = "lunio-latex-mattress";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Lunio Gen4 石墨烯乳膠床墊｜100% 天然乳膠 × 骨科醫師聯合研發",
+  title: { absolute: "Lunio Gen4 石墨烯乳膠床墊｜涼感透氣，解決腰痠背痛、耐用15年 – Lunio乳膠床墊" },
   description:
-    "Lunio Gen4 石墨烯乳膠床墊，石墨烯導熱科技、九區人體工學、100% 天然乳膠。100 晚試睡保證，全台免費配送安裝。",
-  alternates: { canonical: "/product/gen4" },
+    "Lunio Gen4 石墨烯乳膠床墊，石墨烯導熱科技冬暖夏涼、九區人體工學支撐、100% 天然乳膠耐用15年。100 晚試睡保證，全台免費配送安裝。",
+  alternates: { canonical: "/product/lunio-latex-mattress" },
   openGraph: {
     title: "Lunio Gen4 石墨烯乳膠床墊",
-    description: "石墨烯導熱技術 × 骨科醫師聯合研發 × 100 晚免費試睡保證",
+    description: "涼感透氣 × 解決腰痠背痛 × 耐用15年，100 晚免費試睡保證",
   },
 };
 
