@@ -11,7 +11,6 @@ import type { Product } from "@/lib/woocommerce.d";
 import MattressTabFilter from "@/components/mattress/MattressTabFilter";
 import ErgoStoreSection from "@/components/ergo/ErgoStoreSection";
 
-export const dynamic = "force-dynamic";
 
 interface Props {
   params: Promise<{ slug: string }>;

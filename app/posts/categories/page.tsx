@@ -1,4 +1,3 @@
-export const dynamic = "force-dynamic";
 import { getAllCategories } from "@/lib/wordpress";
 import { ArchiveList } from "@/components/archive-list";
 import type { Metadata } from "next";
