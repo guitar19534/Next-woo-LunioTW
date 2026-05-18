@@ -6,14 +6,16 @@ import Link from "next/link";
 const BLUE = "#17569E";
 const NAVY = "#17284b";
 
-const CATS = [
+interface Cat { label: string; img: string; href: string; }
+
+const DEFAULT_CATS: Cat[] = [
   { label: "蝶形記憶枕", img: "/butterfly/Group-346.webp", href: "/product/nooz-butterfly" },
   { label: "涼感記憶枕", img: "/smartcurve/Group-346.webp", href: "/product/lunio-icefit" },
   { label: "護頸記憶枕", img: "/hypercool/Group-346.webp", href: "/product/lunio-hypercool" },
-  { label: "靠枕", img: "/embrance/Group-346.webp", href: "/product/lunio-embrace" },
+  { label: "靠枕",       img: "/embrance/Group-436.webp",  href: "/product/lunio-embrace" },
 ];
 
-export function PillowCategoryTabs() {
+export function PillowCategoryTabs({ cats = DEFAULT_CATS }: { cats?: Cat[] }) {
   const [active, setActive] = useState(0);
   return (
     <div>
@@ -23,7 +25,7 @@ export function PillowCategoryTabs() {
       </div>
       {/* Category cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        {CATS.map((c, i) => (
+        {cats.map((c, i) => (
           <Link key={c.label} href={c.href}
             onMouseEnter={() => setActive(i)}
             className="flex flex-col items-center gap-3 group cursor-pointer">

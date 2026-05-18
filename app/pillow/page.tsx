@@ -127,6 +127,15 @@ export default async function PillowPage() {
   const products = await Promise.all(PILLOW_SLUGS.map((s) => getProductBySlug(s)));
   const validProducts = products.filter((p): p is Product => !!p);
 
+  // Build category tab images from WooCommerce product images
+  const getImg = (slug: string) => validProducts.find((p) => p.slug === slug)?.images?.[0]?.src ?? "";
+  const catTabs = [
+    { label: "蝶形記憶枕", img: getImg("nooz-butterfly"),   href: "/product/nooz-butterfly" },
+    { label: "涼感記憶枕", img: getImg("lunio-icefit"),      href: "/product/lunio-icefit" },
+    { label: "護頸記憶枕", img: getImg("lunio-hypercool"),   href: "/product/lunio-hypercool" },
+    { label: "靠枕",       img: getImg("lunio-embrace"),     href: "/product/lunio-embrace" },
+  ];
+
   // Fetch blog posts
   const blogPosts = (await Promise.all(
     BLOG_SLUGS.map((s) => getPostBySlug(s).catch(() => null))
@@ -147,7 +156,7 @@ export default async function PillowPage() {
           <p style={{ fontSize: "clamp(13px,1.1vw,15px)", color: "#555", lineHeight: 1.9, maxWidth: 760, marginBottom: 40 }}>
             記憶枕採用涼感記憶棉，添加冷凝膠，清爽又減壓，通過多項國際無毒認證，仰睡、側睡都好睡，支撐頸部，告別落枕、肩頸酸痛。
           </p>
-          <PillowCategoryTabs />
+          <PillowCategoryTabs cats={catTabs} />
         </div>
       </section>
 
