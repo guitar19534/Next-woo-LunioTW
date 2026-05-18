@@ -3,8 +3,8 @@
 // "床墊", "枕頭", "寢具配件", "門市試躺", "關於Lunio" render as dropdowns
 export const mainMenu = {
   "床墊": "/mattress",
-  "枕頭": "/shop/category/pillow",
-  "寢具配件": "/shop/category/bedding",
+  "枕頭": "/pillow",
+  "寢具配件": "/bedding",
   "門市試躺": "/storefront",
   "領取優惠": "/promotion",
   "關於Lunio": "/pages/about",
@@ -67,7 +67,7 @@ export const productMenu = {
       { label: "Nebula 經典記憶枕", href: "/product/lunio-nebula" },
       { label: "Mercury 石墨烯記憶枕", href: "/product/lunio-mercury" },
       { label: "天然乳膠枕", href: "/product/pillows" },
-      { label: "查看全部枕頭 →", href: "/shop/category/pillow" },
+      { label: "查看全部枕頭 →", href: "/pillow" },
     ],
   },
   bedding: {
@@ -79,6 +79,7 @@ export const productMenu = {
       { label: "智能天絲床包組｜柔順耐用", href: "/product/tencel-bedsheet", badge: "NEW" },
       { label: "智能天絲被套｜親膚涼爽", href: "/product/tencel-duvet-cover" },
       { label: "智能涼被｜雙面涼感", href: "/product/lunio-snowsilk" },
+      { label: "查看全部寢具配件 →", href: "/bedding" },
     ],
   },
 } as const;
