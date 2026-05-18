@@ -125,30 +125,30 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const recentPosts = recentResponse.data.filter((p) => p.slug !== slug).slice(0, 5);
 
   return (
-    <main style={{ fontFamily: "'MiSansTC','Noto Sans TC',sans-serif", backgroundColor: "#f8faff", minHeight: "100vh" }}>
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-14">
+    <main style={{ fontFamily: "'MiSansTC','Noto Sans TC',sans-serif", backgroundColor: "#f8faff", minHeight: "100vh", overflowX: "hidden" }}>
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-14">
         <div className="grid lg:grid-cols-[1fr_320px] gap-8 lg:gap-10">
 
           {/* ── Article column ──────────────────────────────────── */}
-          <article>
+          <article style={{ minWidth: 0, overflow: "hidden" }}>
             {/* Breadcrumb */}
-            <div className="flex items-center gap-2 text-sm mb-5" style={{ color: "#9ca3af" }}>
-              <Link href="/blog" className="hover:underline" style={{ color: BLUE }}>好眠知識</Link>
+            <div className="flex items-center gap-1.5 text-xs mb-4 flex-wrap" style={{ color: "#9ca3af" }}>
+              <Link href="/blog" className="hover:underline shrink-0" style={{ color: BLUE }}>好眠知識</Link>
               {category && <>
-                <span>›</span>
+                <span className="shrink-0">›</span>
                 <Link href={`/blog?category=${category.id}`} className="hover:underline" style={{ color: BLUE }}>{category.name}</Link>
               </>}
             </div>
 
             {/* Title */}
             <h1 className="font-bold leading-tight mb-4"
-              style={{ fontSize: "clamp(22px, 3vw, 34px)", color: NAVY }}
+              style={{ fontSize: "clamp(20px, 3vw, 34px)", color: NAVY, overflowWrap: "break-word", wordBreak: "break-word" }}
               dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
 
             {/* Meta */}
-            <div className="flex items-center gap-4 mb-6 flex-wrap" style={{ fontSize: 13, color: "#6b7280" }}>
-              <span className="flex items-center gap-1.5">📅 {date}</span>
-              {author?.name && <span className="flex items-center gap-1.5">✍ {author.name}</span>}
+            <div className="flex items-center gap-3 mb-5 flex-wrap" style={{ fontSize: 12, color: "#6b7280" }}>
+              <span className="flex items-center gap-1">📅 {date}</span>
+              {author?.name && <span className="flex items-center gap-1">✍ {author.name}</span>}
             </div>
 
             {/* Featured image */}

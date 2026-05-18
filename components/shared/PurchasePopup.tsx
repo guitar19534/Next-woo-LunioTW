@@ -66,22 +66,21 @@ export function PurchasePopup() {
           from { opacity: 0; transform: translateY(16px); }
           to   { opacity: 1; transform: translateY(0); }
         }
+        .pp-wrap {
+          position: fixed; bottom: 20px; left: 16px; z-index: 50;
+          width: min(320px, calc(100vw - 32px));
+          border-radius: 20px;
+          background: #17284b;
+          box-shadow: 0 8px 32px rgba(0,0,0,0.28), 0 2px 8px rgba(0,0,0,0.18);
+          overflow: hidden;
+          animation: pp-in 0.4s cubic-bezier(0.22,1,0.36,1) forwards;
+          font-family: 'MiSansTC','Noto Sans TC',sans-serif;
+          letter-spacing: 1px;
+        }
       `}</style>
 
-      <div
-        className="fixed bottom-6 left-5 z-50"
-        style={{
-          width: 340,
-          borderRadius: 20,
-          background: "#17284b",
-          boxShadow: "0 8px 32px rgba(0,0,0,0.28), 0 2px 8px rgba(0,0,0,0.18)",
-          overflow: "hidden",
-          animation: "pp-in 0.4s cubic-bezier(0.22,1,0.36,1) forwards",
-          fontFamily: "'MiSansTC','Noto Sans TC',sans-serif",
-          letterSpacing: "1px",
-        }}
-      >
-        <div style={{ padding: "16px 18px 16px 16px", display: "flex", alignItems: "center", gap: 14 }}>
+      <div className="pp-wrap">
+        <div style={{ padding: "14px 16px 14px 14px", display: "flex", alignItems: "center", gap: 12 }}>
 
           {/* Image */}
           <div style={{
