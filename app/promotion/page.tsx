@@ -61,49 +61,53 @@ export default function PromotionPage() {
     <main style={{ fontFamily: FONT, color: NAVY, background: "#fff" }}>
 
       {/* ── 1. HERO + FORM ───────────────────────────────────────────────── */}
-      <section style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: "90vh" }}>
-        {/* Left — hero image */}
-        <div style={{ position: "relative", minHeight: 500 }}>
-          <Image
-            src="/promotions/Web_01.webp"
-            alt="Lunio乳膠床墊"
-            fill
-            className="object-cover object-center"
-            priority
-            sizes="50vw"
-          />
-          <div style={{
-            position: "absolute", inset: 0,
-            background: "linear-gradient(135deg, rgba(23,40,75,0.25) 0%, transparent 60%)",
-          }} />
-          <div style={{ position: "absolute", top: "clamp(40px,6vw,72px)", left: "clamp(24px,5vw,60px)" }}>
-            <h1 style={{
-              fontSize: "clamp(22px,3.5vw,40px)", fontWeight: 800,
-              color: BLUE, lineHeight: 1.3,
-              textShadow: "0 2px 12px rgba(255,255,255,0.8)",
-            }}>
-              想擁有一覺好眠到天亮？
-            </h1>
-          </div>
-        </div>
+      <section style={{ position: "relative", minHeight: "90vh", display: "flex", alignItems: "center" }}>
+        {/* BG image */}
+        <Image
+          src="/promotions/Web_01.webp"
+          alt="Lunio乳膠床墊"
+          fill
+          className="object-cover object-center"
+          priority
+          sizes="100vw"
+        />
+        {/* Overlay */}
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.5) 100%)" }} />
 
-        {/* Right — form */}
-        <div style={{
-          padding: "clamp(40px,5vw,64px) clamp(32px,5vw,72px)",
-          display: "flex", flexDirection: "column", justifyContent: "center",
-          background: "#fff",
-        }}>
-          <h2 style={{ fontSize: "clamp(18px,2vw,24px)", fontWeight: 800, color: NAVY, marginBottom: 16, textAlign: "center" }}>
-            登記享【特別優惠】
-          </h2>
-          <p style={{ fontSize: 14, color: "#555", lineHeight: 1.9, marginBottom: 8, textAlign: "center" }}>
-            歡迎來到Lunio，如果您有購買乳膠床墊的需求，或想要更了解我們的床墊，請留下您的聯絡資訊，專人將會與您聯絡並提供協助，購床還能獲得
-            <strong style={{ color: NAVY }}>🎁額外的特別優惠</strong>，不要錯過喔！
-          </p>
-          <p style={{ fontSize: 13, color: "#e53e3e", fontWeight: 700, marginBottom: 20, textAlign: "center" }}>
-            本週限量50名，優惠即將送完，要搶要快！
-          </p>
-          <PromotionForm />
+        {/* Content */}
+        <div style={{ position: "relative", zIndex: 1, width: "100%", ...W, display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(24px,4vw,64px)", alignItems: "center", padding: "clamp(60px,8vw,100px) clamp(20px,4vw,48px)" }}>
+          {/* Left text */}
+          <div>
+            <h1 style={{
+              fontSize: "clamp(26px,4vw,52px)", fontWeight: 800,
+              color: "#fff", lineHeight: 1.3, marginBottom: 16,
+              textShadow: "0 2px 16px rgba(0,0,0,0.3)",
+            }}>
+              想擁有一覺<br />好眠到天亮？
+            </h1>
+            <p style={{ fontSize: "clamp(14px,1.2vw,18px)", color: "rgba(255,255,255,0.85)", lineHeight: 1.8 }}>
+              登記即享限定特別優惠<br />本週限量 50 名，要搶要快！
+            </p>
+          </div>
+
+          {/* Right — form card */}
+          <div style={{
+            background: "rgba(255,255,255,0.97)",
+            borderRadius: 20, padding: "clamp(28px,4vw,48px)",
+            boxShadow: "0 8px 48px rgba(0,0,0,0.2)",
+          }}>
+            <h2 style={{ fontSize: "clamp(17px,1.8vw,22px)", fontWeight: 800, color: NAVY, marginBottom: 12, textAlign: "center" }}>
+              登記享【特別優惠】
+            </h2>
+            <p style={{ fontSize: 13, color: "#555", lineHeight: 1.9, marginBottom: 8, textAlign: "center" }}>
+              留下聯絡資訊，專人將與您聯絡，購床還能獲得
+              <strong style={{ color: NAVY }}>🎁額外的特別優惠</strong>，不要錯過喔！
+            </p>
+            <p style={{ fontSize: 12, color: "#e53e3e", fontWeight: 700, marginBottom: 18, textAlign: "center" }}>
+              本週限量50名，優惠即將送完，要搶要快！
+            </p>
+            <PromotionForm />
+          </div>
         </div>
       </section>
 
