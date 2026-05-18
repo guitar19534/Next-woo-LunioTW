@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { PromotionForm } from "@/components/promotions/PromotionForm";
 import { FeaturesCarousel } from "@/components/promotions/FeaturesCarousel";
 import { ReviewsCarousel } from "@/components/promotions/ReviewsCarousel";
+import { ScrollToTopButton } from "@/components/promotions/ScrollToTopButton";
 
 export const metadata: Metadata = {
   title: { absolute: "領取特別優惠｜Lunio乳膠床墊 – 限量50名" },
@@ -255,16 +255,7 @@ export default function PromotionPage() {
           <h2 style={{ fontSize: "clamp(24px,4vw,44px)", fontWeight: 800, color: "#fff", marginBottom: 28, lineHeight: 1.3 }}>
             乳膠床墊 + 特別優惠
           </h2>
-          <Link href="#"
-            onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-            style={{
-              display: "inline-block", padding: "14px 40px", borderRadius: 40,
-              background: BLUE, color: "#fff", fontSize: 16, fontWeight: 700,
-              textDecoration: "none", letterSpacing: "0.08em",
-              boxShadow: "0 4px 20px rgba(60,122,228,0.4)",
-            }}>
-            登記享特別優惠
-          </Link>
+          <ScrollToTopButton />
         </div>
       </section>
 
