@@ -964,7 +964,8 @@ export default function CheckoutPage() {
                           {pm.subOptions?.map((sub) => (
                             <div key={sub.key}>
                               {sub.label && (
-                                <p className="mb-1.5" style={{ fontSize: 12, color: "#6b7280" }}>{sub.label}</p>
+                                <p className="mb-1.5" style={{ fontSize: 12, color: "#6b7280" }}
+                                  dangerouslySetInnerHTML={{ __html: sub.label }} />
                               )}
                               <div className="relative">
                                 <select
