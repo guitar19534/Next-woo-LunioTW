@@ -110,15 +110,26 @@ export function DuvetCoverHero({ product, variations }: Props) {
     [variations, selectedColor, selectedSize]
   );
 
-  // Gallery: variation image first, then product images
+  // Gallery: collect unique images from all variations + product images
   const galleryImages = useMemo(() => {
-    const varSrc = selectedVariation?.image?.src;
-    const prodImgs = product.images ?? [];
-    if (!varSrc) return prodImgs;
-    const varImg = selectedVariation!.image!;
-    const filtered = prodImgs.filter((img) => img.src !== varSrc);
-    return [varImg, ...filtered];
-  }, [selectedVariation, product.images]);
+    // Unique variation images (all colors)
+    const varImgs = variations
+      .map((v) => v.image)
+      .filter((img): img is NonNullable<typeof img> => !!img?.src)
+      .filter((img, i, arr) => arr.findIndex((x) => x.src === img.src) === i);
+
+    // Selected variation image goes first
+    const selSrc = selectedVariation?.image?.src;
+    const ordered = selSrc
+      ? [varImgs.find((i) => i.src === selSrc)!, ...varImgs.filter((i) => i.src !== selSrc)]
+      : varImgs;
+
+    // Add product images not already included
+    const usedSrcs = new Set(ordered.map((i) => i.src));
+    const extra = (product.images ?? []).filter((i) => !usedSrcs.has(i.src));
+
+    return [...ordered, ...extra];
+  }, [variations, selectedVariation, product.images]);
 
   const price = selectedVariation?.price || product.price;
   const regularPrice = selectedVariation?.regular_price || product.regular_price;
