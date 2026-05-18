@@ -6,7 +6,7 @@ import { getPostBySlug } from "@/lib/wordpress";
 import { stripHtml, truncateText } from "@/lib/metadata";
 import type { Product } from "@/lib/woocommerce.d";
 import { PillowCategoryTabs } from "@/components/pillow/PillowCategoryTabs";
-import { PillowCrossSell } from "@/components/pillow/PillowCrossSell";
+import MattressTabFilter from "@/components/mattress/MattressTabFilter";
 
 export const revalidate = 3600;
 
@@ -204,9 +204,9 @@ export default async function PillowPage() {
       )}
 
       {/* ── 4. CROSS-SELL ────────────────────────────────────────────── */}
-      <section style={{ background: "#f8faff", padding: "clamp(40px,5vw,64px) 0" }}>
+      <section style={{ background: "#fff", padding: "clamp(40px,5vw,64px) 0" }}>
         <div style={W}>
-          <PillowCrossSell />
+          <MattressTabFilter />
         </div>
       </section>
 
