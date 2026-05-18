@@ -106,7 +106,7 @@ const EXTRA_COLUMNS: Partial<Record<DropdownKey, readonly ExtraCol[]>> = {
 };
 
 // Items that should show a NEW badge
-const NEW_BADGE_HREFS = new Set(["/product/lunio-hypercool"]);
+const NEW_BADGE_HREFS = new Set(["/product/lunio-hypercool", "/product/lunio-protector", "/product/tencel-bedsheet"]);
 
 const SIMPLE_DROPDOWNS_KEYS = new Set<string>(["門市試躺", "關於Lunio"]);
 

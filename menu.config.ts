@@ -75,11 +75,10 @@ export const productMenu = {
     labelEn: "Bedding",
     href: "/shop/category/bedding",
     items: [
-      { label: "SnowWeave 智能天絲被套", href: "/product/lunio-snowweave" },
-      { label: "SnowSilk 智能涼被", href: "/product/lunio-snowsilk" },
-      { label: "SmartGuard 防水保潔墊", href: "/product/lunio-protector" },
-      { label: "SnowWeave 天絲床包組", href: "/product/tencel-bedsheet" },
-      { label: "查看全部配件 →", href: "/shop/category/bedding" },
+      { label: "天絲防水保潔墊｜靜音舒適", href: "/product/lunio-protector", badge: "NEW" },
+      { label: "智能天絲床包組｜柔順耐用", href: "/product/tencel-bedsheet", badge: "NEW" },
+      { label: "智能天絲被套｜親膚涼爽", href: "/product/tencel-duvet-cover" },
+      { label: "智能涼被｜雙面涼感", href: "/product/lunio-snowsilk" },
     ],
   },
 } as const;
