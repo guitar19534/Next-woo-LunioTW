@@ -28,6 +28,11 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.site_name}`,
   },
   description: siteConfig.site_description,
+  icons: {
+    icon: "/Lunio-favicon.webp",
+    shortcut: "/Lunio-favicon.webp",
+    apple: "/Lunio-favicon.webp",
+  },
   metadataBase: new URL(siteConfig.site_domain),
   alternates: {
     canonical: "/",
