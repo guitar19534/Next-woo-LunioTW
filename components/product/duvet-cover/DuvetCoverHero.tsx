@@ -280,7 +280,20 @@ export function DuvetCoverHero({ product, variations }: Props) {
         </div>
       </div>
 
-      <StickyCartBar ctaRef={ctaRef} productName="Lunio Snow Weave Blanket Cover" price={formatPrice(price)} onAdd={handleAddToCart} adding={adding} />
+      <StickyCartBar
+        triggerRef={ctaRef}
+        productName="Lunio Snow Weave Blanket Cover"
+        subtitle="智能天絲涼感被套"
+        price={formatPrice(price)}
+        regularPrice={formatPrice(regularPrice)}
+        isOnSale={isOnSale}
+        variations={variations}
+        selectedVariation={selectedVariation}
+        onVariationChange={() => {}}
+        variationLabels={{}}
+        onAddToCart={handleAddToCart}
+        adding={adding}
+      />
     </section>
   );
 }
