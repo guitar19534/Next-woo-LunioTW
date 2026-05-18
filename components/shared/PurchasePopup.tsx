@@ -2,9 +2,10 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { X } from "lucide-react";
 
-interface Notification { name: string; product: string; img: string; price?: string; ago: string; }
+interface Notification { name: string; product: string; slug: string; img: string; price?: string; ago: string; }
 
 const SHOW_DELAY  = 8_000;
 const SHOW_FOR    = 9_000;
@@ -68,7 +69,7 @@ export function PurchasePopup() {
       `}</style>
 
       <div
-        className="fixed bottom-6 right-5 z-50"
+        className="fixed bottom-6 left-5 z-50"
         style={{
           width: 340,
           borderRadius: 20,
@@ -96,14 +97,16 @@ export function PurchasePopup() {
             <p style={{ fontSize: 13, color: "rgba(255,255,255,0.75)", marginBottom: 5, lineHeight: 1.4 }}>
               {n.name} 已購買
             </p>
-            <p style={{
-              fontSize: 14, fontWeight: 700, color: "#fff",
-              lineHeight: 1.45, marginBottom: 6,
-              display: "-webkit-box",
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: "vertical" as const,
-              overflow: "hidden",
-            }}>{n.product}</p>
+            <Link href={`/product/${n.slug}`} style={{ textDecoration: "none" }}>
+              <p style={{
+                fontSize: 14, fontWeight: 700, color: "#fff",
+                lineHeight: 1.45, marginBottom: 6,
+                display: "-webkit-box",
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: "vertical" as const,
+                overflow: "hidden",
+              }}>{n.product}</p>
+            </Link>
             <p style={{ fontSize: 12, color: "rgba(255,255,255,0.45)" }}>
               {n.ago}
             </p>

@@ -59,6 +59,7 @@ export async function GET() {
         return {
           name:    `${randomItem(LAST_NAMES)}${randomItem(GENDERS)}（${randomItem(CITIES)}）`,
           product: (p.name as string).replace(/\s*\(.*?\)\s*/g, "").trim(),
+          slug:    p.slug as string,
           img,
           price:   price ? `NT$${Number(price).toLocaleString()}` : "",
           ago:     randomMinutesAgo(),
