@@ -240,6 +240,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const addItem = useCallback(
     async (productId: number, quantity: number) => {
+      setIsOpen(true); // open cart immediately — shows syncing state
       setIsSyncing(true);
       try {
         await callCart("/api/cart/add-item", {
@@ -248,7 +249,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
         });
       } finally {
         setIsSyncing(false);
-        setIsOpen(true); // open after item is already in cart state
       }
       // refresh in background — picks up WooDiscountRules gift calculations
       refreshCart().catch(() => {});

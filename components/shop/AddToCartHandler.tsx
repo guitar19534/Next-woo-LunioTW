@@ -19,16 +19,17 @@ export function AddToCartHandler() {
     const varId = parseInt(id, 10);
     if (isNaN(varId)) return;
 
-    addItem(varId, 1)
-      .then(() => {
-        openCart();
-        // Clean URL — remove add-to-cart param
-        const params = new URLSearchParams(searchParams.toString());
-        params.delete("add-to-cart");
-        const qs = params.toString();
-        router.replace(pathname + (qs ? `?${qs}` : ""), { scroll: false });
-      })
-      .catch(() => {});
+    // Open cart immediately for instant feedback (optimistic)
+    openCart();
+
+    // Clean URL right away
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("add-to-cart");
+    const qs = params.toString();
+    router.replace(pathname + (qs ? `?${qs}` : ""), { scroll: false });
+
+    // Add item in background — cart will show syncing state
+    addItem(varId, 1).catch(() => {});
   }, [searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return null;
