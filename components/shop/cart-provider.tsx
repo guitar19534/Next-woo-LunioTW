@@ -176,6 +176,18 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
+// Cart localStorage cache — stale-while-revalidate
+const CART_CACHE_KEY = "lunio_cart_cache";
+function loadCartCache(): Cart | null {
+  try {
+    const raw = localStorage.getItem(CART_CACHE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch { return null; }
+}
+function saveCartCache(cart: Cart) {
+  try { localStorage.setItem(CART_CACHE_KEY, JSON.stringify(cart)); } catch {}
+}
+
 // giftRelations: sessionStorage — { giftProductId: mainProductId }
 // When main product leaves cart, gift is auto-removed by useEffect watcher
 const GIFT_KEY = "lunio_gift_relations";
@@ -187,7 +199,7 @@ function saveGiftRelations(r: Record<number, number>) {
 }
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [cart, setCart] = useState<Cart>(EMPTY_CART);
+  const [cart, setCart] = useState<Cart>(() => loadCartCache() ?? EMPTY_CART);
   const [nonce, setNonce] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -195,7 +207,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [pendingCount, setPendingCount] = useState(0); // items being added
 
   const applyResponse = useCallback((data: StoreCart) => {
-    setCart(mapStoreCart(data));
+    const mapped = mapStoreCart(data);
+    setCart(mapped);
+    saveCartCache(mapped);
     if (data._nonce) setNonce(data._nonce);
   }, []);
 
@@ -219,8 +233,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
     [nonce, applyResponse]
   );
 
-  // Initial cart fetch
+  // Initial cart fetch — stale-while-revalidate
+  // Cache is already loaded in useState initializer, so isLoading=false immediately
   useEffect(() => {
+    const cached = loadCartCache();
+    if (cached) setIsLoading(false); // show cache instantly
     fetch("/api/cart", { cache: "no-store" })
       .then((r) => r.json())
       .then((data: StoreCart) => applyResponse(data))
