@@ -694,7 +694,7 @@ export default function CheckoutPage() {
                   <div>
                     <FieldLabel required>聯絡電話</FieldLabel>
                     <TextInput name="phone" value={f.phone} onChange={set}
-                      placeholder="聯絡電話" type="tel" required />
+                      placeholder="例：0912-345-678" type="tel" required />
                   </div>
 
                   {/* Email */}
