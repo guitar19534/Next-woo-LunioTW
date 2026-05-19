@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { X, ShoppingBag, Trash2, Plus, Minus, Gift, ArrowRight, Lock } from "lucide-react";
@@ -22,6 +22,8 @@ export function CartDrawer() {
   } = useCart();
 
   const itemCount = getItemCount();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") closeCart(); };
@@ -44,7 +46,7 @@ export function CartDrawer() {
         className="relative flex items-center justify-center w-9 h-9 rounded-full hover:bg-black/10 transition-colors"
       >
         <ShoppingBag size={20} />
-        {itemCount > 0 && (
+        {mounted && itemCount > 0 && (
           <span
             className="absolute -top-0.5 -right-0.5 flex items-center justify-center w-[18px] h-[18px] rounded-full text-white font-bold"
             style={{ backgroundColor: "#17569E", fontSize: 10 }}
