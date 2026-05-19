@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const STORE_API = `${process.env.WORDPRESS_URL}/wp-json/wc/store/v1`;
 
+export const fetchWC: typeof fetch = fetch;
+
 export function getCookieHeader(req: NextRequest) {
   return req.headers.get("cookie") ?? "";
 }

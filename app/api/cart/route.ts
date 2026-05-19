@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { STORE_API, getCookieHeader, getNonceHeader, forwardSetCookies, extractNonce } from "./_proxy";
+import { STORE_API, fetchWC, getCookieHeader, getNonceHeader, forwardSetCookies, extractNonce } from "./_proxy";
 
 export async function GET(req: NextRequest) {
-  const wcRes = await fetch(`${STORE_API}/cart`, {
+  const wcRes = await fetchWC(`${STORE_API}/cart`, {
     headers: { Cookie: getCookieHeader(req) },
     cache: "no-store",
   });
@@ -18,7 +18,7 @@ export async function GET(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
   const nonce = getNonceHeader(req);
 
-  const wcRes = await fetch(`${STORE_API}/cart/items`, {
+  const wcRes = await fetchWC(`${STORE_API}/cart/items`, {
     method: "DELETE",
     headers: {
       Cookie: getCookieHeader(req),
