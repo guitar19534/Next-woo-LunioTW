@@ -3,6 +3,23 @@ import { forwardSetCookies } from "@/app/api/cart/_proxy";
 
 const STORE_API = `${process.env.WORDPRESS_URL}/wp-json/wc/store/v1`;
 
+// Convert Taiwan phone to international format expected by WooCommerce
+// 0912345678 → +886912345678 | 02-12345678 → +886212345678
+function normalizeTwPhone(phone: string): string {
+  const digits = phone.replace(/\D/g, "");
+  if (!digits) return phone;
+  if (digits.startsWith("886")) return `+${digits}`;
+  if (digits.startsWith("0")) return `+886${digits.slice(1)}`;
+  return `+886${digits}`;
+}
+
+function normalizeAddress(addr: Record<string, unknown>): Record<string, unknown> {
+  if (typeof addr.phone === "string") {
+    return { ...addr, phone: normalizeTwPhone(addr.phone) };
+  }
+  return addr;
+}
+
 function extractErrMsg(data: Record<string, unknown>): string {
   // data.message is the primary WooCommerce error string
   if (typeof data.message === "string" && data.message) return data.message;
@@ -40,8 +57,8 @@ export async function POST(request: NextRequest) {
       ? body.payment_data : [];
 
     const wcPayload: Record<string, unknown> = {
-      billing_address:  body.billing_address,
-      shipping_address: body.shipping_address,
+      billing_address:  normalizeAddress(body.billing_address),
+      shipping_address: normalizeAddress(body.shipping_address),
       customer_note:    body.customer_note ?? "",
       payment_method:   paymentMethod,
       payment_data:     paymentData,
