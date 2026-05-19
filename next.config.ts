@@ -30,10 +30,11 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     const rules = [
-      // WooCommerce order-received → our success page
+      // WooCommerce order-received → our beautiful thank-you page
+      // (the dynamic page at /checkout/order-received/[orderId] handles this)
       {
-        source: "/checkout/order-received/:orderId",
-        destination: "/checkout/success?order=:orderId",
+        source: "/checkout/order-received/:orderId/",
+        destination: "/checkout/order-received/:orderId",
         permanent: false,
       },
       // WordPress My Account → our custom account dashboard
