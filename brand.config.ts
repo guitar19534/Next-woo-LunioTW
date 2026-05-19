@@ -33,7 +33,7 @@ export const brandConfig = {
     eyebrow: "乳膠床墊首選",
     title: "睡得好，就是最幸福的事",
     subtitle: "Sleeping good, Healthy good",
-    ctaPrimary: { label: "探索床墊", href: "/shop" },
+    ctaPrimary: { label: "探索床墊", href: "/mattress" },
     ctaSecondary: { label: "預約門市試躺", href: "/pages/contact" },
     trustBadges: ["100 晚試睡保證", "全台免費配送", "10 年品質保固"],
   },
