@@ -1,5 +1,6 @@
 import "./globals.css";
 
+import { Suspense } from "react";
 import { Noto_Sans_TC } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
@@ -7,6 +8,7 @@ import { CartProvider } from "@/components/shop";
 import { Nav } from "@/components/layout/nav";
 import { Footer } from "@/components/layout/footer";
 import { PurchasePopup } from "@/components/shared/PurchasePopup";
+import { AddToCartHandler } from "@/components/shop/AddToCartHandler";
 import Script from "next/script";
 
 import { siteConfig } from "@/site.config";
@@ -98,6 +100,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             {children}
             <Footer />
             <PurchasePopup />
+            <Suspense fallback={null}>
+              <AddToCartHandler />
+            </Suspense>
           </CartProvider>
         </ThemeProvider>
         <Analytics />
