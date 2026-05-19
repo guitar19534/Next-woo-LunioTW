@@ -257,13 +257,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const addItem = useCallback(
     async (productId: number, quantity: number) => {
-      setIsOpen(true); // open cart immediately — shows syncing state
       setIsSyncing(true);
       try {
         await callCart("/api/cart/add-item", {
           method: "POST",
           body: JSON.stringify({ id: productId, quantity }),
         });
+        setIsOpen(true); // open after item is ready — no skeleton needed
       } finally {
         setIsSyncing(false);
       }

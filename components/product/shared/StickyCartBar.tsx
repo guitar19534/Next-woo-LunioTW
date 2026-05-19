@@ -127,8 +127,10 @@ export function StickyCartBar({
             className="flex items-center gap-2 flex-shrink-0 px-7 py-2.5 rounded-2xl font-bold text-white transition-opacity hover:opacity-90 disabled:opacity-60"
             style={{ backgroundColor: "#1C46B4", fontSize: 14, letterSpacing: "0.04em" }}
           >
-            <ShoppingBag size={16} />
-            {adding ? "加入中..." : "立刻搶購"}
+            {adding
+              ? <><span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /><span>加入中...</span></>
+              : <><ShoppingBag size={16} /><span>立刻搶購</span></>
+            }
           </button>
         </div>
 

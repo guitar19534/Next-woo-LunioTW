@@ -19,16 +19,13 @@ export function AddToCartHandler() {
     const varId = parseInt(id, 10);
     if (isNaN(varId)) return;
 
-    // Open cart immediately for instant feedback (optimistic)
-    openCart();
-
     // Clean URL right away
     const params = new URLSearchParams(searchParams.toString());
     params.delete("add-to-cart");
     const qs = params.toString();
     router.replace(pathname + (qs ? `?${qs}` : ""), { scroll: false });
 
-    // Add item in background — cart will show syncing state
+    // addItem opens cart after item is ready (no skeleton flash)
     addItem(varId, 1).catch(() => {});
   }, [searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
 
