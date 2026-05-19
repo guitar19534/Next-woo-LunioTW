@@ -56,19 +56,19 @@ export const brandConfig = {
       label: "床墊",
       labelEn: "Mattresses",
       description: "石墨烯乳膠・獨立筒・記憶床墊",
-      href: "/shop/category/mattress",
+      href: "/mattress",
     },
     {
       label: "枕頭",
       labelEn: "Pillows",
       description: "工學護頸枕・涼感護頸枕・記憶枕",
-      href: "/shop/category/pillow",
+      href: "/pillow",
     },
     {
       label: "寢具配件",
       labelEn: "Bedding",
       description: "天絲被套・智能涼被・防水保潔墊",
-      href: "/shop/category/bedding",
+      href: "/bedding",
     },
   ],
 

@@ -591,7 +591,7 @@ export function HypercoolPricing() {
               {first.price}
             </span>
             <Link
-              href={`/shop/${first.slug}`}
+              href="/product/lunio-hypercool"
               className="px-4 py-2 font-bold text-white rounded-full"
               style={{ fontSize: "13px", backgroundColor: "#17569E" }}
             >

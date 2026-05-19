@@ -35,6 +35,7 @@ interface SizeOption {
   price: string;
   strikePrice?: string;
   slug: string;
+  cartId: number;
   image: string;
   desc: string;
 }
@@ -104,6 +105,7 @@ const SIZES: SizeOption[] = [
     price: "NT$21,990",
     strikePrice: "NT$38,000",
     slug: "lunio-gen4-single",
+    cartId: 66174,
     image: "/gen4/3ft.webp",
     desc: "精準支撐全身曲線 單人專屬的高科技深眠空間",
   },
@@ -114,6 +116,7 @@ const SIZES: SizeOption[] = [
     price: "NT$23,990",
     strikePrice: "NT$40,000",
     slug: "lunio-gen4-single-xl",
+    cartId: 66175,
     image: "/gen4/3.5ft.webp",
     desc: "加寬設計搭配智能承托系統 翻身依然穩定舒適 ",
   },
@@ -124,6 +127,7 @@ const SIZES: SizeOption[] = [
     price: "NT$28,990",
     strikePrice: "NT$52,000",
     slug: "lunio-gen4-double",
+    cartId: 66176,
     image: "/gen4/5ft.webp",
     desc: "人體工學分區支撐 兩人共享也能各自獨立安睡 ",
   },
@@ -134,6 +138,7 @@ const SIZES: SizeOption[] = [
     price: "NT$33,990",
     strikePrice: "NT$64,000",
     slug: "lunio-gen4-queen",
+    cartId: 66177,
     image: "/gen4/6ft.webp",
     desc: "更廣闊的睡眠場域 零干擾技術讓深眠不中斷 ",
   },
@@ -144,6 +149,7 @@ const SIZES: SizeOption[] = [
     price: "NT$36,990",
     strikePrice: "NT$80,000",
     slug: "lunio-gen4-superking",
+    cartId: 66178,
     image: "/gen4/7ft.webp",
     desc: "旗艦級寬敞空間 從頭到腳全面智慧承托與釋壓 ",
   },
@@ -619,7 +625,7 @@ export function Gen4Pricing() {
                     <div className="flex justify-center">
                       <div className="flex items-center rounded-full border-2 overflow-hidden" style={{ borderColor: "#17569E" }}>
                         <span className="px-4 font-bold" style={{ fontSize: "15px", color: "#17569E" }}>{s.price}</span>
-                        <Link href={`/shop/${s.slug}`} className="px-4 py-2 font-bold text-white rounded-full" style={{ fontSize: "13px", backgroundColor: "#17569E" }}>
+                        <Link href={`/?add-to-cart=${s.cartId}`} className="px-4 py-2 font-bold text-white rounded-full" style={{ fontSize: "13px", backgroundColor: "#17569E" }}>
                           立即購買
                         </Link>
                       </div>
@@ -700,7 +706,7 @@ export function Gen4Pricing() {
                 <div className="flex justify-center">
                   <div className="flex items-center rounded-full border-2 overflow-hidden" style={{ borderColor: "#17569E" }}>
                     <span className="px-8 font-bold" style={{ fontSize: "22px", color: "#17569E" }}>{current.price}</span>
-                    <Link href={`/shop/${current.slug}`} className="px-7 py-3 font-bold text-white rounded-full" style={{ fontSize: "16px", backgroundColor: "#17569E" }}>
+                    <Link href={`/?add-to-cart=${current.cartId}`} className="px-7 py-3 font-bold text-white rounded-full" style={{ fontSize: "16px", backgroundColor: "#17569E" }}>
                       立即購買
                     </Link>
                   </div>
