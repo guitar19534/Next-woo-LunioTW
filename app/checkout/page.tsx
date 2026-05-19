@@ -255,8 +255,10 @@ export default function CheckoutPage() {
     }
     if (f.invoiceType === "carrier" && f.invoiceCarrier)
       parts.push(`發票條碼：${f.invoiceCarrier}`);
-    if (f.invoiceType === "personal" && f.invoiceEmail)
-      parts.push(`個人發票Email：${f.invoiceEmail}`);
+    if (f.invoiceType === "personal") {
+      const invoiceEmail = f.invoiceEmail || f.email;
+      parts.push(`個人發票Email：${invoiceEmail}`);
+    }
     if (f.invoiceType === "business")
       parts.push(`統編：${f.invoiceTaxId}｜公司：${f.invoiceCompany}`);
     return parts.join("\n");
@@ -347,7 +349,7 @@ export default function CheckoutPage() {
   const invoiceExtra = f.invoiceType === "carrier" ? (
     <TextInput name="invoiceCarrier" value={f.invoiceCarrier} onChange={set} placeholder="請輸入手機條碼（/XXXXXXX）" />
   ) : f.invoiceType === "personal" ? (
-    <TextInput name="invoiceEmail" value={f.invoiceEmail} onChange={set} placeholder="收取發票的 Email" type="email" />
+    <TextInput name="invoiceEmail" value={f.invoiceEmail || f.email} onChange={set} placeholder="收取發票的 Email" type="email" />
   ) : (
     <div className="space-y-2.5">
       <TextInput name="invoiceTaxId" value={f.invoiceTaxId} onChange={set} placeholder="統一編號" />
