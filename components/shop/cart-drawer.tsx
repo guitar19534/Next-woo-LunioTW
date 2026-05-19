@@ -84,7 +84,7 @@ export function CartDrawer() {
           <div className="flex items-center gap-2">
             <ShoppingBag size={18} style={{ color: "#17284b" }} />
             <span className="font-semibold" style={{ color: "#17284b", fontSize: 15 }}>購物車</span>
-            {itemCount > 0 && (
+            {mounted && itemCount > 0 && (
               <span
                 className="flex items-center justify-center px-1.5 rounded-full text-white font-bold"
                 style={{ backgroundColor: "#17569E", fontSize: 11, minWidth: 20, height: 20 }}
