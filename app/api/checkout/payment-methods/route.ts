@@ -42,8 +42,12 @@ export async function GET() {
 
     const gateways: WCGateway[] = await res.json();
 
+    // These gateways are hidden by WooCommerce plugin conditionals on the WP checkout
+    // (e.g. restricted by cart total or product type) — exclude to match WP behavior
+    const HIDDEN_GATEWAYS = new Set(["ctbc_installments", "suntech_buysafemul"]);
+
     const enabled = gateways
-      .filter((g) => g.enabled)
+      .filter((g) => g.enabled && !HIDDEN_GATEWAYS.has(g.id))
       .sort((a, b) => a.order - b.order)
       .map((g) => {
         // Extract user-facing settings (installment periods etc.)
