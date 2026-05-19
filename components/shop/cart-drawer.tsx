@@ -13,6 +13,7 @@ export function CartDrawer() {
     cart,
     isOpen,
     isLoading,
+    isSyncing,
     openCart,
     closeCart,
     removeItem,
@@ -136,6 +137,17 @@ export function CartDrawer() {
             {/* Items */}
             <div className="flex-1 overflow-y-auto px-5">
               <div style={{ borderBottom: "none" }}>
+                {/* Skeleton loading item while syncing */}
+                {isSyncing && (
+                  <div className="flex gap-3.5 py-4 animate-pulse" style={{ borderBottom: "1px solid #f3f4f6" }}>
+                    <div className="rounded-xl bg-gray-100 shrink-0" style={{ width: 72, height: 72 }} />
+                    <div className="flex-1 space-y-2 py-1">
+                      <div className="h-3 bg-gray-100 rounded w-3/4" />
+                      <div className="h-3 bg-gray-100 rounded w-1/2" />
+                      <div className="h-4 bg-gray-100 rounded w-1/4 mt-2" />
+                    </div>
+                  </div>
+                )}
                 {cart.items.map((item) => {
                   const isFree = parseFloat(item.price) === 0;
                   return (
