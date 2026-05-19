@@ -120,7 +120,7 @@ export function PillowLatexPanel({ product, variations }: Props) {
         </div>
         <div className="flex items-center gap-2">
           <div className="flex" style={{ color: "#f5a623" }}>{"★★★★★"}</div>
-          <span style={{ fontSize: 13.5, color: "#6b7280" }}>（Google 評論）{product.average_rating || "4.8"} 顆星</span>
+          <span style={{ fontSize: 13.5, color: "#6b7280" }}>（Google 評論）{parseFloat(product.average_rating) > 0 ? product.average_rating : "4.8"} 顆星</span>
         </div>
       </div>
 

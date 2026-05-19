@@ -143,7 +143,7 @@ export function SunsetProductPanel({ product, variations }: Props) {
         <div className="flex items-center gap-2">
           <div className="flex" style={{ color: "#E07B2E" }}>{"★★★★★"}</div>
           <span className="text-sm" style={{ color: "#555" }}>
-            (Google 評論)床墊評價 {product.average_rating || "5.0"}
+            (Google 評論)床墊評價 {parseFloat(product.average_rating) > 0 ? product.average_rating : "5.0"}
           </span>
         </div>
       </div>

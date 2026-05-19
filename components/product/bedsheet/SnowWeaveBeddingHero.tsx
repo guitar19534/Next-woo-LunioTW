@@ -221,7 +221,7 @@ export function SnowWeaveBeddingHero({ product, variations }: Props) {
           <h1 className="font-bold" style={{ fontSize: 22, color: NAVY }}>智能天絲床包組（床包+枕套）3色</h1>
           <div className="flex items-center gap-2">
             <div className="flex" style={{ color: "#f5a623" }}>{"★★★★★"}</div>
-            <span style={{ fontSize: 13, color: "#6b7280" }}>（Google 評論）床墊評價 {product.average_rating || "4.8"}</span>
+            <span style={{ fontSize: 13, color: "#6b7280" }}>（Google 評論）床墊評價 {parseFloat(product.average_rating) > 0 ? product.average_rating : "4.8"}</span>
           </div>
         </div>
 
@@ -246,7 +246,7 @@ export function SnowWeaveBeddingHero({ product, variations }: Props) {
               </h1>
               <div className="flex items-center gap-2">
                 <div className="flex" style={{ color: "#f5a623" }}>{"★★★★★"}</div>
-                <span style={{ fontSize: 13.5, color: "#6b7280" }}>（Google 評論）床墊評價 {product.average_rating || "4.8"}</span>
+                <span style={{ fontSize: 13.5, color: "#6b7280" }}>（Google 評論）床墊評價 {parseFloat(product.average_rating) > 0 ? product.average_rating : "4.8"}</span>
               </div>
             </div>
 

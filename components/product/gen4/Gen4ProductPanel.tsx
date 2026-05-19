@@ -122,7 +122,7 @@ export function Gen4ProductPanel({ product, variations }: Props) {
         <div className="flex items-center gap-2">
           <div className="flex" style={{ color: "#f5a623" }}>{"★★★★★"}</div>
           <span className="text-sm" style={{ color: "#555" }}>
-            (Google 評論)床墊評價 {product.average_rating || "4.8"}
+            (Google 評論)床墊評價 {parseFloat(product.average_rating) > 0 ? product.average_rating : "4.8"}
           </span>
         </div>
       </div>

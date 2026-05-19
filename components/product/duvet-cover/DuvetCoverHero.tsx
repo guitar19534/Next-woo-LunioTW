@@ -200,7 +200,7 @@ export function DuvetCoverHero({ product, variations }: Props) {
           <h1 className="font-bold" style={{ fontSize: 22, color: NAVY }}>智能天絲涼感被套 3色</h1>
           <div className="flex items-center gap-2">
             <span style={{ color: "#f5a623" }}>★★★★★</span>
-            <span style={{ fontSize: 13, color: "#6b7280" }}>（Google 評論）床墊評價 {product.average_rating || "4.8"}</span>
+            <span style={{ fontSize: 13, color: "#6b7280" }}>（Google 評論）床墊評價 {parseFloat(product.average_rating) > 0 ? product.average_rating : "4.8"}</span>
           </div>
         </div>
 
@@ -231,7 +231,7 @@ export function DuvetCoverHero({ product, variations }: Props) {
               <p style={{ fontSize: 16, color: "#9ca3af" }}>智能天絲涼感被套 3色</p>
               <div className="flex items-center gap-2">
                 <span style={{ color: "#f5a623" }}>★★★★★</span>
-                <span style={{ fontSize: 13.5, color: "#6b7280" }}>（Google 評論）床墊評價 {product.average_rating || "4.8"}</span>
+                <span style={{ fontSize: 13.5, color: "#6b7280" }}>（Google 評論）床墊評價 {parseFloat(product.average_rating) > 0 ? product.average_rating : "4.8"}</span>
               </div>
             </div>
 
