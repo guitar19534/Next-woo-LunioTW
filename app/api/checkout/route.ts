@@ -66,8 +66,46 @@ export async function POST(request: NextRequest) {
     const data = await wcRes.json() as Record<string, unknown>;
 
     if (!wcRes.ok) {
-      const errMsg = extractErrMsg(data);
       console.error("[checkout] WC error", wcRes.status, JSON.stringify(data).slice(0, 400));
+
+      // Handle pending order: WooCommerce returns the existing pending order
+      // instead of creating a new one — treat it as a successful order
+      if (
+        data.code === "woocommerce_rest_cart_empty" ||
+        (typeof data.order_id === "number" && data.status === "pending")
+      ) {
+        const pendingOrderId = data.order_id as number | undefined;
+        if (pendingOrderId) {
+          // Fetch the pending order's payment URL via REST API
+          const orderRes = await fetch(
+            `${process.env.WORDPRESS_URL}/wp-json/wc/v3/orders/${pendingOrderId}?consumer_key=${process.env.WC_CONSUMER_KEY}&consumer_secret=${process.env.WC_CONSUMER_SECRET}`,
+            { cache: "no-store" }
+          );
+          const orderData = orderRes.ok ? await orderRes.json() as Record<string, unknown> : null;
+          const paymentUrl = orderData
+            ? `${process.env.WORDPRESS_URL}/checkout/order-pay/${pendingOrderId}/?pay_for_order=true&key=${orderData.order_key}`
+            : null;
+          const res = NextResponse.json({
+            success: true,
+            order: {
+              id:            pendingOrderId,
+              number:        String(pendingOrderId),
+              status:        "pending",
+              payment_url:   paymentUrl,
+              needs_payment: true,
+            },
+          });
+          forwardSetCookies(wcRes, res);
+          return res;
+        }
+      }
+
+      // Cart is empty — friendly message
+      if (data.code === "woocommerce_rest_cart_empty") {
+        return NextResponse.json({ error: "購物車是空的，請重新加入商品後再結帳" }, { status: 400 });
+      }
+
+      const errMsg = extractErrMsg(data);
       return NextResponse.json({ error: errMsg }, { status: wcRes.status });
     }
 
