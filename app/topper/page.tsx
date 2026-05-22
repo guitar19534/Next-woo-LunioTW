@@ -41,7 +41,7 @@ const PRODUCTS = [
     price: "NT$2,990",
     original: "NT$8,970",
     features: ["一墊多用、居家、外宿、露營，隨時享受好眠", "三折疊設計，附手提袋，好攜帶又防辦", "可拆洗防滑床套"],
-    href: "/product/nooz-helix",
+    href: "/product/nooz-topper-trifold",
     btnLabel: "選擇規格",
   },
   {
@@ -51,7 +51,7 @@ const PRODUCTS = [
     price: "NT$1,890",
     priceTo: "NT$3,190",
     features: ["雙面翻轉，軟硬任選", "改善舊床舒適度、延長舊床墊壽命", "可水洗透氣床套"],
-    href: "/product/nooz-helix",
+    href: "/product/nooz-topper-smartrest",
     btnLabel: "選擇規格",
   },
 ];
