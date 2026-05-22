@@ -172,6 +172,11 @@ export default function CheckoutPage() {
   const cc = cart.totals.currencyCode;
   const hasDiscount = parseFloat(cart.totals.discount) > 0;
 
+  // Service items (old mattress pickup/storage) are only relevant for mattress orders
+  const hasMattress = cart.items.some((item) =>
+    item.name.includes("床墊") || /mattress/i.test(item.name)
+  );
+
   // Fetch payment methods — re-run when cart total is known so WP can filter by amount
   useEffect(() => {
     if (isLoading) return;
@@ -1019,31 +1024,33 @@ export default function CheckoutPage() {
                 </div>
               )}
 
-              {/* 服務項目 */}
-              <div className="rounded-2xl bg-white px-5 py-4"
-                style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.07)" }}>
-                <h3 className="font-bold mb-3" style={{ fontSize: 14, color: NAVY }}>服務項目（請選擇一項）</h3>
-                <div className="space-y-2 mb-3">
-                  {SERVICE_ITEMS.map((s) => (
-                    <label key={s.value} className="flex items-center gap-2.5 cursor-pointer">
-                      <div className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
-                        style={{ border: `2px solid ${serviceItem === s.value ? BLUE : "#d1d5db"}` }}>
-                        {serviceItem === s.value && (
-                          <div className="w-2 h-2 rounded-full" style={{ backgroundColor: BLUE }} />
-                        )}
-                      </div>
-                      <input type="radio" name="service" value={s.value}
-                        checked={serviceItem === s.value}
-                        onChange={() => setServiceItem(v => v === s.value ? "" : s.value)}
-                        className="sr-only" />
-                      <span style={{ fontSize: 13, color: "#374151" }}>{s.label}</span>
-                    </label>
-                  ))}
+              {/* 服務項目 — only shown for mattress orders */}
+              {hasMattress && (
+                <div className="rounded-2xl bg-white px-5 py-4"
+                  style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.07)" }}>
+                  <h3 className="font-bold mb-3" style={{ fontSize: 14, color: NAVY }}>服務項目（請選擇一項）</h3>
+                  <div className="space-y-2 mb-3">
+                    {SERVICE_ITEMS.map((s) => (
+                      <label key={s.value} className="flex items-center gap-2.5 cursor-pointer">
+                        <div className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
+                          style={{ border: `2px solid ${serviceItem === s.value ? BLUE : "#d1d5db"}` }}>
+                          {serviceItem === s.value && (
+                            <div className="w-2 h-2 rounded-full" style={{ backgroundColor: BLUE }} />
+                          )}
+                        </div>
+                        <input type="radio" name="service" value={s.value}
+                          checked={serviceItem === s.value}
+                          onChange={() => setServiceItem(v => v === s.value ? "" : s.value)}
+                          className="sr-only" />
+                        <span style={{ fontSize: 13, color: "#374151" }}>{s.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                  <p className="font-semibold leading-relaxed" style={{ fontSize: 12.5, color: "#dc2626" }}>
+                    ！！請留意 配送時段無法指定 司機會於配送前一天約配
+                  </p>
                 </div>
-                <p className="font-semibold leading-relaxed" style={{ fontSize: 12.5, color: "#dc2626" }}>
-                  ！！請留意 配送時段無法指定 司機會於配送前一天約配
-                </p>
-              </div>
+              )}
 
               {/* Submit — desktop */}
               <div className="hidden lg:block space-y-2">
