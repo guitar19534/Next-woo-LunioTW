@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const LUNIO_WP    = `${process.env.WORDPRESS_URL}/wp-json/lunio/v1`;
-const LUNIO_SECRET = process.env.LUNIO_API_SECRET ?? "lunio-headless-secret-2025";
-const WC_API      = `${process.env.WORDPRESS_URL}/wp-json/wc/v3`;
+const WC_API = `${process.env.WORDPRESS_URL}/wp-json/wc/v3`;
 const AUTH = Buffer.from(
   `${process.env.WC_CONSUMER_KEY}:${process.env.WC_CONSUMER_SECRET}`
 ).toString("base64");
@@ -24,36 +22,20 @@ export interface PaymentSubOption {
   options: Array<{ value: string; label: string }>;
 }
 
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   try {
-    const cookieHeader = request.headers.get("cookie") ?? "";
-
-    // 1. Custom WP endpoint — returns available gateways WITH PHP filters applied
-    //    wc_load_cart() boots WC so plugin conditionals (cart-based rules) work
-    const wpRes = await fetch(`${LUNIO_WP}/payment-methods`, {
-      headers: {
-        "X-Lunio-Secret": LUNIO_SECRET,
-        "X-WC-Cookie": cookieHeader,
-      },
-      cache: "no-store",
-    });
-
-    const availableIds: Set<string> = new Set();
-    if (wpRes.ok) {
-      const available: Array<{ id: string }> = await wpRes.json();
-      available.forEach((m) => availableIds.add(m.id));
-    }
-
-    // 2. REST API v3 — get full settings (installment sub-options, order, etc.)
+    // WC REST v3 — all enabled gateways with full settings (installment sub-options, order, etc.)
+    // Using v3 directly is more reliable than the custom WP endpoint because
+    // wc_load_cart() in the WP endpoint may not have the correct cart session context,
+    // causing is_available() to return false for cart-total-based rules.
     const v3Res = await fetch(`${WC_API}/payment_gateways`, {
       headers: { Authorization: `Basic ${AUTH}` },
       cache: "no-store",
     });
     const allGateways: WCGateway[] = v3Res.ok ? await v3Res.json() : [];
 
-    // 3. Filter to only available IDs, then map with settings
     const enabled = allGateways
-      .filter((g) => g.enabled && (availableIds.size === 0 || availableIds.has(g.id)))
+      .filter((g) => g.enabled)
       .sort((a, b) => a.order - b.order)
       .map((g) => {
         const subOptions: PaymentSubOption[] = Object.values(g.settings ?? {})

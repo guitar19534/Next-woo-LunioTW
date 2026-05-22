@@ -932,10 +932,15 @@ export default function CheckoutPage() {
                 <div className="rounded-2xl bg-white px-5 py-4 space-y-1"
                   style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.07)" }}>
                   {paymentMethodsLoading ? (
-                    <div className="flex items-center gap-2 py-2">
-                      <div className="w-4 h-4 rounded-full border-2 animate-spin flex-shrink-0"
-                        style={{ borderColor: BLUE, borderTopColor: "transparent" }} />
-                      <span style={{ fontSize: 13, color: "#9ca3af" }}>載入付款方式…</span>
+                    <div className="py-3 space-y-2">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-4 h-4 rounded-full border-2 animate-spin flex-shrink-0"
+                          style={{ borderColor: BLUE, borderTopColor: "transparent" }} />
+                        <span className="font-medium" style={{ fontSize: 13.5, color: NAVY }}>正在為您載入付款方式…</span>
+                      </div>
+                      <p style={{ fontSize: 12, color: "#9ca3af", paddingLeft: "26px" }}>
+                        系統正根據您的訂單金額篩選適用的付款選項，請稍候
+                      </p>
                     </div>
                   ) : paymentMethods.map((pm) => (
                     <label key={pm.id}
