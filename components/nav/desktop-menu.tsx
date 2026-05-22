@@ -179,13 +179,16 @@ function ProductLink({
 // ── Dropdown panel ─────────────────────────────────────────────────────────────
 function DropdownPanel({
   dropKey, category, extraColumns, leftOffset, onClose, onMouseEnter, onMouseLeave,
+  productData, featuredCards,
 }: {
   dropKey: DropdownKey; category: CategoryDef;
   extraColumns?: readonly ExtraCol[];
   leftOffset: number;
   onClose: () => void; onMouseEnter: () => void; onMouseLeave: () => void;
+  productData: typeof PRODUCT_DATA;
+  featuredCards: typeof FEATURED;
 }) {
-  const defaultCard = FEATURED[dropKey];
+  const defaultCard = featuredCards[dropKey];
   const [card, setCard] = React.useState<ProductCard>(defaultCard);
   const [visible, setVisible] = React.useState(true);
   const fadeTimer = React.useRef<ReturnType<typeof setTimeout>>(undefined);
@@ -203,7 +206,7 @@ function DropdownPanel({
   }
 
   function handleLinkEnter(href: string) {
-    const data = PRODUCT_DATA[href];
+    const data = productData[href] ?? PRODUCT_DATA[href];
     if (data) crossfadeTo(data);
   }
 
@@ -461,8 +464,25 @@ function SimpleDropdownPanel({
 
 
 // ── Main component ─────────────────────────────────────────────────────────────
-export function DesktopMenu({ dark = false }: { dark?: boolean }) {
+export function DesktopMenu({ dark = false, productImages = {} }: { dark?: boolean; productImages?: Record<string, string> }) {
   const pathname = usePathname();
+
+  // Merge WooCommerce images (from server) into PRODUCT_DATA — override local fallbacks
+  const productData = React.useMemo(() => {
+    if (Object.keys(productImages).length === 0) return PRODUCT_DATA;
+    const merged = { ...PRODUCT_DATA };
+    for (const [href, src] of Object.entries(productImages)) {
+      if (merged[href]) merged[href] = { ...merged[href], imageSrc: src };
+    }
+    return merged;
+  }, [productImages]);
+
+  const featured = React.useMemo(() => ({
+    "床墊":    productData["/product/lunio-latex-mattress"] ?? FEATURED["床墊"],
+    "枕頭":    productData["/product/lunio-hypercool"] ?? FEATURED["枕頭"],
+    "寢具配件": productData["/product/lunio-snowweave"] ?? FEATURED["寢具配件"],
+  }), [productData]);
+
   const [open, setOpen] = React.useState<DropdownKey | null>(null);
   const [openSimple, setOpenSimple] = React.useState<SimpleDropdownKey | null>(null);
   const [leftOffsets, setLeftOffsets] = React.useState<Partial<Record<DropdownKey, number>>>({});
@@ -539,6 +559,8 @@ export function DesktopMenu({ dark = false }: { dark?: boolean }) {
                     onClose={() => setOpen(null)}
                     onMouseEnter={cancelClose}
                     onMouseLeave={scheduleClose}
+                    productData={productData}
+                    featuredCards={featured}
                   />
                 )}
               </li>

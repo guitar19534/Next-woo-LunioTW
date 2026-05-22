@@ -39,7 +39,7 @@ function UserIcon() {
   );
 }
 
-export function Nav() {
+export function Nav({ productImages = {} }: { productImages?: Record<string, string> }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -151,7 +151,7 @@ export function Nav() {
 
             {/* Desktop nav — centered */}
             <div className="flex flex-1 justify-center min-w-0">
-              <DesktopMenu dark={dark} />
+              <DesktopMenu dark={dark} productImages={productImages} />
             </div>
 
             {/* Account + Cart */}

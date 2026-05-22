@@ -5,7 +5,7 @@ import { Noto_Sans_TC } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { Analytics } from "@vercel/analytics/react";
 import { CartProvider } from "@/components/shop";
-import { Nav } from "@/components/layout/nav";
+import { NavWrapper } from "@/components/layout/nav-wrapper";
 import { Footer } from "@/components/layout/footer";
 import { PurchasePopup } from "@/components/shared/PurchasePopup";
 import { AddToCartHandler } from "@/components/shop/AddToCartHandler";
@@ -96,7 +96,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           disableTransitionOnChange
         >
           <CartProvider>
-            <Nav />
+            <NavWrapper />
             {children}
             <Footer />
             <PurchasePopup />
