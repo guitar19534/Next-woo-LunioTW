@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const WC_API = `${process.env.WORDPRESS_URL}/wp-json/wc/v3`;
+const LUNIO_WP     = `${process.env.WORDPRESS_URL}/wp-json/lunio/v1`;
+const LUNIO_SECRET = process.env.LUNIO_API_SECRET ?? "lunio-headless-secret-2025";
+const WC_API       = `${process.env.WORDPRESS_URL}/wp-json/wc/v3`;
 const AUTH = Buffer.from(
   `${process.env.WC_CONSUMER_KEY}:${process.env.WC_CONSUMER_SECRET}`
 ).toString("base64");
@@ -22,20 +24,43 @@ export interface PaymentSubOption {
   options: Array<{ value: string; label: string }>;
 }
 
-export async function GET(_request: NextRequest) {
+export async function GET(request: NextRequest) {
   try {
-    // WC REST v3 — all enabled gateways with full settings (installment sub-options, order, etc.)
-    // Using v3 directly is more reliable than the custom WP endpoint because
-    // wc_load_cart() in the WP endpoint may not have the correct cart session context,
-    // causing is_available() to return false for cart-total-based rules.
+    const total = parseFloat(request.nextUrl.searchParams.get("total") ?? "0");
+
+    // 1. Custom WP endpoint — is_available() filtered by the real order total
+    //    Falls back to null (= show all) if the endpoint fails or returns empty.
+    let availableIds: Set<string> | null = null;
+    if (total > 0) {
+      try {
+        const wpRes = await fetch(
+          `${LUNIO_WP}/payment-methods?total=${total}`,
+          {
+            headers: { "X-Lunio-Secret": LUNIO_SECRET },
+            cache: "no-store",
+          }
+        );
+        if (wpRes.ok) {
+          const available: Array<{ id: string }> = await wpRes.json();
+          if (available.length > 0) {
+            availableIds = new Set(available.map((m) => m.id));
+          }
+        }
+      } catch {
+        // WP endpoint unreachable — fall through to show all enabled gateways
+      }
+    }
+
+    // 2. WC REST v3 — full gateway settings (installment sub-options, order, etc.)
     const v3Res = await fetch(`${WC_API}/payment_gateways`, {
       headers: { Authorization: `Basic ${AUTH}` },
       cache: "no-store",
     });
     const allGateways: WCGateway[] = v3Res.ok ? await v3Res.json() : [];
 
+    // 3. Filter: must be enabled; if WP filtering succeeded, also must be in availableIds
     const enabled = allGateways
-      .filter((g) => g.enabled)
+      .filter((g) => g.enabled && (availableIds === null || availableIds.has(g.id)))
       .sort((a, b) => a.order - b.order)
       .map((g) => {
         const subOptions: PaymentSubOption[] = Object.values(g.settings ?? {})

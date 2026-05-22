@@ -172,14 +172,21 @@ export default function CheckoutPage() {
   const cc = cart.totals.currencyCode;
   const hasDiscount = parseFloat(cart.totals.discount) > 0;
 
-  // Fetch payment methods
+  // Fetch payment methods — re-run when cart total is known so WP can filter by amount
   useEffect(() => {
-    fetch("/api/checkout/payment-methods")
+    if (isLoading) return;
+    const total = parseFloat(cart.totals.total) || 0;
+    setPaymentMethodsLoading(true);
+    fetch(`/api/checkout/payment-methods?total=${total}`)
       .then(r => r.json())
       .then((data: PaymentMethod[]) => {
         if (Array.isArray(data) && data.length) {
           setPaymentMethods(data);
-          setSelectedPayment(data[0].id);
+          setSelectedPayment(prev => {
+            // keep existing selection if still valid, else default to first
+            if (prev && data.some(m => m.id === prev)) return prev;
+            return data[0].id;
+          });
           // Init sub-option defaults for all methods
           const defaults: Record<string, Record<string, string>> = {};
           data.forEach((pm) => {
@@ -195,7 +202,8 @@ export default function CheckoutPage() {
       })
       .catch(() => {})
       .finally(() => setPaymentMethodsLoading(false));
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cart.totals.total, isLoading]);
 
   function set(name: string, value: string) {
     setF(p => ({ ...p, [name]: value }));
