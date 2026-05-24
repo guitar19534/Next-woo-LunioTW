@@ -47,12 +47,15 @@ export async function GET(request: NextRequest) {
         );
         if (wpRes.ok) {
           const available: Array<{ id: string }> = await wpRes.json();
+          console.log("[payment-methods] WP returned:", available.map(g => g.id));
           if (available.length > 0) {
             availableIds = new Set(available.map((m) => m.id));
           }
+        } else {
+          console.error("[payment-methods] WP error:", wpRes.status, await wpRes.text().catch(() => ""));
         }
-      } catch {
-        // WP endpoint unreachable — fall through to show all enabled gateways
+      } catch (err) {
+        console.error("[payment-methods] WP fetch failed:", String(err));
       }
     }
 
