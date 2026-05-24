@@ -22,45 +22,40 @@ function lunio_check_secret(WP_REST_Request $request): bool {
 }
 
 function lunio_get_payment_methods(WP_REST_Request $request): WP_REST_Response {
-    // Order total passed from Next.js (already in major units, e.g. 49980.00 for NT$49,980)
-    $order_total = floatval($request->get_param('total') ?? 0);
+    // wc_load_cart() hooks calculate_totals() into woocommerce_cart_loaded_from_session
+    // (priority 5). Remove it at priority 4 so WC loads the cart without recalculating
+    // shipping / taxes — we only need cart contents for gateway eligibility checks.
+    add_action('woocommerce_cart_loaded_from_session', function($cart) {
+        remove_action('woocommerce_cart_loaded_from_session', array($cart, 'calculate_totals'), 5);
+    }, 4);
 
-    // Boot WooCommerce cart subsystem so payment gateways initialise correctly
+    // Next.js forwards the browser Cookie header; wc_load_cart() reads $_COOKIE and
+    // restores the real user session so gateways see the actual cart products.
     if (function_exists('wc_load_cart')) {
         wc_load_cart();
     }
 
-    // Fake cart totals so is_available() can evaluate amount-based conditions.
-    // We set both the cart object properties and hook the getter filters that
-    // individual gateways may call (e.g. get_subtotal, get_cart_contents_total).
-    if ($order_total > 0 && WC()->cart) {
-        WC()->cart->subtotal              = $order_total;
-        WC()->cart->cart_contents_total   = $order_total;
-        WC()->cart->total                 = $order_total;
-
-        add_filter('woocommerce_cart_get_subtotal',            fn() => $order_total, 999);
-        add_filter('woocommerce_cart_get_cart_contents_total', fn() => $order_total, 999);
-        add_filter('woocommerce_cart_get_total',               fn() => $order_total, 999);
-    }
-
-    // Satisfy the "is this the checkout?" check that some gateways require
     add_filter('woocommerce_is_checkout', '__return_true');
 
-    $available = [];
-    $gateways  = WC()->payment_gateways()->payment_gateways();
+    // Block outgoing HTTP — installment gateways call external APIs when they see a
+    // real cart; blocking forces fast local-only evaluation (categories / min amount).
+    $block_http = function($preempt, $args, $url) {
+        return new WP_Error('lunio_blocked', 'External HTTP blocked during payment availability check.');
+    };
+    add_filter('pre_http_request', $block_http, 99, 3);
 
-    foreach ($gateways as $gateway) {
-        if ($gateway->enabled !== 'yes') continue;
-        try {
-            if ($gateway->is_available()) {
-                $available[] = [
-                    'id'    => $gateway->id,
-                    'title' => $gateway->get_title(),
-                ];
-            }
-        } catch (Throwable $e) {
-            // Skip gateways that throw on is_available()
-        }
+    // get_available_payment_gateways() calls is_available() on each gateway AND applies
+    // the woocommerce_available_payment_gateways filter — identical to native checkout.
+    $gateways_available = WC()->payment_gateways()->get_available_payment_gateways();
+
+    remove_filter('pre_http_request', $block_http, 99);
+
+    $available = [];
+    foreach ($gateways_available as $gateway) {
+        $available[] = [
+            'id'    => $gateway->id,
+            'title' => $gateway->get_title(),
+        ];
     }
 
     return rest_ensure_response($available);

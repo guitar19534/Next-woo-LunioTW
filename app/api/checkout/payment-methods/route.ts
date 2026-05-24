@@ -28,7 +28,8 @@ export async function GET(request: NextRequest) {
   try {
     const total = parseFloat(request.nextUrl.searchParams.get("total") ?? "0");
 
-    // 1. Custom WP endpoint — is_available() filtered by the real order total
+    // 1. Custom WP endpoint — forward the browser's WC session cookie so wc_load_cart()
+    //    loads the real cart; is_available() then evaluates against actual cart contents.
     //    Falls back to null (= show all) if the endpoint fails or returns empty.
     let availableIds: Set<string> | null = null;
     if (total > 0) {
@@ -36,7 +37,11 @@ export async function GET(request: NextRequest) {
         const wpRes = await fetch(
           `${LUNIO_WP}/payment-methods?total=${total}`,
           {
-            headers: { "X-Lunio-Secret": LUNIO_SECRET },
+            headers: {
+              "X-Lunio-Secret": LUNIO_SECRET,
+              "Cookie": request.headers.get("cookie") ?? "",
+            },
+            signal: AbortSignal.timeout(8000),
             cache: "no-store",
           }
         );

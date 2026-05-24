@@ -177,7 +177,7 @@ export default function CheckoutPage() {
     item.name.includes("床墊") || /mattress/i.test(item.name)
   );
 
-  // Fetch payment methods — re-run when cart total is known so WP can filter by amount
+  // Fetch payment methods — re-run when cart total changes
   useEffect(() => {
     if (isLoading) return;
     const total = parseFloat(cart.totals.total) || 0;
