@@ -297,6 +297,10 @@ export default function CheckoutPage() {
         country: "TW", phone: f.phone,
       } : billing;
 
+      const attribution = (() => {
+        try { return JSON.parse(sessionStorage.getItem("wc_attribution") ?? "null"); } catch { return null; }
+      })();
+
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json", "x-wc-nonce": nonce },
@@ -310,6 +314,7 @@ export default function CheckoutPage() {
           customer_note: buildNotes(),
           create_account: !!f.password,
           account_password: f.password || undefined,
+          attribution: attribution ?? {},
         }),
       });
       if (!res.ok) {

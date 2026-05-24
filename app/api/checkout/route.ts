@@ -62,6 +62,9 @@ export async function POST(request: NextRequest) {
       customer_note:    body.customer_note ?? "",
       payment_method:   paymentMethod,
       payment_data:     paymentData,
+      extensions: {
+        "woocommerce/order-attribution": body.attribution ?? {},
+      },
     };
 
     if (body.create_account && body.account_password) {

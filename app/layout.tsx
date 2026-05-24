@@ -9,6 +9,7 @@ import { NavWrapper } from "@/components/layout/nav-wrapper";
 import { Footer } from "@/components/layout/footer";
 import { PurchasePopup } from "@/components/shared/PurchasePopup";
 import { AddToCartHandler } from "@/components/shop/AddToCartHandler";
+import { AttributionCapture } from "@/components/shop/AttributionCapture";
 import Script from "next/script";
 
 import { siteConfig } from "@/site.config";
@@ -103,6 +104,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <Suspense fallback={null}>
               <AddToCartHandler />
             </Suspense>
+            <AttributionCapture />
           </CartProvider>
         </ThemeProvider>
         <Analytics />
