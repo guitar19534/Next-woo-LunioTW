@@ -102,7 +102,7 @@ const PRODUCTS = [
     support: 30,
     cool: 50,
     btnLabel: "了解 Nooz Trifold",
-    href: "/product/nooz-helix",
+    href: "/product/nooz-topper-trifold",
     span2: false,
   },
   {
@@ -117,7 +117,7 @@ const PRODUCTS = [
     support: 25,
     cool: 50,
     btnLabel: "了解 Nooz SmartRest",
-    href: "/product/nooz-helix",
+    href: "/product/nooz-topper-smartrest",
     span2: false,
   },
 ];
