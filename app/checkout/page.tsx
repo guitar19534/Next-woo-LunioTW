@@ -182,7 +182,8 @@ export default function CheckoutPage() {
     if (isLoading) return;
     const total = parseFloat(cart.totals.total) || 0;
     setPaymentMethodsLoading(true);
-    fetch(`/api/checkout/payment-methods?total=${total}`)
+    const ids = cart.items.map(i => i.productId).join(",");
+    fetch(`/api/checkout/payment-methods?total=${total}&ids=${encodeURIComponent(ids)}`)
       .then(r => r.json())
       .then((data: PaymentMethod[]) => {
         if (Array.isArray(data) && data.length) {

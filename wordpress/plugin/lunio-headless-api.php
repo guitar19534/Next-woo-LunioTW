@@ -35,6 +35,30 @@ function lunio_get_payment_methods(WP_REST_Request $request): WP_REST_Response {
         wc_load_cart();
     }
 
+    // Fallback: if the session cart is still empty (session expired or not forwarded),
+    // populate a temporary in-memory cart from the product IDs sent by Next.js.
+    // This ensures gateway is_available() always has real product data to evaluate.
+    $ids_param = sanitize_text_field($request->get_param('ids') ?? '');
+    if ($ids_param && WC()->cart->is_empty()) {
+        $product_ids = array_filter(array_map('absint', explode(',', $ids_param)));
+        $cart_total  = floatval($request->get_param('total') ?? 0);
+        foreach ($product_ids as $product_id) {
+            $product = wc_get_product($product_id);
+            if (!$product) continue;
+            $cart_key = 'lunio_tmp_' . $product_id;
+            WC()->cart->cart_contents[$cart_key] = [
+                'key'          => $cart_key,
+                'product_id'   => $product_id,
+                'variation_id' => 0,
+                'quantity'     => 1,
+                'data'         => $product,
+            ];
+        }
+        // Set totals so amount-based gateway rules evaluate correctly
+        WC()->cart->cart_contents_total = $cart_total;
+        WC()->cart->total               = $cart_total;
+    }
+
     add_filter('woocommerce_is_checkout', '__return_true');
 
     // Block outgoing HTTP — installment gateways call external APIs when they see a

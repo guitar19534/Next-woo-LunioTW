@@ -64,9 +64,19 @@ const PRODUCT_DATA: Record<string, ProductCard> = {
     price: "從 NT$1,290", href: "/product/lunio-icefit",
   },
   "/product/lunio-nebula": {
-    imageSrc: "/hypercool/Hypercool.webp", badge: "",
+    imageSrc: "/nebula/PC_1-2.webp", badge: "",
     title: "Nebula 經典記憶枕", sub: "記憶海綿 × 透氣設計 × 舒壓釋重",
     price: "從 NT$590", href: "/product/lunio-nebula",
+  },
+  "/product/lunio-embrace": {
+    imageSrc: "/embrance/PC1-3.webp", badge: "",
+    title: "Embrace 多功能擁抱枕", sub: "人體工學曲線 × 多功能支撐 × 柔軟包覆",
+    price: "從 NT$1,290", href: "/product/lunio-embrace",
+  },
+  "/product/lunio-mercury": {
+    imageSrc: "/mercury/PC_1.webp", badge: "",
+    title: "Mercury 石墨烯記憶枕", sub: "石墨烯散熱 × 記憶海綿 × 涼感舒適",
+    price: "從 NT$1,490", href: "/product/lunio-mercury",
   },
   // 寢具配件
   "/product/lunio-snowweave": {
@@ -75,9 +85,24 @@ const PRODUCT_DATA: Record<string, ProductCard> = {
     price: "從 NT$2,490", href: "/product/lunio-snowweave",
   },
   "/product/tencel-bedsheet": {
-    imageSrc: "/snowweave/Benefit1.webp", badge: "",
+    imageSrc: "/snowweave/Benefit1.webp", badge: "NEW",
     title: "SnowWeave 天絲床包組", sub: "天絲 × 親膚柔滑 × 多尺寸",
     price: "從 NT$1,290", href: "/product/tencel-bedsheet",
+  },
+  "/product/tencel-duvet-cover": {
+    imageSrc: "/snowweave/SnowWeave-Cartoon.webp", badge: "",
+    title: "智能天絲被套", sub: "天絲纖維 × 雙面設計 × 多色選擇",
+    price: "從 NT$1,590", href: "/product/tencel-duvet-cover",
+  },
+  "/product/lunio-snowsilk": {
+    imageSrc: "/snowsilk/Snowsilk.webp", badge: "",
+    title: "SnowSilk 智能涼被", sub: "雙面涼感 × 輕盈透氣 × 四季適用",
+    price: "從 NT$1,890", href: "/product/lunio-snowsilk",
+  },
+  "/product/lunio-protector": {
+    imageSrc: "/smartguard/PC_1-4.webp", badge: "NEW",
+    title: "SmartGuard 天絲防水保潔墊", sub: "天絲表層 × 靜音防水 × 多尺寸",
+    price: "從 NT$1,690", href: "/product/lunio-protector",
   },
 };
 
@@ -90,7 +115,7 @@ const PRODUCT_IMAGES = Object.fromEntries(
 const FEATURED: Record<DropdownKey, ProductCard> = {
   "床墊":    PRODUCT_DATA["/product/lunio-latex-mattress"],
   "枕頭":    PRODUCT_DATA["/product/lunio-hypercool"],
-  "寢具配件": PRODUCT_DATA["/product/lunio-snowweave"],
+  "寢具配件": PRODUCT_DATA["/product/lunio-protector"],
 };
 
 const DROPDOWNS: Record<DropdownKey, CategoryDef> = {

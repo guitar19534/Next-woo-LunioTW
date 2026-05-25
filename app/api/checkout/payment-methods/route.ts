@@ -34,17 +34,16 @@ export async function GET(request: NextRequest) {
     let availableIds: Set<string> | null = null;
     if (total > 0) {
       try {
-        const wpRes = await fetch(
-          `${LUNIO_WP}/payment-methods?total=${total}`,
-          {
+        const ids = request.nextUrl.searchParams.get("ids") ?? "";
+        const wpUrl = `${LUNIO_WP}/payment-methods?total=${total}${ids ? `&ids=${encodeURIComponent(ids)}` : ""}`;
+        const wpRes = await fetch(wpUrl, {
             headers: {
               "X-Lunio-Secret": LUNIO_SECRET,
               "Cookie": request.headers.get("cookie") ?? "",
             },
             signal: AbortSignal.timeout(8000),
             cache: "no-store",
-          }
-        );
+          });
         if (wpRes.ok) {
           const available: Array<{ id: string }> = await wpRes.json();
           console.log("[payment-methods] WP returned:", available.map(g => g.id));

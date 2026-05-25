@@ -12,10 +12,13 @@ const NAV_SLUGS = [
   "lunio-hypercool",
   "lunio-icefit",
   "lunio-nebula",
+  "lunio-embrace",
+  "lunio-mercury",
   "tencel-bedsheet",
   "tencel-duvet-cover",
   "lunio-protector",
   "lunio-snowsilk",
+  "lunio-snowweave",
 ];
 
 export async function getNavProductImages(): Promise<Record<string, string>> {
