@@ -37,11 +37,9 @@ function lunio_get_payment_methods(WP_REST_Request $request): WP_REST_Response {
 
     // Fallback: if the session cart is still empty (session expired or not forwarded),
     // populate a temporary in-memory cart from the product IDs sent by Next.js.
-    // This ensures gateway is_available() always has real product data to evaluate.
     $ids_param = sanitize_text_field($request->get_param('ids') ?? '');
     if ($ids_param && WC()->cart->is_empty()) {
         $product_ids = array_filter(array_map('absint', explode(',', $ids_param)));
-        $cart_total  = floatval($request->get_param('total') ?? 0);
         foreach ($product_ids as $product_id) {
             $product = wc_get_product($product_id);
             if (!$product) continue;
@@ -54,7 +52,14 @@ function lunio_get_payment_methods(WP_REST_Request $request): WP_REST_Response {
                 'data'         => $product,
             ];
         }
-        // Set totals so amount-based gateway rules evaluate correctly
+    }
+
+    // Always override the cart total from the passed param.
+    // We skip calculate_totals() for speed, so WC()->cart->total stays 0 even when
+    // the session loads correctly — causing amount-based gateways to fail their min
+    // check. Setting it explicitly ensures installment gateways evaluate correctly.
+    $cart_total = floatval($request->get_param('total') ?? 0);
+    if ($cart_total > 0) {
         WC()->cart->cart_contents_total = $cart_total;
         WC()->cart->total               = $cart_total;
     }
