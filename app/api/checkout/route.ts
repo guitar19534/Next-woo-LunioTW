@@ -11,16 +11,21 @@ const AUTH      = Buffer.from(`${process.env.WC_CONSUMER_KEY}:${process.env.WC_C
 async function setOrderAttribution(orderId: number, attribution: Record<string, string>) {
   const fields = ["source_type", "referrer", "utm_source", "utm_medium", "utm_campaign",
                   "utm_content", "utm_id", "utm_term", "session_entry", "session_start_time"];
-  const metaData = fields
-    .filter((k) => attribution[k] !== undefined)
-    .map((k) => ({ key: `_wc_order_attribution_${k}`, value: attribution[k] ?? "" }));
-  if (!metaData.length) return;
-  await fetch(`${WC_API}/orders/${orderId}`, {
+
+  // Always ensure source_type is set; fall back to "typein" (Direct) if client didn't send one
+  const data = { source_type: "typein", ...attribution };
+
+  const metaData = fields.map((k) => ({ key: `_wc_order_attribution_${k}`, value: data[k] ?? "" }));
+
+  const res = await fetch(`${WC_API}/orders/${orderId}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json", Authorization: `Basic ${AUTH}` },
     body: JSON.stringify({ meta_data: metaData }),
     cache: "no-store",
   });
+  if (!res.ok) {
+    console.error("[checkout] attribution meta update failed:", res.status, await res.text().catch(() => ""));
+  }
 }
 
 // Convert Taiwan phone to international format expected by WooCommerce
@@ -153,10 +158,13 @@ export async function POST(request: NextRequest) {
       payment_result?: { redirect_url?: string; payment_status?: string };
     };
 
-    // Set order attribution meta so WC reports show correct source
-    if (order.order_id && body.attribution && typeof body.attribution === "object") {
-      setOrderAttribution(order.order_id, body.attribution).catch(() => {});
-    }
+    // Set order attribution meta so WC reports show correct source.
+    // Must be awaited — Vercel terminates the function once response is sent,
+    // so fire-and-forget calls may never complete.
+    const attribution = body.attribution && typeof body.attribution === "object"
+      ? body.attribution as Record<string, string>
+      : {};
+    await setOrderAttribution(order.order_id, attribution).catch(() => {});
 
     const res = NextResponse.json({
       success: true,
