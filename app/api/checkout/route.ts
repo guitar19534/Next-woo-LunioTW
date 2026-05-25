@@ -2,6 +2,26 @@ import { NextRequest, NextResponse } from "next/server";
 import { forwardSetCookies } from "@/app/api/cart/_proxy";
 
 const STORE_API = `${process.env.WORDPRESS_URL}/wp-json/wc/store/v1`;
+const WC_API    = `${process.env.WORDPRESS_URL}/wp-json/wc/v3`;
+const AUTH      = Buffer.from(`${process.env.WC_CONSUMER_KEY}:${process.env.WC_CONSUMER_SECRET}`).toString("base64");
+
+// Write WooCommerce Order Attribution meta directly so WC reports show
+// the correct source (Direct / UTM / Referral) instead of "Unknown".
+// The Store API extensions field is version-dependent; this works on all WC versions.
+async function setOrderAttribution(orderId: number, attribution: Record<string, string>) {
+  const fields = ["source_type", "referrer", "utm_source", "utm_medium", "utm_campaign",
+                  "utm_content", "utm_id", "utm_term", "session_entry", "session_start_time"];
+  const metaData = fields
+    .filter((k) => attribution[k] !== undefined)
+    .map((k) => ({ key: `_wc_order_attribution_${k}`, value: attribution[k] ?? "" }));
+  if (!metaData.length) return;
+  await fetch(`${WC_API}/orders/${orderId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json", Authorization: `Basic ${AUTH}` },
+    body: JSON.stringify({ meta_data: metaData }),
+    cache: "no-store",
+  });
+}
 
 // Convert Taiwan phone to international format expected by WooCommerce
 // 0912345678 → +886912345678 | 02-12345678 → +886212345678
@@ -62,9 +82,6 @@ export async function POST(request: NextRequest) {
       customer_note:    body.customer_note ?? "",
       payment_method:   paymentMethod,
       payment_data:     paymentData,
-      extensions: {
-        "woocommerce/order-attribution": body.attribution ?? {},
-      },
     };
 
     if (body.create_account && body.account_password) {
@@ -135,6 +152,11 @@ export async function POST(request: NextRequest) {
       totals?: { total_price: string };
       payment_result?: { redirect_url?: string; payment_status?: string };
     };
+
+    // Set order attribution meta so WC reports show correct source
+    if (order.order_id && body.attribution && typeof body.attribution === "object") {
+      setOrderAttribution(order.order_id, body.attribution).catch(() => {});
+    }
 
     const res = NextResponse.json({
       success: true,
