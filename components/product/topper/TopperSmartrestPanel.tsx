@@ -2,94 +2,44 @@
 
 import { useState, useCallback, useRef } from "react";
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
+import Image from "next/image";
 import type { Product, ProductVariation } from "@/lib/woocommerce.d";
 import { useCart } from "@/components/shop";
 import { StickyCartBar } from "@/components/product/shared/StickyCartBar";
 
 const VARIATION_LABELS: Record<string, string> = {
-  "標準單人": "標準單人（89×188 cm）",
-  "單人加大": "單人加大（104×188 cm）",
-  "標準雙人": "標準雙人（150×188 cm）",
-  "雙人加大": "雙人加大（180×188 cm）",
+  "標準單人": "【標準單人】現折2,835元",
+  "單人加大": "【單人加大】現折3,285元",
+  "標準雙人": "【標準雙人】現折4,335元",
+  "雙人加大": "【雙人加大】現折4,785元",
+};
+
+const SIZE_DIMS: Record<string, string> = {
+  "標準單人": "90 x 188 x 5 cm",
+  "單人加大": "105 x 188 x 5 cm",
+  "標準雙人": "150 x 188 x 5 cm",
+  "雙人加大": "180 x 188 x 5 cm",
 };
 
 const BLUE = "#17569E";
 const NAVY = "#17284b";
 
-const ACCORDION_ITEMS = [
-  {
-    title: "產品詳情",
-    content: (
-      <div style={{ fontSize: 14, color: "#374151", lineHeight: 1.85 }}>
-        <p className="font-bold mb-3" style={{ color: NAVY }}>雙面翻轉，軟硬隨心切換</p>
-        <ul className="space-y-2" style={{ paddingLeft: "1.2em", listStyleType: "disc" }}>
-          <li>雙面翻轉設計，一面偏軟、一面偏硬，自由選擇</li>
-          <li>鋪在舊床墊上，立即改善舒適度、延長床墊壽命</li>
-          <li>可水洗透氣床套，清潔輕鬆</li>
-          <li>厚 5 公分，輕薄好搬運</li>
-        </ul>
-      </div>
-    ),
-  },
-  {
-    title: "尺寸規格",
-    content: (
-      <div style={{ fontSize: 14, color: "#374151" }}>
-        <p>厚度：5 公分</p>
-        <div className="mt-3 space-y-1.5">
-          {[
-            ["標準單人", "89 × 188 cm（3 尺）"],
-            ["單人加大", "104 × 188 cm（3.5 尺）"],
-            ["標準雙人", "150 × 188 cm（5 尺）"],
-            ["雙人加大", "180 × 188 cm（6 尺）"],
-          ].map(([size, dim]) => (
-            <p key={size}><span className="font-medium" style={{ color: NAVY }}>{size}</span>：{dim}</p>
-          ))}
-        </div>
-        <p className="mt-3" style={{ fontSize: 13, color: "#9ca3af" }}>尺寸因手工製作誤差正負 2 cm 屬正常</p>
-      </div>
-    ),
-  },
-  {
-    title: "運送方式",
-    content: <p style={{ fontSize: 14, color: "#374151" }}>真空裝箱出貨，全台本島免運費</p>,
-  },
-  {
-    title: "保養方式",
-    content: (
-      <ul className="space-y-2" style={{ fontSize: 14, color: "#374151", paddingLeft: "1.2em", listStyleType: "disc", lineHeight: 1.85 }}>
-        <li>床套可拆洗，以冷水機洗（最高 30°C）</li>
-        <li>放入洗衣袋，低速柔洗</li>
-        <li>不可漂白，陰涼處晾乾</li>
-      </ul>
-    ),
-  },
+const SERVICES = [
+  { src: "/ergo/Icon_payment_1-1.png", label: "12期0利率" },
+  { src: "/ergo/Icon_Delivery_0.png",  label: "本島免費配送" },
+  { src: "/ergo/Icon_Box.png",         label: "捲包床易安裝" },
 ];
-
-function Accordion() {
-  const [open, setOpen] = useState<number | null>(0);
-  return (
-    <div className="border-t border-gray-100">
-      {ACCORDION_ITEMS.map((item, i) => (
-        <div key={i} className="border-b border-gray-100">
-          <button type="button" onClick={() => setOpen(open === i ? null : i)}
-            className="flex items-center justify-between w-full px-0 py-5 text-left">
-            <span className="font-semibold" style={{ fontSize: 15, color: NAVY }}>{item.title}</span>
-            <ChevronDown size={16} style={{ color: "#9ca3af", transform: open === i ? "rotate(180deg)" : "none", transition: "transform 0.2s" }} />
-          </button>
-          {open === i && <div className="pb-4">{item.content}</div>}
-        </div>
-      ))}
-    </div>
-  );
-}
 
 interface Props { product: Product; variations: ProductVariation[]; }
 
 export function TopperSmartrestPanel({ product, variations }: Props) {
+  const sorted = [...variations].sort((a, b) => {
+    const order = ["標準單人", "單人加大", "標準雙人", "雙人加大"];
+    return order.indexOf(a.attributes[0]?.option ?? "") - order.indexOf(b.attributes[0]?.option ?? "");
+  });
+
   const [selectedVariation, setSelectedVariation] = useState<ProductVariation | null>(
-    variations.length > 0 ? variations[variations.length - 1] : null
+    sorted.length > 0 ? sorted[0] : null
   );
   const [qty, setQty] = useState(1);
   const [adding, setAdding] = useState(false);
@@ -100,9 +50,12 @@ export function TopperSmartrestPanel({ product, variations }: Props) {
   const price = selectedVariation?.price || product.price;
   const regularPrice = selectedVariation?.regular_price || product.regular_price;
   const isOnSale = selectedVariation?.on_sale ?? product.on_sale;
+  const selectedOpt = selectedVariation?.attributes[0]?.option ?? "";
+  const sizeDim = SIZE_DIMS[selectedOpt] ?? "";
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
+      {/* Desktop breadcrumb + title */}
       <div className="hidden lg:block space-y-2">
         <nav className="flex items-center gap-1 text-sm" style={{ color: BLUE }}>
           <Link href="/" className="hover:underline">Lunio</Link>
@@ -111,39 +64,78 @@ export function TopperSmartrestPanel({ product, variations }: Props) {
           <span style={{ color: "#aaa" }}>›</span>
           <span style={{ color: "#aaa" }}>SmartRest Flip Topper</span>
         </nav>
-        <p style={{ fontSize: 16, color: "#9ca3af" }}>Nooz SmartRest Flip Topper</p>
-        <h1 className="font-bold leading-tight" style={{ fontSize: 30, color: NAVY }}>翻轉床墊（厚5公分）</h1>
+        <h1 className="font-bold leading-tight" style={{ fontSize: 30, color: NAVY }}>
+          Nooz SmartRest Flip Topper 翻轉床墊（厚5cm）
+        </h1>
         <div className="flex items-center gap-2">
           <div className="flex" style={{ color: "#f5a623" }}>{"★★★★★"}</div>
-          <span style={{ fontSize: 13.5, color: "#6b7280" }}>（Google 評論）{parseFloat(product.average_rating) > 0 ? product.average_rating : "4.8"}</span>
+          <span style={{ fontSize: 13.5, color: "#6b7280" }}>
+            ({parseFloat(product.average_rating) > 0 ? product.average_rating : "5.0"})
+          </span>
         </div>
       </div>
 
+      {/* Tagline */}
+      <p className="font-bold" style={{ fontSize: 17, color: NAVY }}>包覆感 X 支撐力，幫小窩再升級</p>
+
+      {/* Description */}
+      <p style={{ fontSize: 14.5, color: "#555", lineHeight: 1.75 }}>
+        5公分軟硬雙面薄墊，升級舊床，或當租屋床墊、宿舍床墊，隨心所欲
+      </p>
+
+      {/* Feature bullets */}
+      <ul className="space-y-2.5" style={{ paddingLeft: 0, listStyle: "none" }}>
+        {[
+          { label: "軟硬雙面任選", desc: "冷凝記憶棉 / 扎實高支撐泡棉" },
+          { label: "改善舊床軟硬度", desc: "小預算升級舊床墊" },
+          { label: "可水洗透氣床套", desc: "柔軟排汗，舒適乾爽" },
+        ].map((f) => (
+          <li key={f.label} style={{ fontSize: 14.5, color: "#444" }}>
+            <span className="font-bold" style={{ color: NAVY }}>• {f.label}</span>：{f.desc}
+          </li>
+        ))}
+      </ul>
+
+      {/* Size display */}
+      {sizeDim && (
+        <div className="rounded-lg px-4 py-2.5" style={{ backgroundColor: "#f0f4fa", fontSize: 14, color: "#555" }}>
+          尺寸：{sizeDim}
+        </div>
+      )}
+
+      {/* Price */}
       <div className="flex items-baseline gap-3">
-        <span className="font-bold" style={{ fontSize: 26, color: BLUE }}>NT${Number(price).toLocaleString()}</span>
+        <span className="font-bold" style={{ fontSize: 26, color: BLUE }}>
+          NT${Number(price).toLocaleString()}
+        </span>
         {isOnSale && regularPrice && (
-          <span className="line-through" style={{ fontSize: 16, color: "#bbb" }}>NT${Number(regularPrice).toLocaleString()}</span>
+          <span className="line-through" style={{ fontSize: 16, color: "#bbb" }}>
+            NT${Number(regularPrice).toLocaleString()}
+          </span>
         )}
       </div>
 
-      {variations.length > 0 && (
+      {/* Size selector */}
+      {sorted.length > 0 && (
         <div className="flex items-center gap-3">
           <span className="text-sm font-medium shrink-0" style={{ color: "#555" }}>尺寸</span>
-          <select className="flex-1 border rounded-xl px-3 py-2.5 text-sm outline-none"
-            style={{ borderColor: "#ddd", color: NAVY, backgroundColor: "#f8faff" }}
-            value={selectedVariation?.attributes[0]?.option ?? ""}
+          <select
+            className="flex-1 border rounded-xl px-3 py-2.5 text-sm outline-none"
+            style={{ borderColor: "#ddd", color: NAVY, backgroundColor: "#fff" }}
+            value={selectedOpt}
             onChange={(e) => {
-              const v = variations.find((v) => v.attributes.some((a) => a.option === e.target.value)) ?? null;
+              const v = sorted.find((v) => v.attributes.some((a) => a.option === e.target.value)) ?? null;
               handleVariationChange(v);
             }}>
-            {variations.map((v) => {
+            {sorted.map((v) => {
               const opt = v.attributes[0]?.option ?? "";
-              return <option key={v.id} value={opt}>{VARIATION_LABELS[opt] ?? opt} — NT${Number(v.price).toLocaleString()}</option>;
+              return <option key={v.id} value={opt}>{VARIATION_LABELS[opt] ?? opt}</option>;
             })}
           </select>
         </div>
       )}
 
+      {/* Qty + CTA */}
       <div className="flex items-center gap-3">
         <span className="text-sm font-medium" style={{ color: "#555" }}>數量</span>
         <div className="flex items-center rounded-xl overflow-hidden border" style={{ borderColor: "#ddd" }}>
@@ -161,14 +153,19 @@ export function TopperSmartrestPanel({ product, variations }: Props) {
         </button>
       </div>
 
-      <div className="h-px bg-gray-100" />
-      <p style={{ fontSize: 13, color: "#9ca3af" }}>全台本島免運 · 真空裝箱好搬運</p>
-
-      <Accordion />
+      {/* Service icons */}
+      <div className="grid grid-cols-3 gap-2 rounded-2xl py-4 px-3" style={{ backgroundColor: "#EEF3FB" }}>
+        {SERVICES.map((s) => (
+          <div key={s.label} className="flex flex-col items-center gap-1.5 text-center">
+            <Image src={s.src} alt={s.label} width={36} height={36} className="object-contain" />
+            <span style={{ fontSize: 12, color: "#555", fontWeight: 500 }}>{s.label}</span>
+          </div>
+        ))}
+      </div>
 
       <StickyCartBar productName="Nooz SmartRest" subtitle="翻轉床墊"
         price={price} regularPrice={regularPrice} isOnSale={isOnSale}
-        variations={variations} selectedVariation={selectedVariation}
+        variations={sorted} selectedVariation={selectedVariation}
         onVariationChange={handleVariationChange} variationLabels={VARIATION_LABELS}
         onAddToCart={async () => { const id = selectedVariation?.id ?? product.id; setAdding(true); await addItem(id, qty); setAdding(false); }}
         adding={adding} triggerRef={ctaRef} />
