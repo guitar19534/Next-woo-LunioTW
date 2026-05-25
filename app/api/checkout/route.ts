@@ -13,7 +13,7 @@ async function setOrderAttribution(orderId: number, attribution: Record<string, 
                   "utm_content", "utm_id", "utm_term", "session_entry", "session_start_time"];
 
   // Always ensure source_type is set; fall back to "typein" (Direct) if client didn't send one
-  const data = { source_type: "typein", ...attribution };
+  const data: Record<string, string> = { source_type: "typein", ...attribution };
 
   const metaData = fields.map((k) => ({ key: `_wc_order_attribution_${k}`, value: data[k] ?? "" }));
 
