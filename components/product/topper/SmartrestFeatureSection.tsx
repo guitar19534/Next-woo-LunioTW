@@ -8,8 +8,8 @@ const BLUE = "#17569E";
 
 // ── แก้ videoId ให้ตรงกับ YouTube ─────────────────────────────────────────
 const VIDEOS = [
-  { videoId: "PLACEHOLDER_V1" },
-  { videoId: "PLACEHOLDER_V2" },
+  { videoId: "IEJwfR2qLvc" },
+  { videoId: "0SYHdPVWuiM" },
 ];
 
 const ICONS = [
