@@ -66,18 +66,18 @@ function lunio_get_payment_methods(WP_REST_Request $request): WP_REST_Response {
 
     add_filter('woocommerce_is_checkout', '__return_true');
 
-    // Block outgoing HTTP — installment gateways call external APIs when they see a
-    // real cart; blocking forces fast local-only evaluation (categories / min amount).
-    $block_http = function($preempt, $args, $url) {
-        return new WP_Error('lunio_blocked', 'External HTTP blocked during payment availability check.');
-    };
-    add_filter('pre_http_request', $block_http, 99, 3);
+    // Clamp HTTP timeout to 2 s so installment gateways can complete their API
+    // key / eligibility checks without causing a 30-second PHP hang.
+    // We deliberately do NOT block HTTP — blocking prevents is_available() from
+    // returning the correct result for amount-based installment eligibility.
+    $short_timeout = function() { return 2; };
+    add_filter('http_request_timeout', $short_timeout, 99);
 
     // get_available_payment_gateways() calls is_available() on each gateway AND applies
     // the woocommerce_available_payment_gateways filter — identical to native checkout.
     $gateways_available = WC()->payment_gateways()->get_available_payment_gateways();
 
-    remove_filter('pre_http_request', $block_http, 99);
+    remove_filter('http_request_timeout', $short_timeout, 99);
 
     $available = [];
     foreach ($gateways_available as $gateway) {
