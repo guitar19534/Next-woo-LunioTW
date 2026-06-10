@@ -216,6 +216,15 @@ export default function CheckoutPage() {
   function set(name: string, value: string) {
     setF(p => ({ ...p, [name]: value }));
   }
+
+  // Restrict carrier code input to "/" + up to 7 chars of [A-Z0-9.-+], auto-uppercased
+  function setCarrierCode(name: string, value: string) {
+    let v = value.toUpperCase().replace(/[^0-9A-Z.\-+/]/g, "");
+    if (!v.startsWith("/")) v = "/" + v.replace(/\//g, "");
+    else v = "/" + v.slice(1).replace(/\//g, "");
+    v = v.slice(0, 8);
+    setF(p => ({ ...p, [name]: v }));
+  }
   function setShipField(name: string, value: string) {
     setShip(p => ({ ...p, [name]: value }));
   }
@@ -376,7 +385,7 @@ export default function CheckoutPage() {
 
   const invoiceExtra = f.invoiceType === "carrier" ? (
     <div>
-      <TextInput name="invoiceCarrier" value={f.invoiceCarrier} onChange={set} placeholder="請輸入手機條碼（/XXXXXXX）" />
+      <TextInput name="invoiceCarrier" value={f.invoiceCarrier} onChange={setCarrierCode} placeholder="請輸入手機條碼（/XXXXXXX）" />
       <p className="mt-1.5" style={{ fontSize: 12.5, color: carrierError ? "#e53e3e" : "#9ca3af", lineHeight: 1.6 }}>
         格式須為「/」開頭，後面接 7 碼大寫英文字母、數字或特殊符號（. - +）的組合，例如：/ABC1234
       </p>
