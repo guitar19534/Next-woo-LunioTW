@@ -23,7 +23,7 @@ const LAYERS = [
 
 export function TrifoldLayerSection() {
   return (
-    <section style={{ background: "linear-gradient(135deg, #2bcfcf 0%, #5be6d0 40%, #a8f0e8 100%)", padding: "clamp(48px,5vw,72px) 0" }}>
+    <section style={{ background: "radial-gradient(circle at center, #a8f0e8 0%, #5be6d0 50%, #2bcfcf 100%)", padding: "clamp(48px,5vw,72px) 0" }}>
       <div className="max-w-[1140px] w-[90%] mx-auto">
         <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
 

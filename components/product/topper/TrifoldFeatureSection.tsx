@@ -107,8 +107,8 @@ export function TrifoldFeatureSection() {
                 輕巧不佔空間，不論居家、旅行、露營、車宿，都能享受舒適支撐
               </p>
             </div>
-            <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: "4/3" }}>
-              <Image src="/topper-trifold/sku_TriFold.jpg" alt="Nooz FlexiRest Trifold Topper" fill className="object-cover" sizes="(max-width:768px) 90vw, 45vw" />
+            <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: "3/2" }}>
+              <Image src="/topper-trifold/sku_TriFold.jpg" alt="Nooz FlexiRest Trifold Topper" fill className="object-contain" sizes="(max-width:768px) 90vw, 45vw" />
             </div>
           </div>
         </div>
@@ -118,8 +118,8 @@ export function TrifoldFeatureSection() {
       <section style={{ backgroundColor: "#f8faff", padding: "clamp(48px,5vw,72px) 0" }}>
         <div className="max-w-[1100px] w-[90%] mx-auto">
           <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-            <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: "4/3" }}>
-              <Image src="/topper-trifold/Nooz-Trifold-Topper_14.jpg" alt="三折疊床墊使用方式" fill className="object-cover" sizes="(max-width:768px) 90vw, 45vw" />
+            <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: "3/2" }}>
+              <Image src="/topper-trifold/Nooz-Trifold-Topper_14.jpg" alt="三折疊床墊使用方式" fill className="object-contain" sizes="(max-width:768px) 90vw, 45vw" />
             </div>
             <div className="space-y-4">
               <h2 className="font-bold text-center" style={{ fontSize: "clamp(20px,2.2vw,26px)", color: NAVY }}>
@@ -148,8 +148,8 @@ export function TrifoldFeatureSection() {
                 ))}
               </ul>
             </div>
-            <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: "1/1.2" }}>
-              <Image src="/topper-trifold/Nooz-Trifold-Topper_13.jpg" alt="一墊多用使用場景" fill className="object-cover" sizes="(max-width:768px) 90vw, 45vw" />
+            <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: "3/2" }}>
+              <Image src="/topper-trifold/Nooz-Trifold-Topper_13.jpg" alt="一墊多用使用場景" fill className="object-contain" sizes="(max-width:768px) 90vw, 45vw" />
             </div>
           </div>
         </div>
@@ -159,8 +159,8 @@ export function TrifoldFeatureSection() {
       <section style={{ backgroundColor: "#f8faff", padding: "clamp(48px,5vw,72px) 0" }}>
         <div className="max-w-[1100px] w-[90%] mx-auto">
           <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-            <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: "4/3" }}>
-              <Image src="/topper-trifold/Nooz-Trifold-Topper_10.jpg" alt="柔軟貼合，穩定支撐" fill className="object-cover" sizes="(max-width:768px) 90vw, 45vw" />
+            <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: "4/5" }}>
+              <Image src="/topper-trifold/Nooz-Trifold-Topper_10.jpg" alt="柔軟貼合，穩定支撐" fill className="object-contain" sizes="(max-width:768px) 90vw, 45vw" />
             </div>
             <div className="space-y-4">
               <h2 className="font-bold" style={{ fontSize: "clamp(20px,2.2vw,26px)", color: NAVY }}>
@@ -193,8 +193,8 @@ export function TrifoldFeatureSection() {
               </p>
               <p style={{ fontSize: 14.5, color: "#555" }}>透氣床套可拆洗，清潔更方便。</p>
             </div>
-            <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: "4/3" }}>
-              <Image src="/topper-trifold/Nooz-Trifold-Topper_11.jpg" alt="透氣網布涼爽好眠" fill className="object-cover" sizes="(max-width:768px) 90vw, 45vw" />
+            <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: "3/2" }}>
+              <Image src="/topper-trifold/Nooz-Trifold-Topper_11.jpg" alt="透氣網布涼爽好眠" fill className="object-contain" sizes="(max-width:768px) 90vw, 45vw" />
             </div>
           </div>
         </div>
@@ -204,8 +204,8 @@ export function TrifoldFeatureSection() {
       <section style={{ backgroundColor: "#f8faff", padding: "clamp(48px,5vw,72px) 0" }}>
         <div className="max-w-[1100px] w-[90%] mx-auto">
           <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-            <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: "4/3" }}>
-              <Image src="/topper-trifold/Nooz-Trifold-Topper_12.jpg" alt="輕鬆帶著走" fill className="object-cover" sizes="(max-width:768px) 90vw, 45vw" />
+            <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: "3/2" }}>
+              <Image src="/topper-trifold/Nooz-Trifold-Topper_12.jpg" alt="輕鬆帶著走" fill className="object-contain" sizes="(max-width:768px) 90vw, 45vw" />
             </div>
             <div className="space-y-4">
               <h2 className="font-bold" style={{ fontSize: "clamp(20px,2.2vw,26px)", color: NAVY }}>
