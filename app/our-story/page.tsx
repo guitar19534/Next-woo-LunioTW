@@ -71,7 +71,7 @@ export default function OurStoryPage() {
               <p>最新科技打造的機能乳膠床墊，專為台灣人而設計，全方位的服貼支撐你的全身。<br />
               我相信你會像漂浮在月球上一樣舒服睡著，讓你每天都想快點回家陪我！</p>
             </div>
-            <Link href="/blog"
+            <Link href="/blog/lunio-story"
               className="inline-flex px-7 py-3.5 rounded-full font-bold text-white transition-opacity hover:opacity-90"
               style={{ backgroundColor: BLUE, fontSize: 15 }}>
               Lunio 床墊品牌內幕大公開
