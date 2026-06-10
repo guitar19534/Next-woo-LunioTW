@@ -147,7 +147,7 @@ export default function OurStoryPage() {
             </p>
           </div>
           {/* Video thumbnail */}
-          <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer"
+          <a href="https://www.youtube.com/watch?v=L1Hjixw_DvA" target="_blank" rel="noopener noreferrer"
             className="relative block overflow-hidden rounded-2xl group"
             style={{ aspectRatio: "16/9" }}>
             <Image src="/our-story/VDO-Brand-01.webp" alt="品牌總監親自揭密" fill
