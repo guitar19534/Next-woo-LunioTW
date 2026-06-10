@@ -15,21 +15,21 @@ const NAV: { label: string; items: { label: string; href: string }[] }[] = [
     items: [
       { label: "品牌故事",     href: "/our-story" },
       { label: "Lunio 門市",   href: "/storefront" },
-      { label: "分辨天然乳膠", href: "/blog" },
+      { label: "分辨天然乳膠", href: "/latex" },
     ],
   },
   {
     label: "資源",
     items: [
-      { label: "領取優惠",    href: "/shop/category/campaign10000" },
+      { label: "領取優惠",    href: "/promotion" },
       { label: "Lunio Blog",  href: "/blog" },
     ],
   },
   {
     label: "產品",
     items: [
-      { label: "床墊",    href: "/shop/category/mattress" },
-      { label: "枕頭",    href: "/shop/category/pillow" },
+      { label: "床墊",    href: "/mattress" },
+      { label: "枕頭",    href: "/pillow" },
       { label: "床包被子", href: "/product/tencel-bedsheet" },
       { label: "保潔墊",  href: "/product/lunio-protector" },
     ],
@@ -156,10 +156,6 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-3 flex-wrap justify-end" style={{ fontSize: 11.5, color: "rgba(255,255,255,0.35)" }}>
               <span>Copyright ©{year} <span style={{ color: "#60a5fa" }}>Lunio</span> Taiwan</span>
-              <span style={{ opacity: 0.3 }}>·</span>
-              <Link href="/blog"          className="ft-link">分辨乳膠</Link>
-              <Link href="/faq"           className="ft-link">產品購物須知</Link>
-              <Link href="/faq" className="ft-link">隱私政策</Link>
             </div>
           </div>
 
