@@ -23,14 +23,31 @@ const BLUE = "#17569E";
 const NAVY = "#17284b";
 const ORANGE = "#F5A000";
 
-/* ─── Extract headings from HTML for ToC ─────────────────────────────────── */
-function extractHeadings(html: string) {
-  const matches = [...html.matchAll(/<h([234])[^>]*\sid="([^"]+)"[^>]*>(.*?)<\/h[234]>/gi)];
-  return matches.map(([, level, id, text]) => ({
-    level: parseInt(level),
-    id,
-    text: stripHtml(text),
-  }));
+/* ─── Extract headings from HTML for ToC, injecting ids if missing ──────── */
+function processHeadings(html: string) {
+  const headings: { level: number; id: string; text: string }[] = [];
+  let i = 0;
+  const processedHtml = html.replace(
+    /<h([234])([^>]*)>([\s\S]*?)<\/h\1>/gi,
+    (match, level, attrs, inner) => {
+      const text = stripHtml(inner);
+      if (!text.trim()) return match;
+
+      const idMatch = attrs.match(/\sid="([^"]+)"/);
+      let id: string;
+      let newAttrs = attrs;
+      if (idMatch) {
+        id = idMatch[1];
+      } else {
+        id = `toc-heading-${i}`;
+        newAttrs = `${attrs} id="${id}"`;
+      }
+      i++;
+      headings.push({ level: parseInt(level), id, text });
+      return `<h${level}${newAttrs}>${inner}</h${level}>`;
+    }
+  );
+  return { html: processedHtml, headings };
 }
 
 /* ─── Sidebar — recent posts ─────────────────────────────────────────────── */
@@ -116,7 +133,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const media    = post._embedded?.["wp:featuredmedia"]?.[0];
   const author   = post._embedded?.author?.[0];
   const category = post._embedded?.["wp:term"]?.[0]?.[0];
-  const headings = extractHeadings(post.content.rendered);
+  const { html: contentHtml, headings } = processHeadings(post.content.rendered);
 
   const date = new Date(post.date).toLocaleDateString("zh-TW", {
     year: "numeric", month: "2-digit", day: "2-digit",
@@ -172,7 +189,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             {/* Article content */}
             <div
               className="blog-content"
-              dangerouslySetInnerHTML={{ __html: post.content.rendered }}
+              dangerouslySetInnerHTML={{ __html: contentHtml }}
             />
 
             {/* Back / tag bar */}
