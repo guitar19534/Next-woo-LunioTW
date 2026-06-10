@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { StoreCarousel } from "@/components/our-story/StoreCarousel";
 import { MilestonesTimeline } from "@/components/our-story/MilestonesTimeline";
+import { BrandStoryVideo } from "@/components/our-story/BrandStoryVideo";
 
 export const metadata: Metadata = {
   title: "Our Story｜Lunio Taiwan",
@@ -146,18 +147,8 @@ export default function OurStoryPage() {
               我們持續進化每一代產品，只為打造更好睡的床墊和枕頭 高品質不該昂貴，而是人人能負擔 因為好睡眠，是每個人都該有的幸福
             </p>
           </div>
-          {/* Video thumbnail */}
-          <a href="https://www.youtube.com/watch?v=L1Hjixw_DvA" target="_blank" rel="noopener noreferrer"
-            className="relative block overflow-hidden rounded-2xl group"
-            style={{ aspectRatio: "16/9" }}>
-            <Image src="/our-story/VDO-Brand-01.webp" alt="品牌總監親自揭密" fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="50vw" />
-            <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ backgroundColor: "rgba(255,30,30,0.9)" }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="white" aria-hidden><path d="M8 5v14l11-7z"/></svg>
-              </div>
-            </div>
-          </a>
+          {/* Video */}
+          <BrandStoryVideo />
         </div>
       </section>
 
