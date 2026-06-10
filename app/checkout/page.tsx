@@ -101,6 +101,8 @@ interface PaymentMethod {
   subOptions: PaymentSubOption[];
 }
 
+const CARRIER_CODE_REGEX = /^\/[0-9A-Z.\-+]{7}$/;
+
 const INVOICE_TYPES = [
   { value: "carrier", label: "手機條碼載具" },
   { value: "personal", label: "個人電子發票 (Email寄送)" },
@@ -282,6 +284,11 @@ export default function CheckoutPage() {
     e.preventDefault();
     // Only block if methods loaded but none selected
     if (paymentMethods.length > 0 && !selectedPayment) { setError("請選擇付款方式"); return; }
+    if (f.invoiceType === "carrier" && !CARRIER_CODE_REGEX.test(f.invoiceCarrier)) {
+      setError("手機條碼格式錯誤，請輸入「/」開頭，後面接 7 碼大寫英文字母、數字或特殊符號（. - +）");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
     setIsSubmitting(true);
     setError(null);
     try {
@@ -365,8 +372,15 @@ export default function CheckoutPage() {
   );
 
   // ── Invoice conditional field ──
+  const carrierError = f.invoiceCarrier !== "" && !CARRIER_CODE_REGEX.test(f.invoiceCarrier);
+
   const invoiceExtra = f.invoiceType === "carrier" ? (
-    <TextInput name="invoiceCarrier" value={f.invoiceCarrier} onChange={set} placeholder="請輸入手機條碼（/XXXXXXX）" />
+    <div>
+      <TextInput name="invoiceCarrier" value={f.invoiceCarrier} onChange={set} placeholder="請輸入手機條碼（/XXXXXXX）" />
+      <p className="mt-1.5" style={{ fontSize: 12.5, color: carrierError ? "#e53e3e" : "#9ca3af", lineHeight: 1.6 }}>
+        格式須為「/」開頭，後面接 7 碼大寫英文字母、數字或特殊符號（. - +）的組合，例如：/ABC1234
+      </p>
+    </div>
   ) : f.invoiceType === "personal" ? (
     <TextInput name="invoiceEmail" value={f.invoiceEmail || f.email} onChange={set} placeholder="收取發票的 Email" type="email" />
   ) : (
