@@ -24,13 +24,12 @@ const FEATURES = [
 
 const PRODUCTS = {
   "床墊": [
-    { name: "Signature 旗艦床墊", href: "#" },
     { name: "乳膠床墊 Gen4",      href: "/product/lunio-latex-mattress" },
     { name: "乳膠獨立筒床墊 Quantum", href: "/product/lunio-quantum" },
     { name: "Nooz 床墊系列",      href: "/product/nooz-helix" },
   ],
   "枕頭": [
-    { name: "天然乳膠枕",         href: "/product/pillows" },
+    { name: "HyperCool 工學護頸枕", href: "/product/lunio-hypercool" },
     { name: "Mercury 石墨烯機能記憶枕", href: "/product/lunio-mercury" },
     { name: "Nebula 經典記憶枕",  href: "/product/lunio-nebula" },
     { name: "Butterfly 蝴蝶枕",   href: "/product/nooz-butterfly" },
