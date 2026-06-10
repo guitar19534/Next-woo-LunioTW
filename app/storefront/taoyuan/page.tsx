@@ -4,7 +4,7 @@ import { StorefrontPreFooter } from "@/components/storefront/StorefrontPreFooter
 
 export const metadata: Metadata = {
   title: "Lunio 桃園門市｜乳膠床墊專賣店",
-  description: "Lunio 桃園門市，桃園市桃園區正光路393號1樓（京澄為樂社區）。每日 11:00–20:00 營業，歡迎預約試躺。",
+  description: "Lunio 桃園門市，地址：桃園市桃園區正光路393號1樓（京澄為樂社區）。每日 11:00–20:00 營業，聯絡電話: 0937-968-020，歡迎預約試躺，來體驗乳膠床墊、獨立筒床墊與記憶枕吧!",
   alternates: { canonical: "/storefront/taoyuan" },
 };
 

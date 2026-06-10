@@ -52,12 +52,12 @@ export const revalidate = 3600;
 export const metadata = {
   title: "乳膠床墊首選Lunio｜為了更好的睡眠品質",
   description:
-    "Lunio — 台灣頂級天然乳膠床墊品牌。石墨烯技術、骨科醫師合作研發、100晚試睡保證。提升深層睡眠30%，全台免費配送安裝。",
+    "Lunio — 台灣頂級天然乳膠床墊品牌。石墨烯技術、骨科醫師合作研發。提升深層睡眠30%，全台免費配送安裝。",
   alternates: { canonical: "/" },
   openGraph: {
     title: "乳膠床墊首選Lunio｜為了更好的睡眠品質",
     description:
-      "台灣頂級天然乳膠床墊品牌。石墨烯技術、100晚試睡保證，全台免費配送。",
+      "台灣頂級天然乳膠床墊品牌。石墨烯技術，全台免費配送。",
   },
 };
 

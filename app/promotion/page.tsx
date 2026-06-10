@@ -7,7 +7,8 @@ import { ScrollToTopButton } from "@/components/promotions/ScrollToTopButton";
 
 export const metadata: Metadata = {
   title: { absolute: "領取特別優惠｜Lunio乳膠床墊 – 限量50名" },
-  description: "登記享Lunio乳膠床墊特別優惠，專人聯絡協助購床，本週限量50名。100晚試睡保證，全台免費配送安裝。",
+  description: "登記領取Lunio乳膠床墊特別優惠，專人聯絡協助購床，本週限量50名，要搶要快！",
+  alternates: { canonical: "/promotion" },
 };
 
 const BLUE = "#3c7ae4";

@@ -18,7 +18,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: { absolute: "NOOZ Helix 乳膠獨立筒床墊★平價熱銷｜五星級飯店床墊般舒適" },
-  description: "NOOZ Helix 乳膠獨立筒床墊。平價熱銷首選，五星級飯店床墊般舒適，100% 天然乳膠 × 獨立筒彈簧。100 晚試睡保證，全台免費配送安裝。",
+  description: "平價獨立筒床墊熱銷首選，五星級飯店床墊般舒適，100% 天然乳膠 × 獨立筒彈簧。雙人床墊萬元有找，單人床墊5千有找，全台免費運送安裝。",
   alternates: { canonical: "/product/nooz-helix" },
   openGraph: {
     title: "NOOZ Helix 乳膠獨立筒床墊",
@@ -63,7 +63,7 @@ export default async function HelixProductPage() {
             <div className="flex items-center gap-2">
               <div className="flex" style={{ color: "#f5a623" }}>{"★★★★★"}</div>
               <span className="text-sm" style={{ color: "#555" }}>
-                (Google 評論)床墊評價 {product.average_rating || "4.8"}
+                (Google 評論)床墊評價 {parseFloat(product.average_rating) > 0 ? product.average_rating : "4.8"}
               </span>
             </div>
           </div>
@@ -126,10 +126,10 @@ export default async function HelixProductPage() {
           {/* VS image */}
           <div className="flex justify-center mb-14">
             <Image
-              src="/helix/Helix-4.webp"
+              src="/helix/compare-helix.webp"
               alt="NOOZ Helix VS 一般獨立筒床墊比較"
-              width={1100}
-              height={600}
+              width={1084}
+              height={812}
               className="w-full h-auto rounded-2xl"
             />
           </div>

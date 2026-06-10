@@ -21,13 +21,19 @@ export async function generateStaticParams() {
   return tags.map((t) => ({ slug: t.slug }));
 }
 
+/* Manual meta-description overrides for tags whose WooCommerce
+   description is too long or unsuitable for SEO. */
+const TAG_DESCRIPTION_OVERRIDES: Record<string, string> = {
+  "butterfly-pillow": "蝴蝶枕推薦首選！獨家分區設計精準支撐頭頸，徹底告別脖子懸空、落枕與打鼾困擾。仰睡側睡皆舒適，結合親膚涼感科技，立刻升級睡眠品質",
+};
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const tag = await getProductTagBySlug(slug);
   if (!tag) return { title: "找不到標籤" };
   return {
     title: `${tag.name}｜Lunio Taiwan`,
-    description: tag.description || `${tag.name}，Lunio床墊推薦`,
+    description: TAG_DESCRIPTION_OVERRIDES[slug] || tag.description || `${tag.name}，Lunio床墊推薦`,
     alternates: { canonical: `/product-tag/${slug}` },
   };
 }
@@ -67,6 +73,26 @@ const CERTS = [
   { src: "/mattress/Lunio-乳膠產LGA檢測合格.png",                   label: "德國萊茵家具安全無毒" },
   { src: "/mattress/Lunio-產品獲得OEKO-TEX-Standard-1000-認證.png", label: "紡織品環保無毒驗證" },
 ];
+
+/* Manual display-order overrides for specific product-tag pages.
+   Products listed here are pinned to the front in this order; any
+   other products in the tag keep their original (date) order after. */
+const TAG_ORDER_OVERRIDES: Record<string, string[]> = {
+  "backpain-mattress": ["lunio-latex-mattress", "nooz-sunset"],
+  "hard-mattress": ["lunio-quantum", "nooz-sunset"],
+  "cool-mattress": ["tencel-duvet-cover", "lunio-quantum", "lunio-snowsilk", "tencel-bedsheet"],
+};
+
+function applyOrderOverride(products: Product[], slug: string): Product[] {
+  const order = TAG_ORDER_OVERRIDES[slug];
+  if (!order) return products;
+  const rank = new Map(order.map((s, i) => [s, i]));
+  return [...products].sort((a, b) => {
+    const ra = rank.has(a.slug) ? rank.get(a.slug)! : order.length;
+    const rb = rank.has(b.slug) ? rank.get(b.slug)! : order.length;
+    return ra - rb;
+  });
+}
 
 const SERVICES = [
   { src: "/ergo/Icon_Delivery_0.png",    label: "全台本島免運費" },
@@ -157,8 +183,10 @@ export default async function ProductTagPage({ params }: Props) {
   const tag = await getProductTagBySlug(slug);
   if (!tag) notFound();
 
-  const { data: products } = await getProducts(1, 24, { tag: tag.id })
+  const { data: rawProducts } = await getProducts(1, 24, { tag: tag.id })
     .catch(() => ({ data: [] as Product[], headers: { total: 0, totalPages: 0 } }));
+
+  const products = applyOrderOverride(rawProducts, slug);
 
   const colClass =
     products.length === 1 ? "grid-cols-1 max-w-sm" :

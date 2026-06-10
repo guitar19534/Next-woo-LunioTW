@@ -4,7 +4,7 @@ import { StorefrontPreFooter } from "@/components/storefront/StorefrontPreFooter
 
 export const metadata: Metadata = {
   title: "Lunio 新竹新生活門市(竹北)｜乳膠床墊專賣店",
-  description: "Lunio 新竹新生活門市，新竹縣竹北市文興路43號（興隆國小對面）。每日 11:00–20:00 營業，歡迎預約試躺。",
+  description: "Lunio 新竹新生活門市，地址：新竹縣竹北市文興路43號（興隆國小對面）。每日 11:00–20:00 營業，聯絡電話: 0965-321-511，歡迎預約試躺，來體驗乳膠床墊、獨立筒床墊與記憶枕吧!",
   alternates: { canonical: "/storefront/hsinchu" },
 };
 

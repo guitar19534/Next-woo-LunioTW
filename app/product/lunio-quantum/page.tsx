@@ -20,7 +20,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: { absolute: "Lunio Quantum Max 高碳錳乳膠獨立筒床墊｜Tencel天絲床墊，雙層獨立筒" },
   description:
-    "Lunio Quantum Max 高碳錳乳膠獨立筒床墊。雙層獨立筒彈簧 × 100% 天然乳膠 × SmartTemp 智慧溫控。100 晚試睡保證，全台免費配送安裝。",
+    "平價乳膠獨立筒推薦。加厚天絲表布 × 100% 天然乳膠 × 五區獨立筒 × 床沿加固，全身服貼支撐，充分放鬆脊椎和肌肉壓力，10年保固，全台免費配送安裝。",
   alternates: { canonical: "/product/lunio-quantum" },
   openGraph: {
     title: "Lunio Quantum Max 高碳錳乳膠獨立筒床墊",
@@ -65,7 +65,7 @@ export default async function QTMProductPage() {
             <div className="flex items-center gap-2">
               <div className="flex" style={{ color: "#f5a623" }}>{"★★★★★"}</div>
               <span className="text-sm" style={{ color: "#555" }}>
-                (Google 評論)床墊評價 {product.average_rating || "4.8"}
+                (Google 評論)床墊評價 {parseFloat(product.average_rating) > 0 ? product.average_rating : "4.8"}
               </span>
             </div>
           </div>

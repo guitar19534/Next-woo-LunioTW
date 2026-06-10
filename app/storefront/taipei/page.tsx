@@ -4,7 +4,7 @@ import { StorefrontPreFooter } from "@/components/storefront/StorefrontPreFooter
 
 export const metadata: Metadata = {
   title: "Lunio 台北門市｜乳膠床墊專賣店",
-  description: "Lunio 台北門市，台北市大安區敦化南路一段176號（近捷運忠孝敦化8號出口）。每日 11:00–20:00 營業，歡迎預約試躺。",
+  description: "Lunio床墊台北門市，地址：台北市大安區敦化南路一段176號（近捷運忠孝敦化8號出口）。每日 11:00–20:00 營業，聯絡電話: 0965-218-919，歡迎預約試躺，來體驗乳膠床墊、獨立筒床墊與記憶枕吧!",
   alternates: { canonical: "/storefront/taipei" },
 };
 

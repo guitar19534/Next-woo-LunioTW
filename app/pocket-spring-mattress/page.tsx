@@ -287,10 +287,10 @@ export default function PocketSpringMattressPage() {
             <p style={{ marginBottom: 20 }}>在選購任何床墊之前，一定要先確定您需要什麼尺寸的床墊，您可先量測您的床架可容納的長與寬，以及床墊加上床架後的高度，是否方便上下床，避免在購買床墊之後，出現放不進床架、不符合使用需求，或是床墊過高和過低的情況。</p>
             <div style={{ background: "#f0f4f8", borderRadius: 10, padding: "16px 20px", lineHeight: 2 }}>
               <p>想要詳細了解床墊尺寸，請參考{" "}
-                <Link href="/blog/" style={{ color: BLUE, fontWeight: 600 }}>【床墊尺寸｜台灣、歐日美規尺寸差異，買床前必讀！】</Link>
+                <Link href="/blog/mattress-size" style={{ color: BLUE, fontWeight: 600 }}>【床墊尺寸｜台灣、歐日美規尺寸差異，買床前必讀！】</Link>
               </p>
               <p>想要詳細了解床墊高度，請參考{" "}
-                <Link href="/blog/" style={{ color: BLUE, fontWeight: 600 }}>【床墊厚度挑選指南：找到最適合您的理想高度】</Link>
+                <Link href="/blog/mattress-thickness" style={{ color: BLUE, fontWeight: 600 }}>【床墊厚度挑選指南：找到最適合您的理想高度】</Link>
               </p>
             </div>
           </TipSection>

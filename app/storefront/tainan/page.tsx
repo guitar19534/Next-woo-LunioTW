@@ -4,7 +4,7 @@ import { StorefrontPreFooter } from "@/components/storefront/StorefrontPreFooter
 
 export const metadata: Metadata = {
   title: "Dreamlands 精選名床 台南旗艦店｜Lunio Taiwan",
-  description: "Dreamlands 精選名床 台南旗艦店，台南市安平區文平路278號。每日 11:00–20:00 營業，歡迎預約試躺。",
+  description: "Dreamlands 精選名床 台南旗艦店，地址：台南市安平區文平路278號。每日 11:00–20:00 營業，聯絡電話: 0937-968-070，歡迎預約試躺，來體驗乳膠床墊、獨立筒床墊與記憶枕吧!",
   alternates: { canonical: "/storefront/tainan" },
 };
 

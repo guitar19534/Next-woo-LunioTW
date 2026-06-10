@@ -4,7 +4,7 @@ import { StorefrontPreFooter } from "@/components/storefront/StorefrontPreFooter
 
 export const metadata: Metadata = {
   title: "Lunio 高雄旗艦店｜乳膠床墊專賣店",
-  description: "Lunio 高雄旗艦店，高雄市鼓山區馬卡道路406號（內惟火車站，美術館旁）。每日 11:00–20:00 營業，歡迎預約試躺。",
+  description: "Lunio 高雄旗艦店，地址：高雄市鼓山區馬卡道路406號（內惟火車站，美術館旁）。每日 11:00–20:00 營業，聯絡電話: 0965-508-387，歡迎預約試躺，來體驗乳膠床墊、獨立筒床墊與記憶枕吧!",
   alternates: { canonical: "/storefront/kaohsiung" },
 };
 

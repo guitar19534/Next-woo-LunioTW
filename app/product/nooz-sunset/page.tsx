@@ -19,7 +19,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: { absolute: "NOOZ Sunset Pro乳膠活性碳床墊★平價床墊推薦｜扎實支撐首選" },
-  description: "NOOZ Sunset Pro 乳膠活性碳床墊。平價床墊推薦，100%天然乳膠 + 活性碳支撐層，扎實支撐，專為喜歡硬床的你設計。全台免費配送安裝。",
+  description: "平價乳膠床墊推薦，100%天然乳膠 + 活性碳支撐層，扎實支撐，專為喜歡硬床的你設計。雙人床墊萬元有找，單人床墊5千有找，全台免費運送安裝。",
   alternates: { canonical: "/product/nooz-sunset" },
   openGraph: {
     title: "NOOZ Sunset Pro乳膠活性碳床墊",
@@ -64,7 +64,7 @@ export default async function SunsetProductPage() {
             <div className="flex items-center gap-2">
               <div className="flex" style={{ color: "#E07B2E" }}>{"★★★★★"}</div>
               <span className="text-sm" style={{ color: "#555" }}>
-                (Google 評論)床墊評價 {product.average_rating || "5.0"}
+                (Google 評論)床墊評價 {parseFloat(product.average_rating) > 0 ? product.average_rating : "5.0"}
               </span>
             </div>
           </div>
@@ -102,10 +102,10 @@ export default async function SunsetProductPage() {
           {/* VS image */}
           <div className="flex justify-center mb-14">
             <Image
-              src="/sunset/Sunset-Pro_compare_compressed.jpg"
+              src="/sunset/compare-sunset.webp"
               alt="NOOZ Sunset Pro VS 一般乳膠床墊比較"
-              width={1100}
-              height={600}
+              width={1084}
+              height={812}
               className="w-full h-auto rounded-2xl"
             />
           </div>

@@ -17,7 +17,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: { absolute: "NOOZ Moonlight Plus冷凝記憶床墊 ★平價床墊推薦 – Lunio" },
-  description: "NOOZ Moonlight Plus 冷凝記憶床墊。平價床墊推薦首選，冷凝記憶層瞬間散熱，整晚清爽好眠。100晚試睡保證，全台免費配送安裝。",
+  description: "平價記憶床墊推薦，冷凝記憶層瞬間散熱，整晚清爽好眠。雙人床墊萬元有找，單人床墊5千有找，全台免費配送安裝。",
   alternates: { canonical: "/product/nooz-moonlight" },
   openGraph: {
     title: "NOOZ Moonlight Plus冷凝記憶床墊",
@@ -62,7 +62,7 @@ export default async function MoonlightProductPage() {
             <div className="flex items-center gap-2">
               <div className="flex" style={{ color: "#f5a623" }}>{"★★★★★"}</div>
               <span className="text-sm" style={{ color: "#555" }}>
-                (Google 評論)床墊評價 {product.average_rating || "5.0"}
+                (Google 評論)床墊評價 {parseFloat(product.average_rating) > 0 ? product.average_rating : "5.0"}
               </span>
             </div>
           </div>
@@ -94,10 +94,10 @@ export default async function MoonlightProductPage() {
 
           <div className="flex justify-center mb-14">
             <Image
-              src="/moonlight/Moonlight-Plus_compare_compressed.jpg"
+              src="/moonlight/compare-moonlight.webp"
               alt="NOOZ Moonlight Plus VS 一般記憶床墊比較"
-              width={1100}
-              height={600}
+              width={1084}
+              height={812}
               className="w-full h-auto rounded-2xl"
             />
           </div>

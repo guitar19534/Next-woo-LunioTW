@@ -4,7 +4,7 @@ import { StorefrontPreFooter } from "@/components/storefront/StorefrontPreFooter
 
 export const metadata: Metadata = {
   title: "Lunio 台中門市｜乳膠床墊專賣店",
-  description: "Lunio 台中門市，台中市北屯區文心路三段405號（捷運文心中清站，城市停車場對面）。每日 11:00–20:00 營業，歡迎預約試躺。",
+  description: "Lunio 台中門市，地址：台中市北屯區文心路三段405號（捷運文心中清站，城市停車場對面）。每日 11:00–20:00 營業，聯絡電話: 0965-032-822，歡迎預約試躺，來體驗乳膠床墊、獨立筒床墊與記憶枕吧!",
   alternates: { canonical: "/storefront/taichung" },
 };
 
