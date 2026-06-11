@@ -17,19 +17,19 @@ const PRESS_CARDS = [
     img: "/press/感受lunio乳膠床墊的親膚舒適.webp",
     media: "蘋果日報",
     title: "泰國熱銷No.1乳膠床品牌Lunio 樂謐臥無負擔促銷",
-    href: "#",
+    href: "https://turnnewsapp.com/wd/eventwd/143432.html",
   },
   {
     img: "/press/Lunio-GEN3-PRO-乳膠床墊1_compressed.webp",
     media: "Yahoo新聞",
     title: "躺過就回不去！泰國第一天然乳膠床墊Lunio樂謐臥，讓你一夜好眠",
-    href: "#",
+    href: "https://tw.news.yahoo.com/%E6%B3%B0%E5%9C%8B%E7%86%B1%E9%8A%B7no-1%E4%B9%B3%E8%86%A0%E5%BA%8A%E5%93%81%E7%89%8Clunio-%E6%A8%82%E8%AC%9C%E8%87%A5%E6%AD%A3%E5%BC%8F%E4%BE%86%E5%8F%B0-160000710.html",
   },
   {
     img: "/press/中老年人腰酸.webp",
     media: "三立新聞網",
     title: "起床腰痠背痛？名醫揪原因 警示，嚴重會椎肩盤病變",
-    href: "#",
+    href: "https://www.setn.com/News.aspx?NewsID=630541",
   },
 ];
 
