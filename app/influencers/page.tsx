@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { InlineVideoCard } from "@/components/influencers/InlineVideoCard";
 
 export const metadata: Metadata = {
   title: "名人體驗分享｜Lunio Taiwan",
@@ -73,56 +74,6 @@ const BLOGGERS: { img: string; name: string; desc: string }[] = [
 ];
 
 /* ─── Components ─────────────────────────────────────────────────────────── */
-function PlayButton() {
-  return (
-    <div className="absolute inset-0 flex items-center justify-center">
-      <div className="w-16 h-16 rounded-full flex items-center justify-center shadow-xl transition-transform duration-200 group-hover:scale-110"
-        style={{ background: "rgba(255,30,30,0.92)", backdropFilter: "blur(4px)" }}>
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="white" aria-hidden>
-          <path d="M8 5v14l11-7z" />
-        </svg>
-      </div>
-    </div>
-  );
-}
-
-function VideoCard({ item, tag }: { item: typeof CELEBRITIES[0]; tag: string }) {
-  const url = item.videoId === "PLACEHOLDER" ? "#" : `https://www.youtube.com/watch?v=${item.videoId}`;
-  return (
-    <a href={url} target="_blank" rel="noopener noreferrer"
-      className="group flex flex-col overflow-hidden rounded-2xl bg-white transition-all duration-300 hover:-translate-y-1"
-      style={{ boxShadow: "0 2px 16px rgba(23,40,75,0.07)", border: "1px solid #f0f4fb" }}>
-      {/* Thumbnail */}
-      <div className="relative overflow-hidden" style={{ aspectRatio: "16/9" }}>
-        <Image src={item.img} alt={item.title} fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-          sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw" />
-        <div className="absolute inset-0 bg-black/15 group-hover:bg-black/25 transition-colors" />
-        <PlayButton />
-        {/* Tag */}
-        <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-white font-semibold"
-          style={{ fontSize: 11, backgroundColor: BLUE, letterSpacing: "0.05em" }}>
-          {tag}
-        </span>
-      </div>
-      {/* Content */}
-      <div className="p-4 flex-1 flex flex-col">
-        <h3 className="font-bold leading-snug mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors"
-          style={{ fontSize: 14.5, color: NAVY }}>
-          {item.title}
-        </h3>
-        <p className="text-xs flex-1 line-clamp-2" style={{ color: "#8b95a7", lineHeight: 1.7 }}>
-          {item.desc}
-        </p>
-        <div className="mt-3 flex items-center gap-1" style={{ color: BLUE, fontSize: 12, fontWeight: 600 }}>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d="M21.582 6.186A2.506 2.506 0 0 0 19.85 4.44C18.19 4 12 4 12 4s-6.19 0-7.85.44A2.506 2.506 0 0 0 2.418 6.186C2 7.84 2 11.3 2 11.3s0 3.46.418 5.114a2.506 2.506 0 0 0 1.732 1.746C5.81 18.6 12 18.6 12 18.6s6.19 0 7.85-.44a2.506 2.506 0 0 0 1.732-1.746C22 14.76 22 11.3 22 11.3s0-3.46-.418-5.114zM9.954 14.518l.001-6.437 5.249 3.219-5.25 3.218z"/></svg>
-          觀看影片
-        </div>
-      </div>
-    </a>
-  );
-}
-
 function PhotoCard({ item }: { item: typeof BLOGGERS[0] }) {
   return (
     <div className="group flex flex-col overflow-hidden rounded-2xl bg-white transition-all duration-300 hover:-translate-y-1"
@@ -191,7 +142,7 @@ export default function InfluencersPage() {
         <div className="max-w-[1200px] w-[90%] mx-auto">
           <SectionTitle en="Celebrity Stars" zh="藝人明星 · 床墊開箱體驗" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {CELEBRITIES.map((item, i) => <VideoCard key={i} item={item} tag="藝人明星" />)}
+            {CELEBRITIES.map((item, i) => <InlineVideoCard key={i} item={item} tag="藝人明星" />)}
           </div>
         </div>
       </section>
@@ -201,7 +152,7 @@ export default function InfluencersPage() {
         <div className="max-w-[1200px] w-[90%] mx-auto">
           <SectionTitle en="YouTubers" zh="Youtuber · 床墊開箱體驗" />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {YOUTUBERS.map((item, i) => <VideoCard key={i} item={item} tag="YouTuber" />)}
+            {YOUTUBERS.map((item, i) => <InlineVideoCard key={i} item={item} tag="YouTuber" />)}
           </div>
         </div>
       </section>
