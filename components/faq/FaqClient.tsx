@@ -150,7 +150,7 @@ export function FaqClient({ productFaqs, shoppingFaqs }: Props) {
           <p className="font-bold mb-1" style={{ fontSize: 18, color: NAVY }}>您的問題沒有得到解決？</p>
           <p className="mb-6" style={{ fontSize: 14, color: "#6b7280" }}>我們的客服團隊隨時為您服務</p>
           <div className="flex items-center justify-center gap-4 flex-wrap">
-            <a href="https://line.me" target="_blank" rel="noopener noreferrer"
+            <a href="https://line.me/R/ti/p/@900kkmtd" target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm text-white transition-opacity hover:opacity-90"
               style={{ backgroundColor: "#00B900" }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="white" aria-hidden>

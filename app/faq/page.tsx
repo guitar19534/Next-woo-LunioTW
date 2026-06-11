@@ -18,7 +18,7 @@ const PRODUCT_FAQS = [
         <ol className="space-y-4" style={{ paddingLeft: "1.2em", listStyleType: "decimal" }}>
           <li>我們的床墊皆由手工製造，尺寸會有「正負5cm」差異，實屬正常，這是因為材料層具有一定的自然彈性拉伸跟收縮，請以實際收到的床墊長寬高為主。</li>
           <li>我們的床墊皆以台灣標準規格製作，若家中床架為日系品牌（如無印良品）或歐系品牌（如IKEA），尺寸會與台規有所差異，詳情請參考
-            <a href="/blog" className="underline ml-1" style={{ color: BLUE }}>床墊尺寸：歐規、日規、美規尺寸差異，買床前必讀！</a>
+            <a href="/blog/mattress-size" className="underline ml-1" style={{ color: BLUE }}>床墊尺寸：歐規、日規、美規尺寸差異，買床前必讀！</a>
           </li>
           <li>我們的標準單人床墊為「傳統單人尺寸」，目前國內所販售的單人床多數為單人加大尺寸，請先確認欲購買的單人床尺寸後再行購買，若購買尺寸錯誤恕不接受退換貨。</li>
           <li>
@@ -78,7 +78,7 @@ const PRODUCT_FAQS = [
       <div className="space-y-4 text-sm leading-relaxed" style={{ color: "#374151" }}>
         <p>Lunio於北中南都有實體門市，讓您可以透過實際試躺體驗，並享有專業的一對一服務，幫您找到優質且適合您的床墊與枕頭。您可點擊下方門市了解位置資訊及預約，將為您優先保留體驗時段（預約保留十分鐘）。</p>
         <div className="rounded-xl p-4 space-y-2" style={{ backgroundColor: "#f8faff" }}>
-          {[["台北門市","/storefront/taipei"],["新竹新生活門市","/storefront/hsinchu"],["台中門市","/storefront/taichung"],["台南旗艦店","/storefront/tainan"],["高雄旗艦店","/storefront/kaohsiung"],["全台門市資訊","/storefront"]].map(([n,h]) => (
+          {[["台北門市","/storefront/taipei"],["桃園門市","/storefront/taoyuan"],["新竹新生活門市","/storefront/hsinchu"],["台中門市","/storefront/taichung"],["台南旗艦店","/storefront/tainan"],["高雄旗艦店","/storefront/kaohsiung"],["全台門市資訊","/storefront"]].map(([n,h]) => (
             <a key={n} href={h} className="flex items-center gap-2 hover:underline" style={{ color: BLUE }}>
               <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: BLUE, flexShrink: 0 }} />{n}
             </a>
@@ -142,6 +142,14 @@ const SHOPPING_FAQS = [
             <li>活動贈品、組合商品未完整退回</li>
           </ul>
         </div>
+        <div className="rounded-xl p-4" style={{ backgroundColor: "#f8faff" }}>
+          <p className="font-semibold mb-2" style={{ color: BLUE }}>【其他重要說明】</p>
+          <ol className="space-y-2" style={{ paddingLeft: "1.2em", listStyleType: "decimal" }}>
+            <li><strong>床墊屬大型家具，且為真空壓縮包裝</strong>，一經拆封即無法再次販售，請務必確認尺寸與款式後再購買。</li>
+            <li>請全程錄影開箱過程，並立即檢查商品狀態，以確保雙方權益。如因後續<strong>保養不當或環境因素</strong>（如發霉、污損），恕不接受退換貨，且不在保固範圍內。</li>
+            <li>如商品有<strong>非人為瑕疵</strong>，請聯繫客服並提供<strong>照片及開箱影片</strong>，本公司將依保固範圍進行維修或更換同款/同價值商品，造成不便敬請見諒。</li>
+          </ol>
+        </div>
         <p className="text-xs pt-1" style={{ color: "#9ca3af" }}>下單即代表同意本退換貨條款。</p>
       </div>
     ),
@@ -160,7 +168,7 @@ const SHOPPING_FAQS = [
     q: "試躺體驗說明",
     a: (
       <div className="space-y-3 text-sm leading-relaxed" style={{ color: "#374151" }}>
-        <p>於北中南皆有 Lunio 實體門市，可進行試躺體驗，您可先預約時間保留時段，將由專業人員為您進行一對一服務。</p>
+        <p>於北中南皆有 <a href="/storefront" className="underline" style={{ color: BLUE }}>Lunio 實體門市</a>，可進行試躺體驗，您可先預約時間保留時段，將由專業人員為您進行一對一服務。</p>
         <div className="rounded-xl p-4 space-y-2" style={{ backgroundColor: "#f8faff" }}>
           <p className="flex items-start gap-2"><span style={{ color: "#f5a000" }}>＊</span>預約保留十分鐘，請準時抵達，謝謝！</p>
           <p className="flex items-start gap-2"><span style={{ color: "#f5a000" }}>＊</span>床墊與枕頭屬個人貼身用品，因考量衛生因素，故「無提供100日試睡期」。</p>
@@ -186,9 +194,13 @@ const SHOPPING_FAQS = [
             </div>
           ))}
         </div>
+        <div className="rounded-xl p-4 space-y-1" style={{ backgroundColor: "#f8faff", border: "1px solid #e5eaf5" }}>
+          <p className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: BLUE }} />宜花東離島地區不適用</p>
+          <p className="flex items-start gap-2"><span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: BLUE }} />新床搬上樓「免樓層費」</p>
+        </div>
         <div className="rounded-xl p-4" style={{ backgroundColor: "#fff9f0", borderLeft: "3px solid #f5a000" }}>
-          <p className="flex items-start gap-2"><span style={{ color: "#f5a000" }}>＊</span>宜花東離島地區不適用</p>
-          <p className="flex items-start gap-2 mt-1"><span style={{ color: "#f5a000" }}>＊</span>因特殊地形、颱風或不可抗力因素，Lunio保有停止出貨時間的權利，造成不便敬請見諒。</p>
+          <p className="flex items-start gap-2"><span style={{ color: "#f5a000" }}>＊</span>若因特殊地形限制、偏遠山區（含部分宜花東地區）或外島地區無法配送，Lunio 保留是否出貨之權利。</p>
+          <p className="flex items-start gap-2 mt-1"><span style={{ color: "#f5a000" }}>＊</span>如遇颱風、地震等天災，或海關抽驗等不可預期因素，出貨時間可能有所調整，敬請見諒。</p>
         </div>
       </div>
     ),

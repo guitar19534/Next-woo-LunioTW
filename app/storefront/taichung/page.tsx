@@ -49,14 +49,14 @@ export default function TaichungStorePage() {
                 <a href="tel:+886965032822" className="block hover:underline font-medium" style={{ fontSize: 15, color: BLUE }}>
                   聯絡電話：+886 965 032 822
                 </a>
-                <a href="#" target="_blank" rel="noopener noreferrer"
+                <a href="https://line.me/R/ti/p/@380daobw" target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 hover:underline" style={{ fontSize: 14, color: BLUE }}>
                   <LineIcon /> 聯繫台中門市Line官方
                 </a>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 w-full max-w-sm">
-                <a href="https://maps.google.com/?q=台中市北屯區文心路三段405號"
+                <a href="https://maps.app.goo.gl/sRMW82utmMYEU2EX9"
                   target="_blank" rel="noopener noreferrer"
                   className="flex-1 flex items-center justify-center gap-2 py-3 rounded-full font-semibold transition-opacity hover:opacity-90"
                   style={{ backgroundColor: BLUE, color: "#fff", fontSize: 15 }}>

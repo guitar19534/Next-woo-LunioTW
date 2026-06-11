@@ -49,14 +49,14 @@ export default function KaohsiungStorePage() {
                 <a href="tel:+886965508387" className="block hover:underline font-medium" style={{ fontSize: 15, color: BLUE }}>
                   聯絡電話：+886 965 508 387
                 </a>
-                <a href="#" target="_blank" rel="noopener noreferrer"
+                <a href="https://line.me/R/ti/p/@598eupks" target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 hover:underline" style={{ fontSize: 14, color: BLUE }}>
                   <LineIcon /> 聯繫高雄門市Line官方
                 </a>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 w-full max-w-sm">
-                <a href="https://maps.google.com/?q=高雄市鼓山區馬卡道路406號"
+                <a href="https://goo.gl/maps/DkGCimx8Fg8WEi6e8"
                   target="_blank" rel="noopener noreferrer"
                   className="flex-1 flex items-center justify-center gap-2 py-3 rounded-full font-semibold transition-opacity hover:opacity-90"
                   style={{ backgroundColor: BLUE, color: "#fff", fontSize: 15 }}>

@@ -49,14 +49,14 @@ export default function TaoyuanStorePage() {
                 <a href="tel:+886937968020" className="block hover:underline font-medium" style={{ fontSize: 15, color: BLUE }}>
                   聯絡電話：+886 937 968 020
                 </a>
-                <a href="#" target="_blank" rel="noopener noreferrer"
+                <a href="https://lin.ee/NVndAID" target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 hover:underline" style={{ fontSize: 14, color: BLUE }}>
                   <LineIcon /> 聯繫桃園門市Line官方
                 </a>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 w-full max-w-sm">
-                <a href="https://maps.google.com/?q=桃園市桃園區正光路393號1樓"
+                <a href="https://maps.app.goo.gl/uvVyskPxRJMmDVsA8"
                   target="_blank" rel="noopener noreferrer"
                   className="flex-1 flex items-center justify-center gap-2 py-3 rounded-full font-semibold transition-opacity hover:opacity-90"
                   style={{ backgroundColor: BLUE, color: "#fff", fontSize: 15 }}>

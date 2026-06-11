@@ -51,14 +51,14 @@ export default function TaipeiStorePage() {
                 <a href="tel:+886965218919" className="block hover:underline font-medium" style={{ fontSize: 15, color: BLUE }}>
                   聯絡電話：0965-218-919
                 </a>
-                <a href="#" target="_blank" rel="noopener noreferrer"
+                <a href="https://line.me/R/ti/p/@900kkmtd" target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 hover:underline" style={{ fontSize: 14, color: BLUE }}>
                   <LineIcon /> 聯繫台北門市Line官方
                 </a>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 w-full max-w-sm">
-                <a href="https://maps.google.com/?q=台北市大安區敦化南路一段176號"
+                <a href="https://maps.app.goo.gl/xZt4SUQWwH1DLPx67"
                   target="_blank" rel="noopener noreferrer"
                   className="flex-1 flex items-center justify-center gap-2 py-3 rounded-full font-semibold transition-opacity hover:opacity-90"
                   style={{ backgroundColor: BLUE, color: "#fff", fontSize: 15 }}>
