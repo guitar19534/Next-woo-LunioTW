@@ -304,6 +304,24 @@ export async function getPageBySlug(slug: string): Promise<Page | undefined> {
   return pages[0];
 }
 
+/**
+ * Fetches the featured image set on the WordPress `/promotion/` page.
+ * Used as the editable promo banner image on storefront pages.
+ */
+export async function getPromotionBannerImage(): Promise<{ url: string; alt: string } | null> {
+  const pages = await wordpressFetchGraceful<Page[]>(
+    "/wp-json/wp/v2/pages",
+    [],
+    { slug: "promotion", _embed: true },
+    ["wordpress", "pages", "page-promotion"]
+  );
+
+  const media = pages[0]?._embedded?.["wp:featuredmedia"]?.[0];
+  if (!media?.source_url) return null;
+
+  return { url: media.source_url, alt: media.alt_text || "Lunio促銷活動" };
+}
+
 export async function getAllAuthors(): Promise<Author[]> {
   return wordpressFetchGraceful<Author[]>(
     "/wp-json/wp/v2/users",

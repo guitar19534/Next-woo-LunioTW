@@ -91,6 +91,7 @@ export interface Page extends WPEntity {
   ping_status: "open" | "closed";
   template: string;
   meta: Record<string, unknown>;
+  _embedded?: PostEmbedded;
 }
 
 // Taxonomy types

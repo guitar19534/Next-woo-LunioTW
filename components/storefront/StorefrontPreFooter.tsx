@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { BookingForm } from "@/components/storefront/BookingForm";
+import { getPromotionBannerImage } from "@/lib/wordpress";
 
 const NAVY = "#17284b";
 
@@ -15,7 +16,9 @@ const FREE_SERVICES = [
 const BUNNY_VIDEO_ID = "8H_iBqPFSNA";
 const VIP_VIDEO_ID   = "DAt2oUXv-Wc";
 
-export function StorefrontPreFooter() {
+export async function StorefrontPreFooter() {
+  const promoBanner = await getPromotionBannerImage();
+
   return (
     <>
       {/* ── Booking Form ───────────────────────────────────────── */}
@@ -23,7 +26,7 @@ export function StorefrontPreFooter() {
         <div className="max-w-[1100px] w-[88%] mx-auto">
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
             <div className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: "16/10" }}>
-              <Image src="/storefront/Promo-Banner.webp" alt="Lunio促銷活動" fill className="object-cover" sizes="(max-width:768px) 100vw, 50vw" />
+              <Image src={promoBanner?.url ?? "/storefront/Promo-Banner.webp"} alt={promoBanner?.alt ?? "Lunio促銷活動"} fill className="object-cover" sizes="(max-width:768px) 100vw, 50vw" />
             </div>
             <BookingForm />
           </div>
