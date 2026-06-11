@@ -14,12 +14,12 @@ const ORANGE = "#F5A000";
 const FONT   = { fontFamily: "'MiSansTC','Noto Sans TC',sans-serif" };
 
 const STORES = [
-  { name: "台北門市",     img: "/storefront/taipei-store_202508.jpg",        href: "/storefront/taipei",    phone: "+886 965 218 919", lineLabel: "聯繫台北門市Line官方",   lineHref: "#", mapHref: "#" },
-  { name: "桃園門市",     img: "/storefront/Taoyuan-storefront (1).jpg",     href: "/storefront/taoyuan",   phone: "+886 937 968 020", lineLabel: "聯繫桃園門市Line官方",   lineHref: "#", mapHref: "#" },
-  { name: "新竹新生活門市", img: "/storefront/hsinchu-store (1).jpg",        href: "/storefront/hsinchu",   phone: "+886 965 321 511", lineLabel: "聯繫新竹門市Line官方",   lineHref: "#", mapHref: "#" },
-  { name: "台中門市",     img: "/storefront/Taichung-store.jpg",             href: "/storefront/taichung",  phone: "+886 965 032 822", lineLabel: "聯繫台中門市Line官方",   lineHref: "#", mapHref: "#" },
-  { name: "台南旗艦店",   img: "/storefront/DreamLands-store.jpg",           href: "/storefront/tainan",    phone: "+886 937 968 070", lineLabel: "聯繫台南門市Line官方",   lineHref: "#", mapHref: "#" },
-  { name: "高雄旗艦店",   img: "/storefront/Lunio高雄門市.webp",             href: "/storefront/kaohsiung", phone: "+886 965 508 387", lineLabel: "聯繫高雄門市Line官方",   lineHref: "#", mapHref: "#" },
+  { name: "台北門市",     img: "/storefront/taipei-store_202508.jpg",        href: "/storefront/taipei",    phone: "+886 965 218 919", lineLabel: "聯繫台北門市Line官方",   lineHref: "https://line.me/R/ti/p/@900kkmtd", mapHref: "https://maps.app.goo.gl/xZt4SUQWwH1DLPx67" },
+  { name: "桃園門市",     img: "/storefront/Taoyuan-storefront (1).jpg",     href: "/storefront/taoyuan",   phone: "+886 937 968 020", lineLabel: "聯繫桃園門市Line官方",   lineHref: "https://lin.ee/NVndAID", mapHref: "https://maps.app.goo.gl/uvVyskPxRJMmDVsA8" },
+  { name: "新竹新生活門市", img: "/storefront/hsinchu-store (1).jpg",        href: "/storefront/hsinchu",   phone: "+886 965 321 511", lineLabel: "聯繫新竹門市Line官方",   lineHref: "https://line.me/R/ti/p/@517mmnxd", mapHref: "https://maps.app.goo.gl/WaRHEhJecvJgLAsF6" },
+  { name: "台中門市",     img: "/storefront/Taichung-store.jpg",             href: "/storefront/taichung",  phone: "+886 965 032 822", lineLabel: "聯繫台中門市Line官方",   lineHref: "https://line.me/R/ti/p/@380daobw", mapHref: "https://maps.app.goo.gl/sRMW82utmMYEU2EX9" },
+  { name: "台南旗艦店",   img: "/storefront/DreamLands-store.jpg",           href: "/storefront/tainan",    phone: "+886 937 968 070", lineLabel: "聯繫台南門市Line官方",   lineHref: "https://lin.ee/DOY6c8O", mapHref: "https://maps.app.goo.gl/KxKMyZm9tNBDFmkg9" },
+  { name: "高雄旗艦店",   img: "/storefront/Lunio高雄門市.webp",             href: "/storefront/kaohsiung", phone: "+886 965 508 387", lineLabel: "聯繫高雄門市Line官方",   lineHref: "https://line.me/R/ti/p/@598eupks", mapHref: "https://goo.gl/maps/DkGCimx8Fg8WEi6e8" },
 ];
 
 function LineIcon() {
