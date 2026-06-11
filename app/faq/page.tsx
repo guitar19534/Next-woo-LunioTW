@@ -234,11 +234,16 @@ const SHOPPING_FAQS = [
             ))}
           </div>
         </div>
+        <div className="rounded-xl p-4 space-y-2" style={{ backgroundColor: "#f8faff" }}>
+          <p className="font-medium" style={{ color: NAVY }}>【刷卡限制】</p>
+          <p>若信用卡付款失敗，可能為額度不足、銀行拒絕交易、3D 驗證失敗、手機號碼填寫錯誤等原因。若仍無法完成付款，請聯繫客服協助處理。</p>
+          <p>單筆交易上限金額為 20 萬元，超過上限請洽客服協助處理。</p>
+        </div>
         <div className="rounded-xl p-4 space-y-2" style={{ backgroundColor: "#fff9f0", borderLeft: "3px solid #f5a000" }}>
-          <p className="flex items-start gap-2"><span style={{ color: "#f5a000" }}>＊</span>因銀行機制，刷超某金額時信用卡會被拒刷，請致電銀行客服告知狀況，若無法協助請洽Lunio客服。</p>
-          <p className="flex items-start gap-2"><span style={{ color: "#f5a000" }}>＊</span>單筆交易上限金額為 20 萬元，超過上限請洽客服協助處理。</p>
-          <p className="flex items-start gap-2"><span style={{ color: "#f5a000" }}>＊</span>個人（二聯式）發票一經開立，即無法更改及改開公司戶（三聯式）發票。</p>
-          <p className="flex items-start gap-2"><span style={{ color: "#f5a000" }}>＊</span>為了善盡環保，發票一律改為Email寄送。</p>
+          <p className="font-medium" style={{ color: NAVY }}>【發票說明】</p>
+          <p className="flex items-start gap-2"><span style={{ color: "#f5a000" }}>＊</span>個人發票（二聯式）開立後無法改開為公司發票（三聯式）。</p>
+          <p className="flex items-start gap-2"><span style={{ color: "#f5a000" }}>＊</span>公司發票（三聯式）無法使用手機條碼載具。</p>
+          <p className="flex items-start gap-2"><span style={{ color: "#f5a000" }}>＊</span>為響應環保，所有發票皆以 Email 方式寄送。</p>
         </div>
       </div>
     ),
