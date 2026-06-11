@@ -25,7 +25,7 @@ const FEATURES = [
 
 const PRODUCTS = [
   {
-    src: "/embrance/PC1-3.webp",
+    src: "/menucover/Bedding/Embrace-cover.webp",
     alt: "Lunio Embrace 多功能擁抱枕",
     title: "Lunio Embrace 多功能擁抱枕",
     price: "NT$3,980", original: "NT$5,980", discount: "33% Off",
@@ -33,7 +33,7 @@ const PRODUCTS = [
     href: "/product/lunio-embrace",
   },
   {
-    src: "/hypercool/cover_HyperCool-PC.webp",
+    src: "/menucover/LunioPillow/Pillow-HPC-cover.webp",
     alt: "Lunio HyperCool 智能工學護頸枕",
     title: "Lunio HyperCool 智能工學護頸枕",
     price: "NT$1,790", priceTo: "NT$3,290", discount: "68% Off",
@@ -41,7 +41,7 @@ const PRODUCTS = [
     href: "/product/lunio-hypercool",
   },
   {
-    src: "/ergo/Mercury (1).webp",
+    src: "/menucover/LunioPillow/Pillow-Mecury-cover.webp",
     alt: "Lunio Mercury 石墨烯機能記憶枕",
     title: "Lunio Mercury 石墨烯機能記憶枕",
     price: "NT$2,199", priceTo: "NT$3,399", discount: "73% Off",
@@ -49,7 +49,7 @@ const PRODUCTS = [
     href: "/product/lunio-mercury",
   },
   {
-    src: "/nebula/Lunio-Hybrid-Nebula-Pillow00005.webp",
+    src: "/menucover/LunioPillow/Pillow-Nebula-cover.webp",
     alt: "Lunio Nebula 經典記憶枕",
     title: "Lunio Nebula 經典記憶枕",
     price: "NT$895", priceTo: "NT$4,375", discount: "84% Off",
