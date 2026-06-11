@@ -8,6 +8,7 @@ const NAV: { label: string; items: { label: string; href: string }[] }[] = [
     items: [
       { label: "產品及購物說明", href: "/faq" },
       { label: "會員中心",      href: "/account" },
+      { label: "隱私政策",      href: "/cookie-policy" },
     ],
   },
   {
