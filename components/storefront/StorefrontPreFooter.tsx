@@ -12,8 +12,8 @@ const FREE_SERVICES = [
   { icon: "/storefront/Icon_Box.png",          label: "真空裝箱好搬運" },
 ];
 
-const BUNNY_VIDEO_ID = "PLACEHOLDER_BUNNY_VIDEO_ID";
-const VIP_VIDEO_ID   = "PLACEHOLDER_VIP_VIDEO_ID";
+const BUNNY_VIDEO_ID = "8H_iBqPFSNA";
+const VIP_VIDEO_ID   = "DAt2oUXv-Wc";
 
 export function StorefrontPreFooter() {
   return (
