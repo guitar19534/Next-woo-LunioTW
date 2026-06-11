@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 
 const BLUE = "#3B82F6";
 const NAVY = "#17284b";
+const SHOW_ARTICLE_LIST = false;
 
 const PRESS_CARDS = [
   {
@@ -85,7 +86,8 @@ export default function PressPage() {
         </div>
       </section>
 
-      {/* ── Article list (timeline) ───────────────────────────────── */}
+      {/* ── Article list (timeline) — hidden, kept for future use ──── */}
+      {SHOW_ARTICLE_LIST && (
       <section className="bg-white py-14 md:py-20" style={{ borderTop: "1px solid #f3f4f6" }}>
         <div className="max-w-[680px] w-[88%] mx-auto">
           <h2 className="font-bold mb-10 text-center" style={{ fontSize: "clamp(20px, 2vw, 28px)", color: NAVY }}>
@@ -126,6 +128,7 @@ export default function PressPage() {
           </div>
         </div>
       </section>
+      )}
 
     </main>
   );
