@@ -52,7 +52,7 @@ const YOUTUBERS: { title: string; desc: string; img: string; videoId: string }[]
 ];
 
 const BLOGGERS: { img: string; name: string; desc: string }[] = [
-  { img: `${RI}/甜甜圈媽咪.webp`,                                       name: "甜甜圈媽咪",        desc: "每天睡醒都有精神，我只選擇Lunio石墨烯乳膠床墊" },
+  { img: `${RI}/部落客推薦Lunio乳膠床墊-甜甜圈媽咪.webp`,                name: "甜甜圈媽咪",        desc: "每天睡醒都有精神，我只選擇Lunio石墨烯乳膠床墊" },
   { img: `${RI}/部落客推薦Lunio乳膠床墊-Dora妍希.webp`,                 name: "Dora妍希",          desc: "身邊有朋友推薦Lunio，超好睡！透氣有支撐，而且很值位平實CP值高" },
   { img: `${RI}/部落客推薦Lunio乳膠床墊-藍克Frank.webp`,                name: "藍克Frank",         desc: "你在找好睡的床墊嗎？專為東方人設計的舒適床墊，Lunio石墨烯乳膠床" },
   { img: `${RI}/部落客推薦Lunio乳膠床墊-秀的生活點滴.webp`,             name: "秀的生活點滴",      desc: "有孩子的家庭在挑選床墊的時候，會先考慮支撐性與穩固性" },
