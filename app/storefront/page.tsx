@@ -82,7 +82,7 @@ export default function StorefrontPage() {
                     <a href={s.lineHref} target="_blank" rel="noopener noreferrer" className="hover:underline" style={{ color: "#00B900" }}>{s.lineLabel}</a>
                   </div>
                 </div>
-                <a href={s.mapHref} target="_blank" rel="noopener noreferrer"
+                <a href={s.href}
                   className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full font-semibold transition-opacity hover:opacity-90"
                   style={{ backgroundColor: BLUE, color: "#fff", fontSize: 14 }}>
                   查看位置
